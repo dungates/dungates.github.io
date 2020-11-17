@@ -1,9 +1,9 @@
 # Site settings
 title: Duncan Gates' Personal Website
 email: gatesdu@oregonstate.edu
-description: > # this means to ignore newlines until "baseurl:"
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "" # the base hostname & protocol for your site
+description: This is my personal website where I will keep track of my public projects and products. # this means to ignore newlines until "baseurl:"
+baseurl: "/" # the subpath of your site, e.g. /blog/
+url: "http://dungates.github.io" # the base hostname & protocol for your site
 
 twitter_username: gates_duncan
 github_username: dungates
