@@ -14,8 +14,7 @@ source("hex_chart.R")
 source("scatter_chart.R")
 source("heatmap_chart.R")
 
-shinyUI(
-    fixedPage(
+my_ui <- fixedPage(
         theme = "flatly.css",
         title = "BallR: Interactive NBA Shot Charts with R and Shiny",
         
@@ -160,4 +159,5 @@ shinyUI(
                  )
         )
     )
-)
+
+shinyUI(my_ui)

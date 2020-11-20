@@ -1,6 +1,6 @@
 library(shiny)
 
-shinyServer(function(input, output, session) {
+my_server <- function(input, output, session) {
     current_player = reactive({
         req(input$player_name)
         find_player_by_name(input$player_name)
@@ -390,4 +390,6 @@ shinyServer(function(input, output, session) {
         
         html
     })
-})
+}
+
+shinyServer(my_server)
