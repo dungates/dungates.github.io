@@ -338,7 +338,8 @@ header {
 img::selection {
     color: white;
     background: transparent;
-    width: 90%;
+    max-height: 500px;
+    max-width: 800px;
 }
 
 img::-moz-selection {
