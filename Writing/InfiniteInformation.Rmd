@@ -24,6 +24,7 @@ header-includes:
 Cathy O’Neil’s new book Weapons of Math Destruction explores how institutions are increasingly using “big data” to simplify. Algorithms and mathematical models now shape a big part of our lives — and not only Amazon’s personalized advertisements. Formulas are used to calculate user-specific car insurance rates, sort résumés, assess loan applications, predict recidivism rates, and more.
 
 ```{r echo = F, message = F, warning = F}
+#https://fee.org/articles/big-data-cannot-solve-the-infinite-information-problem/
 library(tidyverse)
 library(ggthemes)
 ggplot(data = tibble(x = c(-5, 5), y = c(10, 10)), aes(x = x, y = y, fill = x)) + 
