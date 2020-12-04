@@ -19,5 +19,27 @@ header-includes:
   - \usepackage{indentfirst}
 ---
 
+# The Issue with Infinite Information: Bending Truth with Big Data
+
+Cathy O’Neil’s new book Weapons of Math Destruction explores how institutions are increasingly using “big data” to simplify. Algorithms and mathematical models now shape a big part of our lives — and not only Amazon’s personalized advertisements. Formulas are used to calculate user-specific car insurance rates, sort résumés, assess loan applications, predict recidivism rates, and more.
+
+```{r echo = F, message = F, warning = F}
+library(tidyverse)
+library(ggthemes)
+ggplot(data = tibble(x = c(-5, 5), y = c(10, 10)), aes(x = x, y = y, fill = x)) + 
+  geom_col() + 
+  ggtitle("Data!!!") + 
+    theme(plot.background = element_rect(fill = "#E8E8E8"),
+          panel.background = element_rect(fill = "#E8E8E8"),
+          panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title = element_text(hjust = 0.5)) +
+  theme_clean()
+```
+
+
+But such systems pose major risks. As the Wall Street Journal noted in its book review, we should be wary of “the biases of people who encode their notions in algorithms.” Worse, the details of the models are typically opaque to both those being assessed and those using the assessments for high-stakes decisions. As O’Neil told NPR, “we really have no idea what’s happening to most algorithms under the hood.” In K-12, we’ve seen this very debate rage related to “value-added” models of student performance.
+
 
 
