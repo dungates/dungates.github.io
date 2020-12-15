@@ -1,0 +1,230 @@
+---
+title: "Student/Teacher Ratios"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = F, message = F, warning = F}
+library(tidyverse)
+theme_set(theme_light())
+student_ratio <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-05-07/student_teacher_ratio.csv")
+```
+
+Below I analyze data from UNESCO's Institute of Statistics, the World Development Indicators Database (WDI), and evaluate the impact of student-teacher ratio's on education taking into context different levels of wealth.
+
+### Primary Education
+
+First I separate the data into two different type: primary education, and secondary education. This section looks at primary education exclusively
+
+```{r echo = F, fig.width = 10}
+student_teacher_ratio_2015 <- student_ratio %>%
+  dplyr::filter(indicator == "Primary Education",
+         year == 2015,
+         !is.na(student_ratio))
+student_teacher_ratio_2015 %>%
+  arrange(desc(student_ratio)) %>%
+  slice(c(1:10, seq(n() - 10, n()))) %>%
+  mutate(country = fct_reorder(country, student_ratio)) %>%
+  ggplot(aes(country, student_ratio, fill = student_ratio)) +
+  geom_col() +
+  scale_fill_viridis_c() +
+  coord_flip() +
+  expand_limits(y = 0) +
+  labs(title = "Countries with Highest and Lowest Student/Teacher Ratios",
+       x = "",
+       y = "Student/Teacher ratio",
+       caption = "Primary education as defined by UNESCO",
+       fill = "Student-Teacher Ratio %") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+```
+
+It appears that student/teacher ratio is negatively correlated with country wealth, both per capita and total. There are, however, some exceptions - the US, UK, and Switzerland do not have low student/teacher ratios, while relatively low income countries like Cuba, Greece, and Georgia do have lower ratios.
+
+```{r echo = F, warning = F}
+library(WDI)
+WDIsearch("public.*education") %>%
+  as.data.frame() %>%
+  tbl_df() %>%
+  arrange(str_length(name)) %>%
+  View()
+```
+
+The distribution of student-teacher ratio has a slight right skew, and is almost bimodal.
+
+```{r echo = F, warning = F, message = F}
+indicators_raw <- WDI(indicator = c("NY.GDP.PCAP.CD", "SP.POP.TOTL", "SE.ADT.LITR.ZS",
+                                    "SE.XPD.TOTL.GD.ZS",
+                                    "SE.SEC.NENR.MA", "SE.SEC.NENR.FE"),
+                      start = 2015, end = 2015, extra = TRUE) %>%
+  tbl_df()
+indicators <- indicators_raw %>%
+  select(country_code = iso3c,
+         region,
+         NY.GDP.PCAP.CD:SE.SEC.NENR.FE) %>%
+  mutate(country_code = as.character(country_code))
+student_teacher_ratio_2015 %>%
+  ggplot(aes(student_ratio)) +
+  geom_histogram(color = "black", fill = "white") +
+  geom_density(fill = "steelblue", alpha = 0.7) +
+  geom_vline(xintercept = mean(student_teacher_ratio_2015$student_ratio, na.rm = T), color = "red", linetype = "dashed", size = 1.5) +
+  geom_text(aes(label = "Mean Student-Teacher Ratio\n              (22.81%)", x = mean(student_teacher_ratio_2015$student_ratio, na.rm = T), y = 12), hjust = -0.08, color = "red") +
+  scale_x_log10() +
+  labs(x = "Student-Teacher Ratio", y = "Count", title = "Distribution of Student to Teacher Ratio") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r echo = F, warning = F, fig.width = 10}
+student_teacher_ratio_2015 %>%
+  inner_join(indicators, by = "country_code") %>%
+  arrange(desc(SP.POP.TOTL)) %>%
+  ggplot(aes(NY.GDP.PCAP.CD, student_ratio)) +
+  geom_point(aes(size = SP.POP.TOTL, color = region)) +
+  geom_text(aes(label = country), vjust = 1, hjust = 1, check_overlap = TRUE) +
+  geom_smooth(formula = y ~ x, method = "lm", color = "black") +
+  ggpmisc::stat_poly_eq(aes(label = paste(stat(eq.label),
+                                  stat(adj.rr.label), sep = "*\", \"*")),
+               formula = y ~ x, rr.digits = 3, coef.digits = 4,
+               parse = TRUE, label.x = "right") +
+  scale_color_viridis_d() +
+  scale_x_log10(labels = scales::comma) +
+  scale_y_log10() +
+  scale_size_continuous(labels = scales::comma_format(), range = c(.25, 12)) +
+  labs(x = "GDP Per Capita",
+       y = "Student/Teacher Ratio",
+       title = "GDP Per Capita vs. Student-Teacher Ratio in 2015",
+       color = "Region",
+       size = "Population") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+```
+
+There is clearly a negative correlation between a country's wealth and its student/teacher ratio.
+
+### Other indicators
+
+```{r echo = F, warning = F, fig.width = 10}
+student_teacher_ratio_2015 %>%
+  inner_join(indicators, by = "country_code") %>%
+  dplyr::filter(!is.na(SE.ADT.LITR.ZS)) %>%
+  mutate(literacy = SE.ADT.LITR.ZS / 100) %>%
+  ggplot(aes(student_ratio, literacy, color = country)) +
+  geom_point() +
+  geom_text(aes(label = country), vjust = 1, hjust = 1, check_overlap = TRUE) +
+  scale_color_viridis_d(option = "magma") +
+  scale_x_log10() +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(y = "Literacy", x = "Student-Teacher Ratio") +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r echo = F, warning = F, fig.width = 10}
+joined <- student_teacher_ratio_2015 %>%
+  inner_join(indicators, by = "country_code") %>%
+  mutate(secondary_enrollment = (SE.SEC.NENR.MA + SE.SEC.NENR.FE) / 2)
+joined %>%
+  arrange(desc(SP.POP.TOTL)) %>%
+  ggplot(aes(NY.GDP.PCAP.CD, secondary_enrollment, color = region)) +
+  geom_point() +
+  geom_text(aes(label = country), vjust = 1, hjust = 1, check_overlap = TRUE) +
+  scale_x_log10(labels = scales::comma) +
+  scale_color_viridis_d(option = "inferno") +
+  labs(x = "GDP Per Capita",
+       y = "Secondary school enrollment") +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))
+```
+
+```{r echo = F, warning = F, fig.width = 10}
+joined %>%
+  arrange(desc(SP.POP.TOTL)) %>%
+  ggplot(aes(student_ratio, secondary_enrollment, color = region)) +
+  geom_point() +
+  geom_text(aes(label = country), vjust = 1, hjust = 1, check_overlap = TRUE) +
+  scale_color_viridis_d(option = "plasma") +
+  labs(x = "Student/teacher ratio in primary school",
+       y = "Secondary school enrollment") +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))
+```
+
+<center>
+```{r echo = F, warning = F, results = 'asis', fig.align='center'}
+ols1 <- joined %>%
+  transmute(student_ratio,
+            secondary_enrollment,
+            log2_gdp = log2(NY.GDP.PCAP.CD)) %>%
+  cor(use = "pairwise.complete.obs")
+ols1 <- lm(student_ratio ~ secondary_enrollment, data = joined)
+ols2 <- lm(student_ratio ~ log(NY.GDP.PCAP.CD), data = joined)
+stargazer::stargazer(ols1, ols2, type = "html", style = "qje",
+                     dep.var.labels = "Student Ratio",
+                     covariate.labels = c("Secondary Enrollment", "GDP Per Capita (US$)"))
+```
+</center>
+
+<br></br>
+Examining the confounding variable:
+<br></br>
+<br></br>
+
+<center>
+```{r echo = F, warning = F, results = 'asis', fig.align='center'}
+ols3 <- lm(secondary_enrollment ~ student_ratio + log(NY.GDP.PCAP.CD),
+     data = joined)
+stargazer::stargazer(ols3, type = "html", style = "qje",
+                     dep.var.labels = "Secondary Enrollment",
+                     covariate.labels = c("Student Ratio", "GDP Per Capita (US$)"))
+```
+</center>
+
+
+
+### Appendix: Primary vs secondary education
+
+```{r echo = F, warning = F, fig.width = 10}
+secondary_primary_education <- student_ratio %>%
+  dplyr::filter(year == 2015,
+         !is.na(student_ratio),
+         indicator %in% c("Primary Education", "Secondary Education")) %>%
+  group_by(country) %>%
+  dplyr::filter(n() == 2) %>%
+  ungroup()
+secondary_primary_education %>%
+  inner_join(indicators, by = "country_code") %>%
+  arrange(desc(SP.POP.TOTL)) %>%
+  ggplot(aes(NY.GDP.PCAP.CD, student_ratio)) +
+  geom_point(aes(size = SP.POP.TOTL, color = region)) +
+  geom_text(aes(label = country), vjust = 1, hjust = 1, check_overlap = TRUE) +
+  scale_x_log10(labels = scales::comma) +
+  scale_y_log10() +
+  scale_color_viridis_d() +
+  scale_size_continuous(labels = scales::comma_format(), range = c(.25, 12)) +
+  facet_wrap(~ indicator, ncol = 1) +
+  labs(x = "GDP Per Capita",
+       y = "Student/Teacher Ratio in Primary Education",
+       title = "GDP Per Capita vs. Student/Teacher Ratio",
+       color = "Region",
+       size = "Population") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+secondary_primary_education %>%
+  select(indicator, country, student_ratio) %>%
+  mutate(indicator = snakecase::to_snake_case(indicator)) %>%
+  spread(indicator, student_ratio) %>%
+  mutate(ratio = secondary_education / primary_education) %>%
+  ggplot(aes(primary_education, secondary_education, color = ratio)) +
+  geom_point() +
+  geom_text(aes(label = country), vjust = 1, hjust = 1, check_overlap = TRUE) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_color_distiller(palette = "Blues") +
+  labs(y = "Secondary Education Ratio", x = "Primary Education Ratio", color = "Primary/Secondary Ratio") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+```
