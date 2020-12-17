@@ -14,6 +14,27 @@ output:
       after_body: footer.html
 ---
 
+```{css}
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  text-align: center;
+}
+h4.author { /* Header 4 - and the author and data headers use this too  */
+    font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkRed;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and data headers use this too  */
+  font-size: 18px;
+  font-family: "Times New Roman", Times, serif;
+  color: DarkBlue;
+  text-align: center;
+}
+```
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
@@ -32,15 +53,16 @@ theme_set(theme_ipsum())
 
 # Tidycensus Capabilities
 
-Check what variables are available
+Check what variables are available from the 5 year American Community Survey in 2019.
 
-```{r}
+```{r eval = F}
 all_2019_variables <- load_variables(2019, "acs5")
 ```
 
-
+Obtain data such as median home value easily:
 
 ```{r message = F, warning = F, echo = F}
+# Sys.setenv(CENSUS_API_KEY = "aa7dad57625fd3a7f42a8066e1f3a2ea3ff31ed7")
 # Sys.getenv("CENSUS_API_KEY") # Checks for API key
 # us <- unique(fips_codes$state)[1:51] # gets list of states by abbreviation
 # 
@@ -82,7 +104,7 @@ racevars <- c(White = "B02001_002",
               Hispanic = "B03003_003")
 harris <- get_acs(geography = "tract",
                   variables = racevars, 
-                  year = 2018,
+                  year = 2019,
                   state = "TX",
                   county = "Harris County",
                   geometry = TRUE,
@@ -235,7 +257,12 @@ race_data <- get_historic_acs(variables = race_variables,
 
 race_data <- race_data %>% mutate()
 
-
+# Easier way to do it
+race_data2 <- get_acs(geography = "county",
+                  variables = racevars,
+                  year = 2019,
+                  geometry = TRUE,
+                  summary_var = "B02001_001")
 
 
 
