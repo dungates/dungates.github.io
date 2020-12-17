@@ -1,0 +1,113 @@
+---
+title: "US Educational Inequalities"
+author: "Duncan Gates"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::robobook: 
+    self_contained: true # Other options are downcute, material, readthedown, html_clean, html_docco, lockdown, https://github.com/juba/rmdformats
+    thumbnails: false
+    lightbox: true
+    gallery: false
+    highlight: tango
+    number_sections: true
+    includes:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+```{r echo = F, message = F, warning = F}
+library(tidyverse)
+library(tidycensus)
+library(leaflet)
+library(sf)
+library(mapview)
+library(viridis)
+library(hrbrthemes)
+theme_set(theme_ipsum())
+```
+
+# Tidycensus Capabilities
+
+```{r message = F, warning = F, echo = F}
+# Sys.getenv("CENSUS_API_KEY") # Checks for API key
+# us <- unique(fips_codes$state)[1:51] # gets list of states by abbreviation
+# 
+# totalpop_sf <- map_df(us, function(x) {
+#   get_acs(geography = "tract", variables = "B01003_001",
+#           state = x, geometry = TRUE, shift_geo = T) # Do without geometry = T for more just population information
+# })
+
+totalpop_sf <- get_acs(geography = "state", variables = "B01003_001", geometry = TRUE, shift_geo = T)
+
+# str(totalpop_sf)
+# pal <- colorQuantile("Blues", domain = oregon_pop$estimate, n = 10) # blue color palette for percentiles
+pal <- colorNumeric(palette = "Blues", domain = totalpop_sf$estimate) # Numeric color palette
+
+totalpop_sf %>% # to filter by state do filter(grepl("Oregon", NAME)) %>%
+  st_transform(crs = "+init=epsg:4326") %>%
+  leaflet(width = "100%") %>%
+  addProviderTiles(provider = "CartoDB.Positron") %>%
+  addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+              stroke = FALSE,
+              smoothFactor = 0,
+              fillOpacity = 0.7,
+              color = ~ pal(estimate)) %>%
+  addLegend("bottomright", 
+            pal = pal, 
+            values = ~ estimate,
+            title = "Median Home Value",
+            labFormat = labelFormat(prefix = "$"),
+            opacity = 1)
+```
+
+
+## County level data
+
+```{r results='hide', echo = F, message = F, warning = F}
+racevars <- c(White = "B02001_002", 
+              Black = "B02001_003", 
+              Asian = "B02001_005",
+              Hispanic = "B03003_003")
+harris <- get_acs(geography = "tract",
+                  variables = racevars, 
+                  year = 2018,
+                  state = "TX",
+                  county = "Harris County",
+                  geometry = TRUE,
+                  summary_var = "B02001_001")
+```
+
+```{r message = F, warning = F, echo = F, error = F}
+harris %>%
+  mutate(Percent = 100 * (estimate / summary_est)) %>%
+  ggplot(aes(fill = Percent, color = Percent)) +
+  facet_wrap(~ variable) +
+  geom_sf() +
+  scale_fill_viridis_c(direction = -1) +
+  scale_color_viridis_c(direction = -1) +
+  labs(title = "Racial geography of Harris County, Texas",
+       caption = "Source: American Community Survey") +
+  theme_void()
+```
+
+## Using mapview
+
+```{r, results = 'hide', message = F, warning = F, echo = F, error = F}
+ny <- get_acs(geography = "tract",
+              variables = "B19013_001",
+              state = "NY",
+              county = "New York",
+              geometry = TRUE)
+```
+
+```{r message = F, warning = F, echo = F, error = F}
+mapview(ny, zcol = "estimate", legend = TRUE)
+```
+
+
+
+

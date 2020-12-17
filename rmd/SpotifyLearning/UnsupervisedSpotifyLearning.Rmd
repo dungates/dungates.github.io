@@ -1,0 +1,397 @@
+---
+title: "Spotify Recommendations"
+author: "Duncan Gates"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  rmdformats::html_clean
+---
+```{css, eval = F}
+<style type="text/css">
+
+body {
+  text-align: center;
+}
+
+</style>
+```
+
+```{r include = F}
+knitr::opts_chunk$set(fig.width=12, fig.height=8, fig.align = "center") 
+library(tidyverse)
+library(readr)
+library(lares)
+library(lubridate)
+library(kableExtra)
+library(reactable)
+library(sparkline)
+library(htmltools)
+# df <- read_csv("/Users/dunk/Downloads/archive (1)/data.csv")
+df <- read_csv("/Users/dunk/Projects/SpotifyLearn/Data/data.csv")
+df_genre <- read_csv("/Users/dunk/Projects/SpotifyLearn/Data/data_w_genres.csv")
+```
+
+# Some quick cleaning
+
+The dataset came from Kaggle but was still a little messy, not sure why the artists column came wrapped in ['name']. Additionally some date formatting was inconsistent (as always), I imputed -01-01 if there was no date after the year.
+
+```{r}
+df2 <- df %>% mutate(artists = str_remove_all(artists, "\\['"),
+                     artists = str_remove_all(artists, "\\']"),
+                     artists = gsub(",", " and ", artists),
+                     artists = str_remove_all(artists, "^'|'$"), # work on this a bit more
+                     decade = as.factor(floor(year/10)*10), # make decade column
+                     year = as.factor(year),
+                     release_date = ifelse(nchar(release_date) == 4, paste0(release_date, "-01-01"), release_date)) # Make release_date a real date column
+# Also would be cool to try to recognize gender by name and make a dummy column
+```
+
+This one is for networking later.
+
+```{r}
+df_genre2 <- df_genre %>% mutate(genres = str_remove_all(genres, "\\["), # Get rid of brackets
+                     genres = str_remove_all(genres, "\\]"),
+                     genres = str_split(genres, ",")) %>%  # Split up genres by comma
+                     unnest(genres) %>% 
+                     mutate(genres = str_remove_all(genres, "\\ '")) %>% # remove all space appostrophes
+                            mutate(genres = str_remove_all(genres, "\\'")) %>% #remove all appostrophes, could be a better filter than this
+                     mutate(genres = str_remove_all(genres, "\"")) # Some quotes stuck around on childrens music category
+# df_genre3 <- df_genre2 %>% pivot_wider(names_from = artists, values_from = genres)
+```
+
+
+
+# Looking At the Data Using Lares
+
+```{r message = F, fig.align='center'}
+df_str(df, return = "plot")
+```
+
+Look at percentages and cumulatives, looks like no popularity is very common!
+
+```{r message = F}
+df %>% freqs(popularity, plot = T)
+```
+
+There is about the same amount of music every year in this dataframe
+
+```{r message = F}
+df %>% freqs(year, plot = T)
+```
+
+Basically newer stuff is more popular with little to no exceptions
+
+```{r message = F, out.height='150%'}
+df %>% mutate(popularity = round(popularity/10)) %>% freqs(popularity, year, plot = T, results = F, top = 50)
+```
+
+Looks like explicitness has a normal distribution compared to popularity
+
+```{r message = F}
+df %>% 
+  mutate(explicit = as.factor(explicit),
+         popularity = round(popularity/10)) %>%
+  freqs(popularity, explicit, plot = T,
+        title = "Popularity by Explicitness",
+        subtitle = paste("Duncan Gates", Sys.Date()),
+        results = F) 
+```
+
+Now we check out the distribution, there's some really cool stuff here
+
+```{r message = F, warning = F}
+df %>% distr(popularity, valence) # Some really cool density plots can be done here
+
+```
+
+There's also some really long songs out there...
+
+```{r message = F}
+df %>% distr(duration_ms)
+```
+
+This looks more like the actual distribution
+
+```{r message = F}
+df %>% 
+  filter(duration_ms < 400000) %>%
+  distr(duration_ms)
+```
+
+Very interesting distribution here
+
+```{r message = F}
+df %>% distr(popularity)
+```
+
+Looks like things are a lot more explicit in 2000-2020 as one might expect, would be interesting to see how when this starts, or what drives it. I also wonder what happened in 1920-1940?
+
+```{r message = F}
+df %>%
+  mutate(explicit = as.factor(explicit),
+         new_era = ifelse(year %in% c(2000:2020), 1, 0)) %>%
+  distr(explicit, new_era)
+df %>% 
+  mutate(decade = floor(year/10)*10) %>%
+  distr(explicit, decade, custom_colours = T, abc = T) 
+```
+
+By the way mode is just whether the song is major or minor.
+
+```{r message = F}
+df %>% distr(mode, force = "char") 
+```
+
+You can even use ggplot2!
+
+```{r message = F}
+df %>%
+  distr(popularity, loudness) + geom_point(color = "yellow")
+```
+
+Wouldn't be data science without some random regressions, even more data science/machine learningy since the second one is a log odds table!
+
+```{r message = F}
+df %>%
+  select(-c(id, name, artists, year, release_date, key)) %>%
+  corr_cross(top = 10) # Look at top 10 correlations in the data, key messes with this idk why
+table <- df %>%
+  select(-c(id, name, artists, year, release_date, key)) %>%
+  corr_var(popularity, logs = T, plot = F, top = 10) 
+table %>% 
+  mutate(variables = paste(toupper(substr(variables, 1, 1)), substr(variables, 2, nchar(as.character(variables))), sep = "")) %>%
+  mutate(corr = kableExtra::cell_spec(corr, "html", color = ifelse(corr > 0, "blue", "red")),
+         pvalue = kableExtra::cell_spec(pvalue, "html", color = ifelse(pvalue < 0.05, "green", "red"))) %>%
+  kableExtra::kable(format = "html", escape = F) %>% 
+  kableExtra::kable_styling("striped", full_width = F, position = "center")
+# wow OHSE is pretty dope check this out with a better dataframe
+```
+
+# Fun with reactable
+
+Using lares one more time to get an idea of the data, there's a lot of NA's at first so I drop those and look again
+
+```{r message = F}
+df_genre2 %>% distr(genres)
+df_genre2 <- df_genre2 %>% na_if("") %>% na.omit %>%
+                     mutate(genres = as.factor(genres))
+```
+
+What's it look like for genres now? Apparently in this dataframe there has been more rock than pop, not sure if that is actually the case (it does seem possible) or if its just the nature of this data.
+
+```{r message = F}
+df_genre2 %>% freqs(genres, plot = T,
+        title = "Genres by Artist",
+        subtitle = paste("Duncan Gates", Sys.Date()),
+        results = F)
+df_genre2 %>% 
+  select(-count) %>%
+  summer(genres) %>% 
+  mutate_if(is.numeric, funs(round)) %>%
+  dplyr::rename(Count = n, `Duration` = duration_ms) %>%
+  mutate(`Duration` = paste0(minute(seconds_to_period((`Duration`/(1000*Count)))), 
+                                     ":", 
+                                     dseconds(round(seconds_to_period((`Duration`/(1000*Count))), digits = 2)))) %>% # Some disgusting lubridate here sorry
+  rename_with(str_to_title) %>%
+  mutate(Genres = str_to_title(Genres)) %>%
+  mutate_at(vars(c("Acousticness", "Danceability", "Energy", "Instrumentalness", "Liveness", "Loudness", "Speechiness", "Tempo", "Valence", "Popularity", "Key", "Mode")), ~round((./Count), digits = 3)) %>% 
+  arrange(desc(Count)) %>% 
+  reactable(bordered = T,
+            highlight = T,
+            defaultColDef = colDef(align = "center",
+                                   width = 150,
+                                   footer = function(values = c("Count", "Acousticness", "Danceability", "Energy", "Instrumentalness", "Liveness", "Loudness", "Speechiness", "Tempo", "Valence", "Popularity", "Key", "Mode")) {
+              if (!is.numeric(values)) return()
+              sparkline(values, type = "bar", width = 100, height = 30) # Can also do boxplots and line graphs
+            }))
+```
+
+Let's filter down a bit and make a couple of these columns prettier
+
+```{r}
+make_color_pal <- function(colors, bias = 1) {
+  get_color <- colorRamp(colors, bias = bias)
+  function(x) rgb(get_color(x), maxColorValue = 255)
+} # Make a color function
+good_color <- make_color_pal(viridis::magma(n = 12), bias = 2)
+good_color2 <- make_color_pal(viridis::viridis(n = 60))
+# seq(0.1, 0.9, length.out = 12) %>% 
+#   good_color() %>% 
+#   scales::show_col() # This just shows the color palette generated
+
+color_table <- df_genre2 %>% 
+  select(-count) %>%
+  summer(genres) %>% 
+  filter(n > 200) %>% # Let's get the top 60 most popular genres
+  mutate_if(is.numeric, funs(round)) %>%
+  dplyr::rename(Count = n, `Duration` = duration_ms) %>%
+  mutate(`Duration` = paste0(minute(seconds_to_period((`Duration`/(1000*Count)))), 
+                                     ":", 
+                                     dseconds(round(seconds_to_period((`Duration`/(1000*Count))), digits = 2)))) %>% # Some disgusting lubridate here sorry
+  rename_with(str_to_title) %>%
+  mutate(Genres = str_to_title(Genres)) %>%
+  mutate_at(vars(c("Acousticness", "Danceability", "Energy", "Instrumentalness", "Liveness", "Loudness", "Speechiness", "Tempo", "Valence", "Popularity", "Key", "Mode")), ~round((./Count), digits = 3)) %>% 
+  arrange(desc(Count))
+reactable <- color_table %>% 
+  reactable(bordered = T,
+            highlight = T,
+            columns = list(
+              Count = colDef(
+                name = "Count",
+                style = function(value) {
+                  value
+                  normalized <- (value - min(color_table$Count)) / (max(color_table$Count) - min(color_table$Count))
+                  color <- rev(good_color(normalized))
+                  list(background = color)
+                }
+              ),
+              Valence = colDef(
+                name = "Valence",
+                style = function(value) {
+                value
+                normalized <- (value - min(color_table$Valence)) / (max(color_table$Valence) - min(color_table$Valence))
+                color <- good_color2(normalized)
+                list(background = color)
+                },
+                class = "border"
+              )
+            ),
+            defaultColDef = colDef(align = "center",
+                                   width = 150,
+                                   footer = function(values = c("Count", "Acousticness", "Danceability", "Energy", "Instrumentalness", "Liveness", "Loudness", "Speechiness", "Tempo", "Valence", "Popularity", "Key", "Mode")) {
+              if (!is.numeric(values)) return()
+              sparkline(values, type = "box", width = 100, height = 30) # Can also do bar and line graphs
+            }))
+```
+
+Have to do a bit of css to get this right,
+
+```{css}
+.table {
+  margin: 0 auto;
+  width: 675px;
+}
+.tableTitle {
+  margin: 6px 0;
+  font-size: 16px;
+  font-family: 'Econ Sans Cnd'
+}
+.tableTitle h2 {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Econ Sans Cnd';
+  text-align: center
+}
+.tableTitle p {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center
+}
+.border {
+  border-left: 4px solid #555;
+  border-right: 4px solid #555;
+}
+```
+
+And print the css that wasn't put in the reactable,
+
+```{r}
+div(class = "tableTitle",
+    div(
+      class = "title",
+      h2("Aggregated Genre Characteristics"),
+      p(
+        "Each Column is an Average of Genre with Arbitrary Artists"
+      ),
+    ),
+    reactable)
+```
+
+
+# Machine Learning???
+
+
+Let's load some networking libraries
+
+```{r message = F}
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+```
+
+Now let's make some central nodes for our network. Also here's a correlation matrix of the data frame.
+
+```{r message = F}
+network_df <- df_genre2 %>% 
+  rename_with(str_to_title) %>%
+  mutate(Genres = str_to_title(Genres)) %>% 
+  relocate(c(Popularity, Count), .after = Artists) %>%
+  arrange(desc(Count, Popularity))
+
+corrplot2 <- function(data,
+                      method = "pearson",
+                      sig.level = 0.05,
+                      order = "original",
+                      diag = FALSE,
+                      type = "upper",
+                      tl.srt = 90,
+                      number.font = 1,
+                      number.cex = 1,
+                      mar = c(0, 0, 0, 0)) {
+  library(corrplot)
+  data_incomplete <- data
+  data <- data[complete.cases(data), ]
+  mat <- cor(data, method = method)
+  cor.mtest <- function(mat, method) {
+    mat <- as.matrix(mat)
+    n <- ncol(mat)
+    p.mat <- matrix(NA, n, n)
+    diag(p.mat) <- 0
+    for (i in 1:(n - 1)) {
+      for (j in (i + 1):n) {
+        tmp <- cor.test(mat[, i], mat[, j], method = method)
+        p.mat[i, j] <- p.mat[j, i] <- tmp$p.value
+      }
+    }
+    colnames(p.mat) <- rownames(p.mat) <- colnames(mat)
+    p.mat
+  }
+  p.mat <- cor.mtest(data, method = method)
+  col <- colorRampPalette(c("#BB4444", "#EE9988", "#FFFFFF", "#77AADD", "#4477AA"))
+  corrplot(mat,
+    method = "color", col = col(200), number.font = number.font,
+    mar = mar, number.cex = number.cex,
+    type = type, order = order,
+    addCoef.col = "black", # add correlation coefficient
+    tl.col = "black", tl.srt = tl.srt, # rotation of text labels
+    # combine with significance level
+    p.mat = p.mat, sig.level = sig.level, insig = "blank",
+    # hide correlation coefficiens on the diagonal
+    diag = diag
+  )
+}
+
+network_df %>% select(-Genres, -Artists) %>% corrplot2()
+```
+
+Graphing
+
+```{r message=FALSE}
+network_df_filter <- network_df %>% filter(Count > 200) %>% select(Genres, Artists) # Arbitrary filter for artists with more than 100 songs to get an idea of what we're looking at
+network_graph <- network_df_filter %>%
+  graph_from_data_frame(directed = T) # From igraph
+V(network_graph)$size <- degree(network_graph)
+ggraph(network_graph, layout = "fr") +
+  geom_edge_link(aes(color = Value), edge_color = "grey66", arrow = arrow(type = "closed", length = unit(3, 'mm'))) +
+  geom_node_point(aes(size = degree(network_graph), alpha = degree(network_graph)), color = "lightblue", size = 5) +
+  geom_node_text(aes(filter = size >= 8, label = name), vjust = 1, hjust = 1, repel = TRUE, family = "serif", fontface = "bold") +
+  scale_edge_width(range = c(0.2,3)) +
+  scale_size(range = c(1,6)) +
+  ggtitle("Mapping Genres and Artists") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "none")
+```
+
+
+
+
