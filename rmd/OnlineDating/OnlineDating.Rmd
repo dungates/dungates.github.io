@@ -1,0 +1,58 @@
+---
+title: "How Online Identities are Constructed to Appeal to Others"
+author: "Duncan Gates"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  rmdformats::robobook: 
+    self_contained: true # Other options are downcute, material, readthedown, html_clean, html_docco, lockdown, https://github.com/juba/rmdformats
+    thumbnails: false
+    lightbox: true
+    gallery: false
+    highlight: tango
+    number_sections: true
+    includes:
+      after_body: footer.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+setwd("/Users/dunk/Projects/NewWebsite.io/img/rmd/")
+```
+
+# The Data Informing the Analysis
+
+Let's start out just by stating the obvious, online dating is huge, and growing. The potential for profit is limitless, and growth will doubtlessly continue as the entirety of younger generations now sees it as the main way to gain access to the dating pool. Over 90% of college students have at some point used Tinder alone, and the portion of actual subscribers and ongoing active users of the app is actually growing consistently as well.
+
+![](/Users/dunk/Projects/NewWebsite.io/img/rmd/TinderGrowth.png)
+
+In modern times, romance has taken to the internet for various reasons, primarily it seems because it is easier and far more available than resources such as friends, coworkers, or going to bars.
+
+![](/Users/dunk/Projects/NewWebsite.io/img/rmd/IncreasinglyOnline.png)
+
+Tinder is far and away the most popular way to "online date," but it's debateable what that really means, in my experience people really like swiping, and actual interaction is very rare for the vast majority. Of course there are some outliers, but amongst all groups Tinder is the most popular
+
+![](/Users/dunk/Projects/NewWebsite.io/img/rmd/USDatingbyAge.png)
+
+Genders are very different selectively, this is not surprising but a deep dive on the causes of this would be fascinating to see.
+
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="caption",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("/Users/dunk/Projects/NewWebsite.io/img/rmd/MenRateWomen.png","/Users/dunk/Projects/NewWebsite.io/img/rmd/WomenRateMen.png"))
+```
+
+Partnership rate peaks at around 35 and declines afterwards due to high divorce rates, the corresponding proportion of men and women meeting partners online does not make a ton of intuitive sense in response to this, suggesting more room for growth.
+
+![](/Users/dunk/Projects/NewWebsite.io/img/rmd/AgevsDating.png)
+
+Online Dating Systems play a prominent role in the social lives of many people. A few studies have investigated how self-presentation in this setting affects perceived attractiveness (Ellison, Heino, & Gibbs 2006; Hancock, Toma, & Ellison 2007). In one recent study (Fiore et al. 2008), the authors presented online dating profiles to 25 male and 25 female participants, who either saw a component in isolation (the photo, the attributes - age, weight, religion, etc., and the free-text portion), or saw the profile as a whole. They rated the components on attractiveness, trustworthiness, femininity, and masculinity (participants only rated profiles of the opposite sex). As past research in the psychology of attraction would suggest, the photo was the strongest predictor of whole profile attractiveness, but interestingly, the study also suggested that the free-text component played an important role in predicting overall attractiveness.
+
+
+
+
+# Jupyter Notebook Analysis
+
+
+
+
+
+
