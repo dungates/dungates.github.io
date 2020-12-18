@@ -14,7 +14,7 @@ output:
       after_body: footer.html
 ---
 
-```{css}
+```{css, echo = F}
 h1.title {
   font-size: 38px;
   color: DarkRed;
@@ -126,7 +126,7 @@ harris %>%
 
 ## Using mapview
 
-```{r, results = 'hide', message = F, warning = F, echo = F, error = F}
+```{r results = 'hide', message = F, warning = F, echo = F, error = F}
 ny <- get_acs(geography = "tract",
               variables = "B19013_001",
               state = "NY",
@@ -146,8 +146,8 @@ mapview(ny, zcol = "estimate", legend = TRUE)
 
 Digging into 2016-2019 census data by using each one, this takes significant time on the census website learning the codes and API formatting.
 
-```{r}
-get_historic_acs <- function (variables, 
+```{r message = F, warning = F, error = F}
+get_historic_acs <- function(variables, 
                               geography, 
                               year, 
                               summary_var = NULL) {
@@ -165,11 +165,9 @@ for (i in 1:length(year)) {
 
 year_range <- 2016:2019
 
-geos_inc <- c("us", 
-              "metropolitan statistical area/micropolitan statistical area", 
-              "state")
+geos_inc <- c("county")
 
-variable <- c('DP02_0059P', 
+ed_variable <- c('DP02_0059P', 
               'DP02_0060P', 
               'DP02_0061P', 
               'DP02_0062P', 
@@ -187,12 +185,27 @@ ed_labels <- c('Less than 9th Grade',
 
 ed_level <- c(1:7)
 
-ed_table <- as_tibble(bind_cols(variable, ed_level, ed_labels), stringsAsFactors = FALSE)
+ed_table <- as_tibble(bind_cols(ed_variable, ed_level, ed_labels), stringsAsFactors = FALSE)
 
-ed_data <- get_historic_acs(variables = variable, 
+ed_data <- get_historic_acs(variables = ed_variable, 
                             geography = geos_inc, 
-                            year = year_range)
+                            year = 2018)
 ed_data <- ed_data %>% 
+  mutate(variable = case_when(variable == "DP02_0059P" ~ 'Less than 9th Grade',
+                              variable == "DP02_0060P" ~ '9th to 12th grade, no diploma',
+                              variable == "DP02_0061P" ~ 'High school graduate',
+                              variable == "DP02_0062P" ~ 'Some college, no degree',
+                              variable == "DP02_0063P" ~ 'Associate\'s degree',
+                              variable == "DP02_0064P" ~ 'Bachelor\'s degree',
+                              variable == "DP02_0065P" ~ 'Grad/pro degree'))
+
+ed_data_2 <- get_acs(geography = "county",
+                  variables = ed_variable,
+                  year = 2018,
+                  geometry = TRUE,
+                  summary_var = "DP02_0059P",
+                  shift_geo = T)
+ed_data_2 <- ed_data_2 %>% 
   mutate(variable = case_when(variable == "DP02_0059P" ~ 'Less than 9th Grade',
                               variable == "DP02_0060P" ~ '9th to 12th grade, no diploma',
                               variable == "DP02_0061P" ~ 'High school graduate',
@@ -205,7 +218,7 @@ ed_data <- ed_data %>%
 
 ## Secondary Data for Plotting and Comparison
 
-```{r}
+```{r message = F, warning = F, error = F, eval = F}
 variable <-c("DP02_0011P", 
              "DP02_0067P",
              "DP02_0069P",
@@ -236,41 +249,184 @@ dp_table <- as.data.frame(cbind(variable, label))
 dp_data <- get_historic_acs(variables=variable, 
                             geography = geos_inc, 
                             year = year_range) # REMINDER TO GGANIMATE LAST 5 YEARS
+```
 
-race_variables <- c("B02001_001",
-                    "B02001_002",
-                    "B02001_003",
-                    "B02001_004",
-                    "B02001_005")
+## Another way to get race data
 
-race_labels <- c("Total",
-                 "White",
-                 "Black",
-                 "American Indian",
-                 "Asian")
-
-race_table <- as_tibble(bind_cols(race_variables, race_labels))
-
-race_data <- get_historic_acs(variables = race_variables, 
-                            geography = geos_inc, 
-                            year = year_range)
-
-race_data <- race_data %>% mutate()
+```{r}
+# race_variables <- c("B02001_001",
+#                     "B02001_002",
+#                     "B02001_003",
+#                     "B02001_004",
+#                     "B02001_005")
+# 
+# race_labels <- c("Total",
+#                  "White",
+#                  "Black",
+#                  "American Indian",
+#                  "Asian")
+# 
+# race_table <- as_tibble(bind_cols(race_variables, race_labels))
+# 
+# race_data <- get_historic_acs(variables = race_variables, 
+#                             geography = geos_inc, 
+#                             year = year_range)
+# 
+# race_data <- race_data %>% mutate()
 
 # Easier way to do it
 race_data2 <- get_acs(geography = "county",
                   variables = racevars,
-                  year = 2019,
+                  year = 2018,
                   geometry = TRUE,
-                  summary_var = "B02001_001")
+                  summary_var = "B02001_001",
+                  shift_geo = T)
+```
 
 
+## Joining the data
+
+```{r}
+# ed_data <- ed_data %>%
+#   left_join(ed_table)
+ed_data_join <- ed_data %>% select(variable, GEOID, NAME, estimate) %>% rename(education_level = variable)
+race_data_join <- race_data2 %>% mutate(estimate_percent = estimate/summary_est) %>% select(GEOID, NAME, variable, estimate_percent, geometry) %>% rename(race = variable)
+test <- ed_data_join %>% left_join(race_data_join, by = c("GEOID", "NAME"))
+```
+
+## A plot of educational attainment that should only be run on specific counties
+
+```{r include = F}
+# Don't run this, way too much data need to filter to certain counties
+test %>% mutate(year = 2018) %>%
+  ggplot(aes(x = year, 
+             y = estimate, 
+             fill = factor(education_level))) + 
+    geom_col(color= 'gray', width = .8) +
+    scale_fill_brewer(palette = 'Blues') +
+    coord_flip()+
+    facet_wrap(~NAME, ncol = 3)+
+    theme(legend.position="bottom", 
+          legend.title = element_blank(), 
+          plot.title = element_text(size=14))+
+    labs(title="Educational attainment profiles",
+         subtitle="2018")
+```
+
+## Map of the racial data
+
+```{r fig.width=10}
+race_data_join %>%
+  mutate(Percent = 100 * (estimate_percent)) %>%
+  ggplot(aes(fill = Percent, color = Percent)) +
+  facet_wrap(~ race) +
+  geom_sf() +
+  scale_fill_viridis_c(direction = -1) +
+  scale_color_viridis_c(direction = -1) +
+  labs(title = "Racial geography of the US",
+       caption = "Source: American Community Survey") +
+  theme_void()
+```
 
 
+## Map of the Educational Data
+
+```{r fig.width=10}
+# just_geometry <- race_data_join %>% select(geometry, GEOID)
+# ed_data_join <- ed_data_join %>% left_join(just_geometry, by = "GEOID")
+ed_data_2 %>%
+  ggplot(aes(fill = estimate, color = estimate)) +
+  facet_wrap(~ factor(variable, levels = c('Less than 9th Grade', 
+               '9th to 12th grade, no diploma', 
+               'High school graduate', 
+               'Some college, no degree', 
+               "Associate's degree", 
+               "Bachelor's degree", 
+               'Grad/pro degree'))) +
+  geom_sf() +
+  scale_fill_viridis_c(direction = -1) +
+  scale_color_viridis_c(direction = -1) +
+  labs(title = "Educational Geography of the US",
+       caption = "Source: American Community Survey",
+       color = "Percent") +
+  theme_void() + 
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+```
+
+# Visualizing the Relationship between Race and Education
+
+```{r}
+race_data_state <- get_acs(geography = "state",
+                  variables = racevars,
+                  year = 2018,
+                  geometry = TRUE,
+                  summary_var = "B02001_001",
+                  shift_geo = T)
+race_data_state <- race_data_state %>% as_tibble() %>% 
+  select(-geometry, -GEOID, -summary_moe, -moe) %>% 
+  rename(race = variable) %>% 
+  mutate(race_percent = 100*(estimate/summary_est)) %>%
+  select(-summary_est, -estimate)
+ed_data_state <- get_acs(geography = "state",
+                  variables = ed_variable,
+                  year = 2018,
+                  geometry = TRUE,
+                  summary_var = "DP02_0059P",
+                  shift_geo = T)
+ed_data_state <- ed_data_state %>% as_tibble() %>% 
+  select(-geometry, -GEOID, -summary_moe, -moe) %>% 
+  rename(education_level = variable) %>% 
+  select(-summary_est) %>% 
+  mutate(education_level = case_when(education_level == "DP02_0059P" ~ 'Less than 9th Grade',
+                              education_level == "DP02_0060P" ~ '9th to 12th grade, no diploma',
+                              education_level == "DP02_0061P" ~ 'High school graduate',
+                              education_level == "DP02_0062P" ~ 'Some college, no degree',
+                              education_level == "DP02_0063P" ~ 'Associate\'s degree',
+                              education_level == "DP02_0064P" ~ 'Bachelor\'s degree',
+                              education_level == "DP02_0065P" ~ 'Grad/pro degree'))
+
+
+race_education_state <- ed_data_state %>% left_join(race_data_state, by = c("NAME")) %>% rename(education_percent = estimate, state = NAME)
+
+# Plot to go here
 ```
 
 
 
+
+
+
+## Chord Diagram (Not Yet Finished)
+
+```{r eval = F}
+library(chorddiag)
+matrix_race <- race_data_join %>% as_tibble() %>% select(-geometry, -GEOID) %>% mutate(estimate_percent = 100 * estimate_percent)
+matrix_ed <- ed_data_2 %>% 
+  as_tibble() %>%
+  select(-geometry, -GEOID, -summary_est, -summary_moe, -moe) %>% 
+  pivot_wider(names_from = NAME, values_from = estimate)
+matrix_ed_race <- matrix_ed %>%
+  inner_join(matrix_race, by = c(""))
+
+m <- matrix(c(11975,  5871, 8916, 2868,
+              1951, 10048, 2060, 6171,
+              8010, 16145, 8090, 8045,
+              1013,   990,  940, 6907),
+            byrow = TRUE,
+            nrow = 4, ncol = 4)
+
+races <- c("White", "Black", "Asian", "Hispanic")
+dimnames(m) <- list(have = races,
+                    prefer = races)
+groupColors <- c("#000000", "#FFDD89", "#957244", "#F26223")
+
+# Build the chord diagram:
+p <- chorddiag(m, groupColors = groupColors, groupnamePadding = 20)
+p
+
+
+```
 
 
 
