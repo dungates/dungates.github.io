@@ -296,7 +296,7 @@ test <- ed_data_join %>% left_join(race_data_join, by = c("GEOID", "NAME"))
 
 ## A plot of educational attainment that should only be run on specific counties
 
-```{r include = F}
+```{r include = F, eval = F}
 # Don't run this, way too much data need to filter to certain counties
 test %>% mutate(year = 2018) %>%
   ggplot(aes(x = year, 
@@ -367,7 +367,8 @@ race_data_state <- race_data_state %>% as_tibble() %>%
   select(-geometry, -GEOID, -summary_moe, -moe) %>% 
   rename(race = variable) %>% 
   mutate(race_percent = 100*(estimate/summary_est)) %>%
-  select(-summary_est, -estimate)
+  select(-summary_est, -estimate) %>%
+  mutate(race = as.factor(race))
 ed_data_state <- get_acs(geography = "state",
                   variables = ed_variable,
                   year = 2018,
@@ -384,7 +385,14 @@ ed_data_state <- ed_data_state %>% as_tibble() %>%
                               education_level == "DP02_0062P" ~ 'Some college, no degree',
                               education_level == "DP02_0063P" ~ 'Associate\'s degree',
                               education_level == "DP02_0064P" ~ 'Bachelor\'s degree',
-                              education_level == "DP02_0065P" ~ 'Grad/pro degree'))
+                              education_level == "DP02_0065P" ~ 'Grad/pro degree')) %>%
+  mutate(education_level = factor(education_level, levels = c('Less than 9th Grade', 
+               '9th to 12th grade, no diploma', 
+               'High school graduate', 
+               'Some college, no degree', 
+               "Associate's degree", 
+               "Bachelor's degree", 
+               'Grad/pro degree')))
 
 
 race_education_state <- ed_data_state %>% left_join(race_data_state, by = c("NAME")) %>% rename(education_percent = estimate, state = NAME)
@@ -401,29 +409,75 @@ race_education_state <- ed_data_state %>% left_join(race_data_state, by = c("NAM
 
 ```{r eval = F}
 library(chorddiag)
-matrix_race <- race_data_join %>% as_tibble() %>% select(-geometry, -GEOID) %>% mutate(estimate_percent = 100 * estimate_percent)
-matrix_ed <- ed_data_2 %>% 
-  as_tibble() %>%
-  select(-geometry, -GEOID, -summary_est, -summary_moe, -moe) %>% 
-  pivot_wider(names_from = NAME, values_from = estimate)
-matrix_ed_race <- matrix_ed %>%
-  inner_join(matrix_race, by = c(""))
+library(readxl)
+race_education_data <- read_excel("/Users/dunk/Downloads/Book1.xlsx")
+race_education_data_2 <- race_education_data %>% select(-`...1`) %>% mutate_if(is.numeric, .funs = funs(.*100))
+test_matrix <- as.matrix(race_education_data_2)
 
-m <- matrix(c(11975,  5871, 8916, 2868,
-              1951, 10048, 2060, 6171,
-              8010, 16145, 8090, 8045,
-              1013,   990,  940, 6907),
-            byrow = TRUE,
-            nrow = 4, ncol = 4)
+colnames(test_matrix) <- c("All", "American Indian or Alaska Native", "Asian", "Black", "Hispanic", 
+                                       "Native Hawaiian or other Pacific Islander", "White", "More than one race")
 
-races <- c("White", "Black", "Asian", "Hispanic")
-dimnames(m) <- list(have = races,
-                    prefer = races)
-groupColors <- c("#000000", "#FFDD89", "#957244", "#F26223")
+rownames(test_matrix) <- c("Less than high school", "High school graduate", "Some college but no degree",
+                                            "Associate degree", "Bachelor's degree", "Master's degree", "Professional degree", 
+                                            "Doctoral degree")
+
+
+
+groupColors <- c(RColorBrewer::brewer.pal(8, "Blues"))
+chorddiag(test_matrix, type = "bipartite", 
+          groupColors = groupColors,
+          groupnamePadding = 20, showTicks = F, categorynameFontsize = 0, groupnameFontsize = 12)
+```
+
+
+
+
+
+```{r include = F}
+# matrix_race <- race_data_join %>% as_tibble() %>% select(-geometry, -GEOID) %>% mutate(estimate_percent = 100 * estimate_percent)
+# matrix_ed <- ed_data_2 %>% 
+#   as_tibble() %>%
+#   select(-geometry, -GEOID, -summary_est, -summary_moe, -moe) %>% 
+#   pivot_wider(names_from = NAME, values_from = estimate)
+# matrix_ed_race <- matrix_ed %>%
+#   inner_join(matrix_race, by = c(""))
+# 
+# pivot <- ed_data_state %>%
+#   pivot_wider(names_from = "education_level", values_from = "estimate")
+#   
+# pivot2 <- race_data_state %>%
+#   pivot_wider(names_from = "race", values_from = "race_percent")
+# 
+# state_matrix <- left_join(pivot, pivot2, by = c("NAME")) %>% rename(State = NAME)
+# 
+# state_matrix_final <- as.matrix(state_matrix)
+
+# titanic_tbl <- tibble::as_tibble(Titanic)
+# titanic_tbl <- titanic_tbl %>%
+#     mutate(across(where(is.character), as.factor))
+# by_class_survival <- titanic_tbl %>%
+#     group_by(Class, Survived) %>%
+#     summarise(Count = sum(n)) %>% 
+#     ungroup()
+# titanic.mat <- matrix(by_class_survival$Count, nrow = 4, ncol = 2, byrow = TRUE)
+# dimnames(titanic.mat ) <- list(Class = levels(titanic_tbl$Class),
+#                                Survival = levels(titanic_tbl$Survived))
+# print(titanic.mat)
+
+# races_education_vars <- c("White", "Black", "Asian", "Hispanic", "Less than 9th Grade", "9th to 12th grade, no diploma",
+#            "High school graduate", "Some college, no degree", "Associate's degree", "Bachelor's degree", 
+#            "Grad/pro degree")
+# dimnames(state_matrix_final) <- list(Race = levels(race_data_state$race),
+#                                      Education = levels(ed_data_state$education_level))
+# rownames(state_matrix_final) = paste0("State", 1:51)
+# colnames(state_matrix_final) = paste0("Education", 1:12)
+# colnames(state_matrix_final) = paste0("Race", 9:12)
+# groupColors <- c("#000000", "#FFDD89", "#957244", "#F26223")
+
 
 # Build the chord diagram:
-p <- chorddiag(m, groupColors = groupColors, groupnamePadding = 20)
-p
+# p <- chorddiag(state_matrix_final, groupColors = groupColors, groupnamePadding = 20)
+# p
 
 
 ```
