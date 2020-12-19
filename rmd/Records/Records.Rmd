@@ -1,0 +1,354 @@
+---
+title: "Which World Record is Most Impressive"
+author: "Duncan Gates"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  rmdformats::html_clean:
+    self_contained: true # Other options are downcute, material, readthedown, html_clean, html_docco, lockdown, https://github.com/juba/rmdformats
+    thumbnails: false
+    lightbox: true
+    gallery: false
+    highlight: tango
+    number_sections: false
+---
+
+# Data Obtain
+
+```{r include = F}
+knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.align = 'center')
+library(rvest)
+library(xml2)
+library(tidyverse)
+library(hrbrthemes)
+library(here)
+set_here("/Users/dunk/Github/Athletics")
+```
+
+## Initial Data Scrape with rvest
+
+Men's world records scrape.
+
+```{r echo = T}
+url <- "https://www.worldathletics.org/records/by-category/world-records"
+mens_world_records <- url %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="menoutdoor"]/table') %>% 
+  html_table()
+mens_world_records <- mens_world_records[[1]]
+```
+
+Women's world records scrape.
+
+```{r echo = T}
+womens_world_records <- url %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="womenoutdoor"]/table') %>% 
+  html_table()
+womens_world_records <- womens_world_records[[1]]
+```
+
+
+https://en.wikipedia.org/wiki/Athletics_record_progressions for later bigger data obtain on each event.
+
+## Data Cleaning
+
+```{r echo = T}
+mens_world_records <- mens_world_records %>% 
+  select(Discipline, Perf, Competitor, DOB, Country, Date) %>%
+  mutate(DOB = lubridate::dmy(DOB),
+         Date = lubridate::dmy(Date)) %>%
+  mutate(Perf = gsub("h #", "", Perf),
+         Perf = str_remove(Perf, "h"),
+         Perf = str_remove(Perf, "   *"),
+         Perf = str_remove(Perf, "\\*"),
+         Perf = str_remove(Perf, "   (i)"),
+         Discipline = factor(Discipline),
+         Country = factor(Country))
+
+womens_world_records <- womens_world_records %>% 
+  select(Discipline, Perf, Competitor, DOB, Country, Date) %>%
+  mutate(DOB = lubridate::dmy(DOB),
+         Date = lubridate::dmy(Date)) %>%
+  mutate(Perf = gsub("h #", "", Perf),
+         Perf = gsub(" #", "", Perf),
+         Perf = str_remove(Perf, "h"),
+         Perf = str_remove(Perf, "Wo   *"),
+         Perf = str_remove(Perf, "Wo"),
+         Perf = str_remove(Perf, " Mx"),
+         Perf = str_remove(Perf, "\\*"),
+         Perf = str_remove(Perf, "   (i)"),
+         Discipline = factor(Discipline),
+         Country = factor(Country))
+womens_world_records$Perf[8] <- "5:23.75" # Can't tell why (i) is not getting removed
+# xlsx::write.xlsx(womens_world_records, "womens_world_records.xlsx")
+```
+
+
+## Basic Plotting
+
+Running World Records
+
+```{r fig.width = 10}
+# xlsx::write.xlsx(mens_world_records, "mens_world_records.xlsx") # Not sure how to change times like I need to here -> character to numeric and in hms, ms, and s format so I just wrote it to excel and used =cellvalue *86400 which makes it seconds
+mens_world_records_seconds <- readxl::read_excel("mens_world_records.xlsx", range = "B1:G46")
+womens_world_records_seconds <- readxl::read_excel("womens_world_records.xlsx", range = "B1:G50")
+womens_world_records_seconds_join <- womens_world_records_seconds %>% 
+  slice(1:25) %>%
+  mutate(Gender = "Women")
+mens_world_records_seconds_join <- mens_world_records_seconds %>%
+  slice(1:21) %>% 
+  mutate(Gender = "Men")
+mens_womens_records <- full_join(womens_world_records_seconds_join, mens_world_records_seconds_join)
+mens_world_records_seconds %>% 
+  mutate(Perf = as.numeric(Perf),
+         Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
+                                                    "One Mile","2000 Metres","3000 Metres","5000 Metres", "5 Kilometres", "10,000 Metres", "10 Kilometres","20,000 Metres","One Hour","Half Marathon","25,000 Metres","30,000 Metres","Marathon","100 Kilometres"))) %>%
+  slice(1:21) %>%
+  slice(-15, -11, -13, -16) %>% # SELECT OUT UNNECESSARY ONES: kamworor old world record for half, mo farah for timed distance, cheptegei and kipruto for road records
+  ggplot(aes(x = Discipline, y = Perf, group = 1)) + 
+  geom_point() + 
+  stat_summary(fun.y = sum, geom = "line") +
+  scale_y_time() + 
+  theme_ipsum() +
+  labs(x = "Distance", y = "Time") +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+Separated into Track, Middle Distance, and Long Distance
+
+```{r fig.width = 10}
+mens_world_records_seconds %>% 
+  mutate(Perf = as.numeric(Perf),
+         Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
+                                                    "One Mile","2000 Metres","3000 Metres","5000 Metres", "5 Kilometres", "10,000 Metres", "10 Kilometres","20,000 Metres","One Hour","Half Marathon","25,000 Metres","30,000 Metres","Marathon","100 Kilometres"))) %>%
+  slice(1:4) %>%
+  slice(-15, -11, -13, -16) %>% # SELECT OUT UNNECESSARY ONES: kamworor old world record for half, mo farah for timed distance, cheptegei and kipruto for road records
+  ggplot(aes(x = Discipline, y = Perf, group = 1)) + 
+  geom_text(aes(label = Competitor), size = 2, nudge_y = 5) + 
+  stat_summary(fun.y = sum, geom = "line") +
+  scale_y_time() + 
+  theme_ipsum() +
+  labs(x = "Distance", y = "Time", title = "Track Records") +
+  theme(axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5))
+```
+
+```{r fig.width = 10}
+mens_world_records_seconds %>% 
+  mutate(Perf = as.numeric(Perf),
+         Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
+                                                    "One Mile","2000 Metres","3000 Metres","5000 Metres", "5 Kilometres", "10,000 Metres", "10 Kilometres","20,000 Metres","One Hour","Half Marathon","25,000 Metres","30,000 Metres","Marathon","100 Kilometres"))) %>%
+  slice(5:10) %>%
+  ggplot(aes(x = Discipline, y = Perf, group = 1)) + 
+  geom_text(aes(label = Competitor), size = 2, nudge_y = 20) + 
+  stat_summary(fun.y = sum, geom = "line") +
+  scale_y_time() + 
+  theme_ipsum() +
+  labs(x = "Distance", y = "Time", title = "Middle Distance Records") +
+  theme(axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5))
+```
+
+```{r fig.width = 10}
+mens_world_records_seconds %>% 
+  mutate(Perf = as.numeric(Perf),
+         Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
+                                                    "One Mile","2000 Metres","3000 Metres","5000 Metres", "5 Kilometres", "10,000 Metres", "10 Kilometres","20,000 Metres","One Hour","Half Marathon","25,000 Metres","30,000 Metres","Marathon","100 Kilometres"))) %>%
+  slice(14:21) %>%
+  slice(-2, -3, -8) %>% # SELECT OUT UNNECESSARY ONES: kamworor old world record for half, mo farah for timed distance, cheptegei and kipruto for road records
+  ggplot(aes(x = Discipline, y = Perf, group = 1)) + 
+  geom_text(aes(label = Competitor), size = 2, nudge_y = 250) + 
+  stat_summary(fun.y = sum, geom = "line") +
+  scale_y_time() + 
+  theme_ipsum() +
+  labs(x = "Distance", y = "Time", title = "Long Distance Records") +
+  theme(axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5))
+```
+
+Plotting Men's and Women's World Records Together.
+
+```{r}
+mens_womens_records %>% 
+  slice(-11,-12,-14,-15,-17,-18,-23,-36,-40,-38,-41) %>%
+  mutate(Perf = as.numeric(Perf),
+         Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
+                                                    "One Mile","2000 Metres","3000 Metres","5000 Metres", "5 Kilometres", "10,000 Metres", "10 Kilometres","20,000 Metres","One Hour","Half Marathon","25,000 Metres","30,000 Metres","Marathon","100 Kilometres"))) %>%
+  ggplot(aes(x = Discipline, y = Perf, color = Gender, group = Gender)) + 
+  geom_point() + 
+  geom_line() +
+  scale_color_manual(values = c("dodgerblue1", "pink")) +
+  scale_y_time() + 
+  theme_ipsum() +
+  labs(x = "Distance", y = "Time", title = "All Distance Records") +
+  theme(axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5))
+```
+
+Split into smaller sections once again 
+
+```{r fig.width = 10}
+faceted_records <- mens_womens_records %>% 
+  slice(-11,-12,-14,-15,-17,-18,-23,-36,-40,-38,-41) %>%
+  mutate(Perf = as.double(Perf),
+         Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
+                                                    "One Mile","2000 Metres","3000 Metres","5000 Metres", "5 Kilometres", "10,000 Metres", "10 Kilometres","20,000 Metres","One Hour","Half Marathon","25,000 Metres","30,000 Metres","Marathon","100 Kilometres")))
+faceted_records <- faceted_records %>%
+  mutate(Distance = case_when(Perf < 120 ~ "Short Distance",
+                              Perf > 120 & Perf < 1800 ~ "Middle Distance",
+                              Perf > 1800 ~ "Long Distance")) %>%
+  mutate(Distance = factor(Distance, levels = c("Short Distance", "Middle Distance", "Long Distance")))
+
+ggplot(data = faceted_records, aes(x = Discipline, y = Perf, color = Gender, group = Gender)) + 
+  geom_point() + 
+  geom_line() +
+  facet_wrap( ~ Distance, scales = "free") +
+  scale_color_manual(values = c("dodgerblue1", "pink")) +
+  scale_y_time(breaks = scales::breaks_pretty(10), limits = c(0, NA)) + 
+  theme_ipsum() +
+  labs(x = "Distance", y = "Time", title = "Distance World Records") +
+  theme(axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5))
+```
+
+Percent Difference At Each Level, by this metric it appears that the most impressive world records are the men's 20,000 through 30,000 meters. This could also just be the result of these races being largely unimportant in the racing world, as evidenced by the jump in the ratio of the half marathon.
+
+```{r fig.width = 13}
+records_difference <- faceted_records %>% 
+  pivot_wider(id_cols = Discipline, names_from = Gender, values_from = c(Perf))
+records_difference$Women[13] <- 3871
+records_difference <- records_difference %>%
+  unnest(c(Men, Women)) %>%
+  mutate(Ratio = Men/Women)
+ggplot(records_difference, aes(x = Discipline, y = Ratio, fill = Ratio)) + 
+  geom_col() +
+  geom_text(aes(label = paste0(100*round(Ratio, 4), "%")), hjust = -0.1) +
+  scale_y_continuous(labels = scales::percent, 
+                     breaks = scales::breaks_pretty(n = 10)) +
+  scale_fill_distiller(palette = "Blues") +
+  coord_flip() +
+  labs(title = "Difference in Men's and Women's Records", y = "Ratio (Women:Men)") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        legend.position = "none")
+```
+
+
+
+
+
+
+
+
+
+
+Progression of the 100 meter world record
+
+The vast majority of world records have been broken at positive wind speeds, is this because the races are run in non-windy conditions, or wind speed has a drastic effect on runners? Given how minor the negative wind speeds are when it is broken, it is likely that this is because it is having a significant impact.
+
+```{r fig.width = 10}
+library(lubridate)
+world_record_100 <- readr::read_csv(file = "100mworldrecord.csv", col_types = list(col_character(), 
+                                                                                                                             col_character(),
+                                                                                                                             col_character(),
+                                                                                                                             col_character(),
+                                                                                                                             col_character(),
+                                                                                                                             col_character(),
+                                                                                                                             col_double(),
+                                                                                                                             col_character(),
+                                                                                                                             col_double()))
+world_record_100$`Day of Date`[35] <- "14-Oct-68"
+
+foo <- function(x, year=1968){
+  m <- year(x) %% 100
+  year(x) <- ifelse(m > year %% 100, 1900+m, 2000+m)
+  x
+}
+
+world_record_100_clean <- world_record_100 %>% 
+  rename(Time = `Min. Time`) %>%
+  mutate(Date = foo(dmy(`Day of Date`), 1911))
+
+world_record_100_clean %>%
+  mutate(Record = factor(Record, levels = c("Ratified", "Ratified but later Rescinded", "Not Ratified"))) %>%
+  ggplot(aes(x = Date, y = Time, fill = Wind)) +
+  geom_line() + 
+  scale_fill_distiller(palette = "YlOrRd") +
+  ggrepel::geom_label_repel(aes(label = ifelse(Record == "Ratified but later Rescinded" |
+                                 Record == "Not Ratified", 
+                                 Athlete, 
+                                 "")), fill = "white") +
+  ggrepel::geom_label_repel(aes(label = ifelse(Record == "Ratified" & Wind < 0,
+                                               paste("Wind Speed:", Wind),
+                                               ""),
+                                fill = Wind)) +
+  scale_x_date(breaks = scales::breaks_pretty(n = 10)) +
+  facet_wrap( ~ Record) +
+  labs(x = "Date", title = "World Records in the 100 Meters") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+```
+
+![](/Users/dunk/Github/Athletics/WindSpeed100m.png)
+
+
+```{r, include = F}
+world_record_100_clean %>%
+  mutate(Record = factor(Record, levels = c("Ratified", "Ratified but later Rescinded", "Not Ratified"))) %>%
+  ggplot(aes(x = Date, y = Time, fill = Wind)) +
+  geom_line() + 
+  scale_fill_distiller(palette = "Greens") +
+  ggrepel::geom_label_repel(aes(label = ifelse(Record == "Ratified but later Rescinded" |
+                                 Record == "Not Ratified", 
+                                 Athlete, 
+                                 "")), fill = "white") +
+  ggrepel::geom_label_repel(aes(label = ifelse(Record == "Ratified" & Wind > 0,
+                                               paste("Wind Speed:", Wind),
+                                               ""),
+                                fill = Wind)) +
+  scale_x_date(breaks = scales::breaks_pretty(n = 10)) +
+  facet_wrap( ~ Record) +
+  labs(x = "Date", title = "World Records in the 100 Meters") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+```
+
+
+
+
+Percent Improvement for World Record Each Time
+
+Usain Bolt is absolutely bonkers good, no one else has ever made such an individual dent into the 100 meter world record.
+
+![](/Users/dunk/Github/Athletics/Improvement100m.png)
+
+```{r include = F}
+record_improve <- world_record_100_clean %>%
+  select(-`Day of Date`, -`Nationality_1`) %>%
+  dplyr::filter(`Record` == "Ratified") %>%
+  arrange(desc(Date)) %>%
+  mutate(Time_diff = 1-(Time/lead(Time)))
+ggplot(record_improve, aes(x = Date, y = Time, fill = Time_diff)) +
+  geom_line() +
+  ggrepel::geom_label_repel(aes(label = ifelse(Time_diff > 0,
+                                               paste0(Athlete,
+                                                      " (",
+                                                      year(Date),
+                                                      ")",
+                                               "\n Improvement: ", 
+                                               (100*round(Time_diff, 4)), 
+                                               "%"), ""),
+                                fill = Time_diff)) +
+  scale_x_date(breaks = scales::breaks_pretty(n = 10)) +
+  labs(x = "Date", title = "Ratified World Records in the 100 Meters") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90),
+        legend.position = "none")
+```
+
+
+Next step is to add an animation of each world record over time, need to get all that data first.
+
