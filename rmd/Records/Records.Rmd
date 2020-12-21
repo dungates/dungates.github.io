@@ -1,97 +1,40 @@
 ---
-title: "Which World Record is Most Impressive"
-author: "Duncan Gates"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+title: "Which World Record is Most Impressive?"
+date: "[Return to Site](https://duncangates.me)"
 output:
-  rmdformats::html_clean:
+    rmdformats::html_docco:
     self_contained: true # Other options are downcute, material, readthedown, html_clean, html_docco, lockdown, https://github.com/juba/rmdformats
     thumbnails: false
     lightbox: true
     gallery: false
     highlight: tango
     number_sections: false
+    includes: 
+      after_body: footer.html
 ---
 
-# Data Obtain
 
 ```{r include = F}
-knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.align = 'center')
+knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.align = 'center', fig.width = 20, fig.height = 10)
 library(rvest)
 library(xml2)
 library(tidyverse)
 library(hrbrthemes)
 library(here)
-set_here("/Users/dunk/Github/Athletics")
+htmltools::tagList(rmarkdown::html_dependency_font_awesome()) # Needed so fa's in footer will show
+theme_set(theme_ipsum_pub())
 ```
 
-## Initial Data Scrape with rvest
+<center>
+## Running World Records
+</center>
 
-Men's world records scrape.
+This plot shows men's world records for running at each distance.
 
-```{r echo = T}
-url <- "https://www.worldathletics.org/records/by-category/world-records"
-mens_world_records <- url %>% 
-  read_html() %>% 
-  html_nodes(xpath='//*[@id="menoutdoor"]/table') %>% 
-  html_table()
-mens_world_records <- mens_world_records[[1]]
-```
-
-Women's world records scrape.
-
-```{r echo = T}
-womens_world_records <- url %>% 
-  read_html() %>% 
-  html_nodes(xpath='//*[@id="womenoutdoor"]/table') %>% 
-  html_table()
-womens_world_records <- womens_world_records[[1]]
-```
-
-
-https://en.wikipedia.org/wiki/Athletics_record_progressions for later bigger data obtain on each event.
-
-## Data Cleaning
-
-```{r echo = T}
-mens_world_records <- mens_world_records %>% 
-  select(Discipline, Perf, Competitor, DOB, Country, Date) %>%
-  mutate(DOB = lubridate::dmy(DOB),
-         Date = lubridate::dmy(Date)) %>%
-  mutate(Perf = gsub("h #", "", Perf),
-         Perf = str_remove(Perf, "h"),
-         Perf = str_remove(Perf, "   *"),
-         Perf = str_remove(Perf, "\\*"),
-         Perf = str_remove(Perf, "   (i)"),
-         Discipline = factor(Discipline),
-         Country = factor(Country))
-
-womens_world_records <- womens_world_records %>% 
-  select(Discipline, Perf, Competitor, DOB, Country, Date) %>%
-  mutate(DOB = lubridate::dmy(DOB),
-         Date = lubridate::dmy(Date)) %>%
-  mutate(Perf = gsub("h #", "", Perf),
-         Perf = gsub(" #", "", Perf),
-         Perf = str_remove(Perf, "h"),
-         Perf = str_remove(Perf, "Wo   *"),
-         Perf = str_remove(Perf, "Wo"),
-         Perf = str_remove(Perf, " Mx"),
-         Perf = str_remove(Perf, "\\*"),
-         Perf = str_remove(Perf, "   (i)"),
-         Discipline = factor(Discipline),
-         Country = factor(Country))
-womens_world_records$Perf[8] <- "5:23.75" # Can't tell why (i) is not getting removed
-# xlsx::write.xlsx(womens_world_records, "womens_world_records.xlsx")
-```
-
-
-## Basic Plotting
-
-Running World Records
-
-```{r fig.width = 10}
+```{r}
 # xlsx::write.xlsx(mens_world_records, "mens_world_records.xlsx") # Not sure how to change times like I need to here -> character to numeric and in hms, ms, and s format so I just wrote it to excel and used =cellvalue *86400 which makes it seconds
-mens_world_records_seconds <- readxl::read_excel("mens_world_records.xlsx", range = "B1:G46")
-womens_world_records_seconds <- readxl::read_excel("womens_world_records.xlsx", range = "B1:G50")
+mens_world_records_seconds <- readxl::read_excel("/Users/dunk/Projects/Athletics/mens_world_records.xlsx", range = "B1:G46")
+womens_world_records_seconds <- readxl::read_excel("/Users/dunk/Projects/Athletics/womens_world_records.xlsx", range = "B1:G50")
 womens_world_records_seconds_join <- womens_world_records_seconds %>% 
   slice(1:25) %>%
   mutate(Gender = "Women")
@@ -109,14 +52,13 @@ mens_world_records_seconds %>%
   geom_point() + 
   stat_summary(fun.y = sum, geom = "line") +
   scale_y_time() + 
-  theme_ipsum() +
   labs(x = "Distance", y = "Time") +
   theme(axis.text.x = element_text(angle = 90))
 ```
 
 Separated into Track, Middle Distance, and Long Distance
 
-```{r fig.width = 10}
+```{r}
 mens_world_records_seconds %>% 
   mutate(Perf = as.numeric(Perf),
          Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
@@ -127,13 +69,12 @@ mens_world_records_seconds %>%
   geom_text(aes(label = Competitor), size = 2, nudge_y = 5) + 
   stat_summary(fun.y = sum, geom = "line") +
   scale_y_time() + 
-  theme_ipsum() +
   labs(x = "Distance", y = "Time", title = "Track Records") +
   theme(axis.text.x = element_text(angle = 90),
         plot.title = element_text(hjust = 0.5))
 ```
 
-```{r fig.width = 10}
+```{r}
 mens_world_records_seconds %>% 
   mutate(Perf = as.numeric(Perf),
          Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
@@ -143,13 +84,12 @@ mens_world_records_seconds %>%
   geom_text(aes(label = Competitor), size = 2, nudge_y = 20) + 
   stat_summary(fun.y = sum, geom = "line") +
   scale_y_time() + 
-  theme_ipsum() +
   labs(x = "Distance", y = "Time", title = "Middle Distance Records") +
   theme(axis.text.x = element_text(angle = 90),
         plot.title = element_text(hjust = 0.5))
 ```
 
-```{r fig.width = 10}
+```{r}
 mens_world_records_seconds %>% 
   mutate(Perf = as.numeric(Perf),
          Discipline = factor(Discipline, levels = c("100 Metres","200 Metres","400 Metres","800 Metres","1000 Metres","1500 Metres",
@@ -160,7 +100,6 @@ mens_world_records_seconds %>%
   geom_text(aes(label = Competitor), size = 2, nudge_y = 250) + 
   stat_summary(fun.y = sum, geom = "line") +
   scale_y_time() + 
-  theme_ipsum() +
   labs(x = "Distance", y = "Time", title = "Long Distance Records") +
   theme(axis.text.x = element_text(angle = 90),
         plot.title = element_text(hjust = 0.5))
@@ -179,7 +118,6 @@ mens_womens_records %>%
   geom_line() +
   scale_color_manual(values = c("dodgerblue1", "pink")) +
   scale_y_time() + 
-  theme_ipsum() +
   labs(x = "Distance", y = "Time", title = "All Distance Records") +
   theme(axis.text.x = element_text(angle = 90),
         plot.title = element_text(hjust = 0.5))
@@ -205,7 +143,6 @@ ggplot(data = faceted_records, aes(x = Discipline, y = Perf, color = Gender, gro
   facet_wrap( ~ Distance, scales = "free") +
   scale_color_manual(values = c("dodgerblue1", "pink")) +
   scale_y_time(breaks = scales::breaks_pretty(10), limits = c(0, NA)) + 
-  theme_ipsum() +
   labs(x = "Distance", y = "Time", title = "Distance World Records") +
   theme(axis.text.x = element_text(angle = 90),
         plot.title = element_text(hjust = 0.5))
@@ -291,8 +228,8 @@ world_record_100_clean %>%
         legend.position = "none")
 ```
 
-![](/Users/dunk/Github/Athletics/WindSpeed100m.png)
-
+<!-- ![](/Users/dunk/Github/Athletics/WindSpeed100m.png) -->
+![](/Users/dunk/Projects/NewWebsite.io/rmd/Records/WindSpeed100m.png)
 
 ```{r, include = F}
 world_record_100_clean %>%
@@ -323,7 +260,8 @@ Percent Improvement for World Record Each Time
 
 Usain Bolt is absolutely bonkers good, no one else has ever made such an individual dent into the 100 meter world record.
 
-![](/Users/dunk/Github/Athletics/Improvement100m.png)
+<!-- ![](/Users/dunk/Github/Athletics/Improvement100m.png) -->
+![](/Users/dunk/Projects/NewWebsite.io/rmd/Records/Improvement100m.png)
 
 ```{r include = F}
 record_improve <- world_record_100_clean %>%

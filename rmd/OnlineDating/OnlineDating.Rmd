@@ -1,7 +1,6 @@
 ---
 title: "How Online Identities are Constructed to Appeal to Others"
-author: "Duncan Gates"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "[Return to Site](https://duncangates.me)"
 output: 
   rmdformats::robobook: 
     self_contained: true # Other options are downcute, material, readthedown, html_clean, html_docco, lockdown, https://github.com/juba/rmdformats
