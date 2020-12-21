@@ -189,7 +189,7 @@ ggplot(records_difference, aes(x = Discipline, y = Ratio, fill = Ratio)) +
 ```
 
 
-
+NEED TO DO RUNNING PACE BY DISTANCE SEE (https://www.reddit.com/r/dataisbeautiful/comments/69m4xe/world_record_running_pace_by_distance_oc/).
 
 
 
@@ -321,6 +321,131 @@ animate(record_improve_graph,
         duration = 25,
         nframes = 25)
 ```
+
+
+# Getting more data
+
+```{r}
+wikipedia_table_scrape <- function(url, xpath = '//*[@id="mw-content-text"]/div[1]/table[1]') {
+  url <- url
+  progression <- url %>% 
+  read_html() %>% 
+  html_nodes(xpath=xpath) %>% 
+  html_table()
+progression <- progression[[1]]
+}
+```
+
+
+## 200m Data Obtain and Clean
+
+```{r}
+twohundred_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Men%27s_200_metres_world_record_progression",
+                       xpath = '//*[@id="mw-content-text"]/div[1]/table[1]')
+```
+
+
+## 400m Data Obtain and Clean
+
+```{r}
+fourhundred_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Men%27s_400_metres_world_record_progression",
+                       xpath = '//*[@id="mw-content-text"]/div[1]/table[1]')
+```
+
+
+## 800m Data Obtain and Clean
+
+```{r}
+eighthundred_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Men%27s_800_metres_world_record_progression")
+```
+
+## 1000m Data Obtain and Clean
+
+```{r}
+thousand_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/1000_metres_world_record_progression")
+```
+
+
+## 1500m Data Obtain and Clean
+
+```{r}
+fifteenhundred_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/1500_metres_world_record_progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[2]')
+```
+
+
+## Mile Data Obtain and Clean
+
+```{r}
+mile_progression <- readxl::read_excel("/Users/dunk/Github/Athletics/Men's Mile Run Record Progression.xlsx")
+mile_progression_clean <- mile_progression %>%
+  mutate(Time = str_remove(Time, "\\*"),
+         Time = str_remove(Time, "\\*"),
+         Date = str_remove(Date, "\\[5\\]"),
+         Date = dmy(Date))
+```
+
+
+## 3000m Data Obtain and Clean
+
+
+```{r}
+threethousand_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Men%27s_3000_metres_world_record_progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[2]')
+```
+
+## 2 mile Data obtain and clean
+
+```{r}
+twomile <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Two_miles#World_Record_Progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[4]')
+```
+
+
+## 5000m Data Obtain and Clean
+
+```{r}
+fivethousand_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/5000_metres_world_record_progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[2]')
+```
+
+
+
+## 10000m Data Obtain and Clean
+
+```{r}
+tenthousand_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/10000_metres_world_record_progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[2]')
+```
+
+
+
+## Half Marathon Data Obtain and Clean
+
+```{r}
+halfmarathon <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Half_marathon_world_record_progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[2]')
+```
+
+
+## Marathon Data Obtain and Clean
+
+
+```{r}
+marathon <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Marathon_world_record_progression",
+                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[1]')
+```
+
+
+## Data combine and clean
+
+```{r}
+recordslist <- list(world_record_100_clean, twohundred_progression)
+```
+
+
+
+
 
 
 
