@@ -15,6 +15,7 @@ output:
 
 
 ```{r include = F}
+library(gganimate)
 library(rvest)
 library(xml2)
 library(tidyverse)
@@ -162,7 +163,9 @@ ggplot(data = faceted_records, aes(x = Discipline, y = Perf, color = Gender, gro
         plot.title = element_text(hjust = 0.5))
 ```
 
-Percent Difference At Each Level, by this metric it appears that the most impressive world records are the men's 20,000 through 30,000 meters. This could also just be the result of these races being largely unimportant in the racing world, as evidenced by the jump in the ratio of the half marathon.
+# Percent Difference At Each Distance
+
+By this metric it appears that the most impressive world records are the men's 20,000 through 30,000 meters. This could also just be the result of these races being largely unimportant in the racing world, as evidenced by the jump in the ratio of the half marathon.
 
 ```{r fig.width = 13}
 records_difference <- faceted_records %>% 
@@ -194,7 +197,7 @@ ggplot(records_difference, aes(x = Discipline, y = Ratio, fill = Ratio)) +
 
 
 
-Progression of the 100 meter world record
+# Progression of the 100 meter world record
 
 The vast majority of world records have been broken at positive wind speeds, is this because the races are run in non-windy conditions, or wind speed has a drastic effect on runners? Given how minor the negative wind speeds are when it is broken, it is likely that this is because it is having a significant impact.
 
@@ -270,7 +273,7 @@ world_record_100_clean %>%
 
 
 
-Percent Improvement for World Record Each Time
+# Percent Improvement for World Record Each Time
 
 Usain Bolt is absolutely bonkers good, no one else has ever made such an individual dent into the 100 meter world record.
 
@@ -303,4 +306,22 @@ ggplot(record_improve, aes(x = Date, y = Time, fill = Time_diff)) +
 
 
 Next step is to add an animation of each world record over time, need to get all that data first.
+
+```{r}
+record_improve_graph <- ggplot(record_improve, aes(x = Date, y = Time)) +
+  geom_label(aes(label = Athlete)) +
+  scale_x_date(breaks = scales::breaks_pretty(n = 10)) +
+  labs(x = "Date", title = "Ratified World Records in the 100 Meters") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 90),
+        legend.position = "none") +
+  transition_time(Date) +
+  ease_aes('linear')
+animate(record_improve_graph,
+        duration = 25,
+        nframes = 25)
+```
+
+
+
 
