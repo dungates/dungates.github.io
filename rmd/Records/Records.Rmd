@@ -1,13 +1,13 @@
 ---
 title: "Which World Record is Most Impressive?"
-date: "[Return to Site](https://duncangates.me)"
+author: "Duncan Gates"
 output:
-    rmdformats::html_docco:
+  rmdformats::html_docco:
     self_contained: true # Other options are downcute, material, readthedown, html_clean, html_docco, lockdown, https://github.com/juba/rmdformats
     thumbnails: false
     lightbox: true
     gallery: false
-    highlight: tango
+    highlight: kate
     number_sections: false
     includes: 
       after_body: footer.html
@@ -15,12 +15,24 @@ output:
 
 
 ```{r include = F}
-knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.align = 'center', fig.width = 20, fig.height = 10)
 library(rvest)
 library(xml2)
 library(tidyverse)
 library(hrbrthemes)
 library(here)
+library(knitr)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=100)
+
 htmltools::tagList(rmarkdown::html_dependency_font_awesome()) # Needed so fa's in footer will show
 theme_set(theme_ipsum_pub())
 ```
@@ -33,8 +45,10 @@ This plot shows men's world records for running at each distance.
 
 ```{r}
 # xlsx::write.xlsx(mens_world_records, "mens_world_records.xlsx") # Not sure how to change times like I need to here -> character to numeric and in hms, ms, and s format so I just wrote it to excel and used =cellvalue *86400 which makes it seconds
-mens_world_records_seconds <- readxl::read_excel("/Users/dunk/Projects/Athletics/mens_world_records.xlsx", range = "B1:G46")
-womens_world_records_seconds <- readxl::read_excel("/Users/dunk/Projects/Athletics/womens_world_records.xlsx", range = "B1:G50")
+# /Users/dunk/Projects/Athletics/mens_world_records.xlsx
+# /Users/dunk/Projects/Athletics/womens_world_records.xlsx
+mens_world_records_seconds <- readxl::read_excel("/Users/dunk/Github/Athletics/mens_world_records.xlsx", range = "B1:G46")
+womens_world_records_seconds <- readxl::read_excel("/Users/dunk/Github/Athletics/womens_world_records.xlsx", range = "B1:G50")
 womens_world_records_seconds_join <- womens_world_records_seconds %>% 
   slice(1:25) %>%
   mutate(Gender = "Women")
@@ -228,8 +242,8 @@ world_record_100_clean %>%
         legend.position = "none")
 ```
 
-<!-- ![](/Users/dunk/Github/Athletics/WindSpeed100m.png) -->
-![](/Users/dunk/Projects/NewWebsite.io/rmd/Records/WindSpeed100m.png)
+![](/Users/dunk/Github/Athletics/WindSpeed100m.png)
+<!-- ![](/Users/dunk/Projects/NewWebsite.io/rmd/Records/WindSpeed100m.png) -->
 
 ```{r, include = F}
 world_record_100_clean %>%
@@ -260,8 +274,8 @@ Percent Improvement for World Record Each Time
 
 Usain Bolt is absolutely bonkers good, no one else has ever made such an individual dent into the 100 meter world record.
 
-<!-- ![](/Users/dunk/Github/Athletics/Improvement100m.png) -->
-![](/Users/dunk/Projects/NewWebsite.io/rmd/Records/Improvement100m.png)
+![](/Users/dunk/Github/Athletics/Improvement100m.png)
+<!-- ![](/Users/dunk/Projects/NewWebsite.io/rmd/Records/Improvement100m.png) -->
 
 ```{r include = F}
 record_improve <- world_record_100_clean %>%

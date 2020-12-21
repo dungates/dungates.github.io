@@ -1,0 +1,17 @@
+base
+ggplot2
+dplyr
+data.table
+xml2
+rvest
+tidyverse
+tibble
+tidyr
+readr
+purrr
+stringr
+forcats
+hrbrthemes
+here
+knitr
+lubridate

@@ -31,3 +31,4 @@ kableExtra
 DT
 radarchart
 lubridate
+data.table

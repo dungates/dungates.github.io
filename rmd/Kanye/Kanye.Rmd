@@ -43,7 +43,6 @@ library(lubridate)
 ## Global options
 options(max.print="75")
 opts_chunk$set(echo=FALSE,
-	             cache=TRUE,
                prompt=FALSE,
                tidy=TRUE,
                comment=NA,
@@ -75,27 +74,66 @@ theme_set(theme_minimal())
 ```{r echo = F}
 # options("digits" = 3)
 # readr::write_rds(spotify_genius, "/Users/dunk/Github/SpotifyStats/KanyeFinalAnalysis/main_data.csv")
-spotify_genius <- readr::read_rds("/Users/dunk/Projects/NewWebsite.io/rmd/Kanye/main_data.csv")
+# /Users/dunk/Projects/NewWebsite.io/rmd/Kanye/main_data.csv
+spotify_genius <- readr::read_rds("/Users/dunk/Github/SpotifyStats/KanyeFinalAnalysis/main_data.csv")
 ```
 
 # Plotting the Music
 
 First, let's take a look at valence, which by Spotify's definition is an attribute "that describes the musical positiveness conveyed by a track. Tracks with high valence sound more positive (happy, cheerful, euphoric), while tracks with low valence sound more negative (sad, depressed, angry)."
 
+This ridgeline plot of valence by album shows a clear trend in Kanye's music, progressing towards the lower end of the valence scale:
+
 <center>
 ```{r fig.width = 14}
-spotify_genius %>% ggplot(aes(x = valence, y = ordered_albums, fill = ..x..)) +
-  geom_density_ridges_gradient(scale = 0.9) +
-  scale_fill_gradient(low = "white", high = "deeppink") +
+spotify_genius %>% ggplot(aes(x = valence, y = ordered_albums, fill = ordered_albums)) +
+  geom_density_ridges() +
+  scale_fill_manual(values = c("#411218",
+                         "#633119",
+                         "#853082",
+                         "#c2cece",
+                         "#EC2440",
+                         "#D8D9DE",
+                         "#f58b57",
+                         "#7A8CA4")) +
   theme_fivethirtyeight() +
   theme(panel.background = element_rect(fill = "white")) +
   theme(plot.background = element_rect(fill = "white")) +
   xlim(0,1) +
   ggtitle("Kanye's Valence By Album: A Clear Path of Misery") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5))
+```
+</center>
+
+Organizing each album by mean valence pretty clearly shows this trend as well, you practically end up with the order of Kanye's discography, with just Graduation and Late Registration being switched, and even then just barely. 
+
+```{r}
+# table: album by mean valence
+spotify_genius %>%
+  dplyr::group_by(factor(album_name, levels = c(kanyealbums))) %>%
+  dplyr::summarise(round(mean(valence), 4), mean(album_release_year)) %>%
+  arrange(desc(`factor(album_name, levels = c(kanyealbums))`)) %>%
+  dplyr::rename(Album = `factor(album_name, levels = c(kanyealbums))`, `Mean Valence` = `round(mean(valence), 4)`, `Release Year` = `mean(album_release_year)`) %>%
+  datatable() %>%
+  formatStyle(target = "row",
+              columns = c("Album"),
+              backgroundColor = styleEqual(c("The College Dropout", "Late Registration",
+                                             "Graduation", "808s & Heartbreak",
+                                             "My Beautiful Dark Twisted Fantasy", "Yeezus",
+                                             "The Life Of Pablo", "ye"),
+                c("#411218",
+                         "#633119",
+                         "#853082",
+                         "#c2cece",
+                         "#EC2440",
+                         "#D8D9DE",
+                         "#f58b57",
+                         "#7A8CA4")))
 ```
 
-Before beginning the sentiment analysis it seems useful to look at what the songs mean using Spotify's metrics to evaluate the emotions of a song, the following plots investigate how valence (x-axis) interacts with energy (y-axis), essentially producing a 4 quadrant graph where from quadrant 1-4 we have Anger, Happiness, Sadness, and Calmness. The colors on the labels in these graphs match the colors of the album covers just for fun, they don't actually mean anything.
+
+Before beginning the sentiment analysis it seems useful to look at what the songs mean using Spotify's metrics to evaluate the emotions of a song, the following plots investigate how valence (x-axis) interacts with energy (y-axis), essentially producing a 4 quadrant graph where from quadrant 1-4 we have Anger, Happiness, Sadness, and Calmness. The colors on the labels in these graphs match the colors of the album covers just for fun, they don't actually mean anything. For College Dropout it seems to be a very happy album, the energy in tracks like "Jesus Walks","New Workout Plan", and "Last Call" is evident placing them high in the upper right quadrant. Meanwhile some tracks appear in the "calm" yet still happy lower right quadrant, these are mostly the skits which include a lot of dialogue making how Spotify measures energy an imperative question. It seems to be successful regardless as these are definitely lower energy songs, in fact every categorization here seems remarkably accurate.
 
 <center>
 ```{r, fig.width = 14}
@@ -125,7 +163,7 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Filler Text 2.
+Late Registration appears to be very similar to College Dropout with a slight drop in valence indicates an "angrier" album, and the skits once again appear in the exact same place.
 
 <center>
 ```{r, fig.width = 14}
@@ -154,7 +192,7 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Filler Text 3.
+Graduation has tracks that range across the "energy-valencesphere", but still remain tightly clumped towards the upper half, indicating a high variance in valence, but very low variance in energy. The only surprise here is "Everything I Am" which should definitely be rated in the lower left near "I Wonder".
 
 <center>
 ```{r, fig.width = 14}
@@ -181,7 +219,7 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Filler Text 4.
+808s & Heartbreak is far from where we started with College Dropout, everything tends towards the lower left, but funnily enough the breakout from this album, "Heartless", comes up in the Happy section with decent valence and energy scores.
 
 <center>
 ```{r, fig.width = 14}
@@ -208,7 +246,7 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Filler Text 5.
+My Beautiful Dark Twisted Fantasy once again entirely shifts the narrative this time largely appearing in the upper left as "angry". The interlude for "All of the Lights" is of course an outlier since it is an instrumental, but Spotify's metrics seems to get everything right here, this album is very high energy, and a lot of these songs do have an angry tone. The only alteration that could be made is tweaking "Runaway's" energy score so it appears in sadness, but it's results seem reasonable, the rising cacophony of distortion in the second half of the song certainly has significant energy.
 
 <center>
 ```{r, fig.width = 14}
@@ -236,7 +274,7 @@ spotify_genius %>%
 ```
 
 
-Filler Text 6.
+Yeezus was a game-changer, but according to Spotify's metrics not really, this one tightly clusters in the middle-left, not showing much significant other than that it was a slightly angry album.
 
 <center>
 ```{r, fig.width = 14}
@@ -262,7 +300,7 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Filler Text 7.
+If anything can be said about The Life Of Pablo, it can definitely be said that it is diverse in nearly every way. There are many different features, instruments, and styles on this album so the massive dispersion of valence and energy that are found are not surprising, starting with the gospel-like "Ultralight Beam", and ending with the more traditional rap "Saint Pablo" it's hard to imagine TLOP getting any other result.
 
 <center>
 ```{r, fig.width = 14}
@@ -290,7 +328,7 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Filler Text 8.
+Based on valence and energy, and actually listening to the album I think anyone would agree with these results, ye is an angry and sad album. In this time Kanye was confused, angry and lashing out, yet restrained by his family and pouring out his feelings into this album, resulting in a mixed bag of songs.
 
 <center>
 ```{r, fig.width = 14}
@@ -316,34 +354,8 @@ spotify_genius %>%
         plot.title = element_text(hjust = 0.5))
 ```
 
-Graphing is great but if you want to look at each song in more detail here is a table color coded by album.
 
-
-```{r}
-# table: album by mean valence
-spotify_genius %>%
-  dplyr::group_by(factor(album_name, levels = c(kanyealbums))) %>%
-  dplyr::summarise(round(mean(valence), 4)) %>%
-  arrange(desc(`factor(album_name, levels = c(kanyealbums))`)) %>%
-  dplyr::rename(Album = `factor(album_name, levels = c(kanyealbums))`, `Mean Valence` = `round(mean(valence), 4)`) %>%
-  datatable() %>%
-  formatStyle(target = "row",
-              columns = c("Album"),
-              backgroundColor = styleEqual(c("The College Dropout", "Late Registration",
-                                             "Graduation", "808s & Heartbreak",
-                                             "My Beautiful Dark Twisted Fantasy", "Yeezus",
-                                             "The Life Of Pablo", "ye"),
-                c("#411218",
-                         "#633119",
-                         "#853082",
-                         "#c2cece",
-                         "#EC2440",
-                         "#D8D9DE",
-                         "#f58b57",
-                         "#7A8CA4")))
-```
-
-Let's check out all the songs organized by valence, once again color coded by album. The Life of Pablo, College Dropout, and Graduation all feature highest here.
+Let's check out all the songs organized by valence, once again color coded by album. The Life of Pablo, College Dropout, and Graduation all feature highest here. The song's that are actually showing up are interestingly mostly verbose, ironic songs which have dialogues to them most of the time.
 
 ```{r}
 # Songs organized by valence
@@ -371,7 +383,8 @@ spotify_genius %>%
                          "#7A8CA4")))
 ```
 
-Now a plot of valence, danceability, and energy as functions of album year, which for Kanye is just his album discography.
+Here is a plot of valence, danceability, and energy as functions of album year, which for Kanye is just his album discography. Danceability is defined by Spotify as “describing how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.” Energy is meanwhile described as "a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy." The metric of "sonic score" looks at each of these and simply takes their sum, in the future I will look into creating a sonic score also weighted by sentiment of the lyricism.
+
 
 <center>
 ```{r}
@@ -406,7 +419,7 @@ legend("topright", c("My Beautiful Dark Twisted Fantasy",
 ```
 </center>
 
-Sonic Score Table.
+Looking at this as a table for each track we see similar results to what valence yields, which makes sense, energy, valence, and danceability are all highly correlated so when adding them together not much changes.
 
 ```{r}
 spotify_genius %>%
@@ -432,7 +445,7 @@ spotify_genius %>%
                          "#7A8CA4")))
 ```
 
-This table has the mean of all of Spotify's metrics by album, which honestly seems to show a fairly consistent pattern for Kanye's discography.
+This table has the mean of all of Spotify's metrics by track, which seems to show a fairly consistent pattern for Kanye's discography.
 
 
 ```{r}
@@ -487,7 +500,7 @@ tidier_kanye$word[tidier_kanye$word == "ve" | tidier_kanye$word == "ll"] <- NA
 tidier_kanye$word[tidier_kanye$word == "ileft"] <- "left"
 ```
 
-Wordcloud of the most frequent words in Kanye's songs after filtering out common meaningless words like the, a, etc.
+After tokenizing the lyrics from scraping genius of each song listed on Spotify, then removing stop words with tidytext, this wordcloud of the top 200 words in Kanye's music is produced:
 
 <center>
 ```{r}
@@ -509,14 +522,43 @@ wordcloud(words = word_count$word, freq = word_count$n,
 ```
 </center>
 
-How many tracks does the word "kanye" appear in, and how often? Obviously a lot in "I Love Kanye", but surprisingly enough only once in "Wake Up Mr. West", and not even that much overall, I would not be surprised if most artists had similar amounts of self-references throughout their discography. Since he often refers to himself as ye, or yeezus, I also include those in the table count, but neither of those even show up that much, yeezus only appearing once in "Highlights" and "I am a God" each.
+This says a lot about what most people already know about Kanye, he is explicit and sings about what he feels, his most common word is "shit", but his second most common is "love", and third most is "feel". He is frequently rapping emphatically about his feelings which then relate to his other primary interests of god, love, and his personal relationships.
+
+Here is what this looks like ranked, in a less messy format:
+
+<center>
+```{r}
+text_wordcounts <- tidy_kanye %>% select(track_name, album_name, word)
+text_wordcounts$word <- as.factor(text_wordcounts$word)
+text_wordcounts <- text_wordcounts %>% dplyr::group_by(word) %>% dplyr::summarise(n = n()) %>% ungroup
+
+# Ranking most common words in Kanye Songs
+text_wordcounts %>% dplyr::mutate(word = reorder(word, n)) %>% anti_join(stop_words) %>%
+  dplyr::filter(n > 100) %>%
+  ggplot(aes(word, n, fill = -n)) + 
+  geom_col() + 
+  coord_flip() +
+  scale_fill_distiller(palette = "Blues") +
+  labs(x = "Word", y = "Count", title = "Most Frequent Words in Kanye's Songs") +
+  geom_text(aes(label = n), hjust = 1.2, color = "white", fontface = "bold") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.x = element_text(face = "bold", color = "skyblue", size = 12),
+        axis.title.y = element_blank(),
+        legend.position = "none",
+        axis.text.y = element_text(face = "bold", color = "skyblue", size = 10))
+```
+</center>
+
+
+How many tracks does the word "kanye" appear in, and how often? Obviously a lot in "I Love Kanye", but surprisingly enough only once in "Wake Up Mr. West", and not even that much overall, I would not be surprised if most artists had similar amounts of self-references throughout their discography. Since he often refers to himself as ye, yeezy, or yeezus, I also include those in the table count, but asides from "yeezy" neither of the other two even show up that much, yeezus only appearing once in "Highlights" and "I am a God" each. "Yeezy" shows up a bunch in The Life of Pablo songs which is interesting, 
 
 
 ```{r}
 # how many tracks does the word "kanye" appear in?
 kanye_freq <- tidier_kanye %>%
-  select(track_name, word) %>%
-  dplyr::filter(word == "kanye" | word == "ye" | word == "yeezus") %>%
+  select(track_name, word, album_name) %>%
+  dplyr::filter(word == "kanye" | word == "ye" | word == "yeezus" | word == "yeezy") %>%
   dplyr::group_by(track_name) %>%
   dplyr::summarise(plyr::count(word)) %>%
   dplyr::rename(Word = x, Count = freq, Track = track_name) %>%
@@ -535,7 +577,7 @@ datatable(kanye_freq) %>%
   # backgroundPosition = 'center')
 ```
 
-Wordcloud for just the album ye, you can see why sentiment analysis would pick this up as deeply depressed/angry/sad.
+In this wordcloud for just the album ye, you can see why sentiment analysis would pick this up as deeply depressed/angry/sad, which is what is found no matter what algorithm you use. Once again it seems extremely meaningful to take tone into context, both of voice and of the music.
 
 <center>
 ```{r}
@@ -552,7 +594,7 @@ wordcloud(words = word_count_ts$word, freq = word_count_ts$n,
 ```
 </center>
 
-Wordcloud for 808s & Heartbreak, the issue is clear once again, although this time it could literally just because Kanye says "Amazing" A LOT in the song amazing, in fact he says it 55 times, which is the third most frequent by song out of all of his discography. Coming just after "bam" which isn't sang by him in Famous, and "ey" also in Famous, it can really be argued that it is the largest personal use in his discography.
+In this wordcloud for 808s & Heartbreak, the issue is clear once again, although this time it could literally just because Kanye says "Amazing" A LOT in the song amazing, in fact he says it 55 times, which is the third most frequent by song out of all of his discography. Coming just after "bam" which isn't sang by him in Famous, and "ey" also in Famous, it can really be argued that it is the largest personal use in his discography.
 
 <center>
 ```{r}
@@ -578,7 +620,7 @@ wordcloud(words = word_count_ts_2$word, freq = word_count_ts_2$n,
 
 
 
-Wordcloud for My Beautiful Dark Twisted Fantasy, not much to interpret here there is a lot going on, but if you've heard this album this makes sense.
+Finally, in this wordcloud for My Beautiful Dark Twisted Fantasy, there is not much to interpret immediately as there is a lot going on, but if you've heard this album the results here make complete sense, and each song is easily identifiable.
 
 <center>
 ```{r}
@@ -594,7 +636,7 @@ wordcloud(words = word_count_rep$word, freq = word_count_rep$n,
 ```
 </center>
 
-Lexical diversity is fairly consistently in the middle ranges, although there are some outliers in The Life of Pablo and The College Dropout that should be investigated.
+Lexical diversity is a measurement of the ratio of unique words to total words, which I calculate below after separately grouping albums and tracks. Kanye's lexical diversity is fairly consistently in the middle ranges, although there are some outliers in The Life of Pablo and The College Dropout that should be investigated. Additionally, I haven't filtered out all his feature's from the data here, so there could be a lot of obfuscation going on,
 
 <center>
 ```{r}
@@ -645,6 +687,7 @@ legend("topright", c("My Beautiful Dark Twisted Fantasy",
 ```
 </center>
 
+Here is the data in a table grouped by track and color coded by album then organized by least lexical diversity, keep in mind that lexical diversity is a ratio so the scale is 0 to 1. 808s & Heartbreak features prominently in the second page along with My Beautiful Dark Twisted Fantasy on the first and second. Skit #2 is number one mostly because it is so short, and mostly consists of Kanye saying "we broke".
 
 ```{r}
 # least lexically diverse tracks
@@ -653,7 +696,7 @@ tidy_kanye %>% dplyr::group_by(track_name, album_name) %>%
   select(track_name, lex_div, album_name) %>%
   arrange(lex_div) %>%
   distinct() %>%
-  dplyr::rename(Album = album_name) %>%
+  dplyr::rename(Album = album_name, Track = track_name, `Lexical Diversity` = lex_div) %>%
   datatable() %>%
   formatStyle(target = "row",
               columns = c("Album"),
@@ -671,8 +714,8 @@ tidy_kanye %>% dplyr::group_by(track_name, album_name) %>%
                          "#7A8CA4")))
 ```
 
-Now for the real fun, sentiment analysis using NRC, AFINN, and BING, which is surprisingly straightforward.
-
+Now for the real fun, sentiment analysis using NRC, AFINN, and BING, which is surprisingly straightforward. The AFINN lexicon scores each word from -5 to 5, based on how positive or negative it is.
+Some words therefore have no score as they have a neutral effect, such as "the". The following bar graph gives the sum of scores by each album, after weighting by differences in the total number of words per album.
 
 ```{r echo = F}
 # joining the tokenized, tidied lyric dataset with sentiment lexicons
@@ -688,7 +731,7 @@ kanye_bing <- tidier_kanye %>%
 ```
 
 
-Sentiment scores with AFINN, looks like its not a great tool in general given that it got the exact opposite of what it should have - that 808s was his most depressed and lowest point, it would be useful in the future to try to weight instrumental components in this analysis, to try to give context to the data.
+These are the weighted scores with AFINN, it looks like its not a great tool in general given that it got the exact opposite of what it should have - that 808s was Kanye's most depressed and lowest point, it would be useful in the future to try to weight instrumental components in this analysis, to try to give context to the data.
 
 <center>
 ```{r}
@@ -698,7 +741,7 @@ dim <- kanye_AFINN %>%
 kanye_AFINN %>%
   dplyr::group_by(ordered_albums) %>%
   dplyr::summarise(sum(value)) %>%
-  dplyr::mutate(scaled = `sum(value)` * 229 / dim$n) %>%
+  dplyr::mutate(scaled = `sum(value)` / dim$n) %>%
   ggplot(aes(x = ordered_albums, y = scaled)) +
   geom_bar(stat = "identity", fill = c("#411218",
                          "#633119",
@@ -718,19 +761,15 @@ kanye_AFINN %>%
 ```
 </center>
 
-Pyramid Plot of The Life of Pablo
+Now using the bing lexicon I take a look at The Life of Pablo, which has a very negative AFINN score. In this case, each numerical measure represents a word, the bing lexicon uses the two categories “positive” and “negative” instead of scoring; for example, the graph shows that "No More Parties in LA" has thirty positive words and twenty negative words.
 
 <center>
 ```{r}
 kanye_pyramid <- kanye_bing %>%
   unique() %>%
   dplyr::group_by(track_name, sentiment, album_name) %>%
-  dplyr::count(track_name, sentiment)
-
-for(i in 1:24) {
-  if(kanye_pyramid$sentiment[i] == "negative")
-    kanye_pyramid$n[i] <- -kanye_pyramid$n[i]
-}
+  dplyr::count(track_name, sentiment) %>%
+  dplyr::mutate(n = ifelse(sentiment == "negative", n*-1, n))
 
 kanye_pyramid %>%
   dplyr::mutate(sentiment = str_to_title(sentiment)) %>%
@@ -749,7 +788,27 @@ kanye_pyramid %>%
 ```
 </center>
 
-Radar chart.
+Replicating this for 808s & Heartbreak we see some results that flip what AFINN says, most of the words are negative, in fact in "Welcome to Heartbreak" there is not a single positive word.
+
+```{r}
+kanye_pyramid %>%
+  dplyr::mutate(sentiment = str_to_title(sentiment)) %>%
+  dplyr::filter(album_name == "808s & Heartbreak") %>%
+  ggplot(aes(x = track_name, y = n, fill = sentiment)) +
+  geom_bar(subset = .(sentiment == "positive"), stat = "identity") +
+  geom_bar(subset = .(sentiment == "negative"), stat = "identity") +
+  scale_y_continuous() +
+  coord_flip() +
+  ggtitle("808s & Heartbreak Bing Scores") +
+  labs(fill = "Sentiment") +
+  theme_fivethirtyeight() +
+  scale_fill_manual(values = c("#b72124", "#a89c9a")) +
+  theme(panel.background = element_rect(fill = "white")) +
+  theme(plot.background = element_rect(fill = "white"))
+```
+
+
+Finally, this radar chart looks at each of Spotify's metrics in each album and tries to plot each of them using the nrc lexicon to show emotion in joy, anticipation, trust, surprise, sadness, anger, disgust and fear.
 
 <center>
 ```{r}
@@ -775,32 +834,6 @@ radar_chart <- radar_chart[c(2,7,5,8,4,3,1,6), c(1, 7:2)]
 chartJSRadar(radar_chart, polyAlpha = 0.2, lineAlpha = 0.8, maxScale = 25,
              colMatrix = matrix(c(0, 255, 255, 255, 185, 15, 139, 0, 139,
                                   255, 0, 0, 201, 167, 198, 0, 0, 0), byrow = F, nrow = 3))
-```
-</center>
-
-Most common words in song.
-
-<center>
-```{r}
-text_wordcounts <- tidy_kanye %>% select(track_name, album_name, word)
-text_wordcounts$word <- as.factor(text_wordcounts$word)
-text_wordcounts <- text_wordcounts %>% dplyr::group_by(word) %>% dplyr::summarise(n = n()) %>% ungroup
-
-# Ranking most common words in Kanye Songs
-text_wordcounts %>% dplyr::mutate(word = reorder(word, n)) %>% anti_join(stop_words) %>%
-  dplyr::filter(n > 100) %>%
-  ggplot(aes(word, n, fill = -n)) + 
-  geom_col() + 
-  coord_flip() +
-  scale_fill_distiller(palette = "Blues") +
-  labs(x = "Word", y = "Count", title = "Most Frequent Words in Kanye's Songs") +
-  geom_text(aes(label = n), hjust = 1.2, color = "white", fontface = "bold") +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.title.x = element_text(face = "bold", color = "skyblue", size = 12),
-        axis.title.y = element_blank(),
-        legend.position = "none",
-        axis.text.y = element_text(face = "bold", color = "skyblue", size = 10))
 ```
 </center>
 
