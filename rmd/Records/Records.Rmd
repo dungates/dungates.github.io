@@ -22,6 +22,7 @@ library(tidyverse)
 library(hrbrthemes)
 library(here)
 library(knitr)
+library(lubridate)
 
 ## Global options
 options(max.print="75")
@@ -202,28 +203,6 @@ NEED TO DO RUNNING PACE BY DISTANCE SEE (https://www.reddit.com/r/dataisbeautifu
 The vast majority of world records have been broken at positive wind speeds, is this because the races are run in non-windy conditions, or wind speed has a drastic effect on runners? Given how minor the negative wind speeds are when it is broken, it is likely that this is because it is having a significant impact.
 
 ```{r fig.width = 10}
-library(lubridate)
-world_record_100 <- readr::read_csv(file = "100mworldrecord.csv", col_types = list(col_character(), 
-                                                                                                                             col_character(),
-                                                                                                                             col_character(),
-                                                                                                                             col_character(),
-                                                                                                                             col_character(),
-                                                                                                                             col_character(),
-                                                                                                                             col_double(),
-                                                                                                                             col_character(),
-                                                                                                                             col_double()))
-world_record_100$`Day of Date`[35] <- "14-Oct-68"
-
-foo <- function(x, year=1968){
-  m <- year(x) %% 100
-  year(x) <- ifelse(m > year %% 100, 1900+m, 2000+m)
-  x
-}
-
-world_record_100_clean <- world_record_100 %>% 
-  rename(Time = `Min. Time`) %>%
-  mutate(Date = foo(dmy(`Day of Date`), 1911))
-
 world_record_100_clean %>%
   mutate(Record = factor(Record, levels = c("Ratified", "Ratified but later Rescinded", "Not Ratified"))) %>%
   ggplot(aes(x = Date, y = Time, fill = Wind)) +
