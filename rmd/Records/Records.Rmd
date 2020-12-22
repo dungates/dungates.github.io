@@ -673,6 +673,7 @@ runningrecords %>%
   slice(which.min(Time), which.max(Time)) %>%
   mutate(Difference = 1/ (Time / lead(Time)),
          `Improvement Time` = year(Date) - year(lead(Date))) %>%
+  arrange(desc(Difference)) %>%
   gt::gt()
 ```
 
