@@ -428,8 +428,7 @@ tenthousand_progression <- wikipedia_table_scrape(url = "https://en.wikipedia.or
 ## Half Marathon Data Obtain and Clean
 
 ```{r}
-halfmarathon <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Half_marathon_world_record_progression",
-                                                     xpath = '//*[@id="mw-content-text"]/div[1]/table[2]')
+halfmarathon <- wikipedia_table_scrape(url = "https://en.wikipedia.org/wiki/Half_marathon_world_record_progression")
 ```
 
 
@@ -503,16 +502,179 @@ eighthundred_clean <- eighthundred_progression %>%
          Time = str_remove(Time, "\\+"),
          Time = str_remove(Time, "y")) %>%
   mutate(Date = ymd(Date)) %>%
-  mutate(Time = as.double(Time))
+  mutate(Time = period_to_seconds(ms(Time))) %>%
+  mutate(Time = as.double(Time)) %>%
+  rename(`Location of race` = Location)
+
+onetwofoureight <- eighthundred_clean %>%
+  mutate(Distance = "800 Meters") %>%
+  bind_rows(onetwofour)
+
+thousand_progression_clean <- thousand_progression %>%
+  mutate(Date = str_remove(Date, "\\[1\\]")) %>%
+  mutate(Date = ymd(Date)) %>%
+  mutate(Time = period_to_seconds(ms(Time))) %>%
+  mutate(Time = as.double(Time)) %>%
+  rename(Nationality = Country, `Location` = Venue) %>%
+  mutate(Distance = "1000 Meters")
+fivetot_clean <- onetwofoureight %>%
+  rename(Location = `Location of race`) %>%
+  bind_rows(thousand_progression_clean)
+
+fifteenhundred_clean <- fifteenhundred_progression %>%
+  select(-Auto) %>%
+  rename(Location = Place) %>%
+  mutate(Date = ymd(Date),
+         Time = str_remove(Time, "\\+")) %>%
+  mutate(Distance = "1500 Meters",
+         Time = period_to_seconds(ms(Time)),
+         Time = as.double(Time))
+sixtot_clean <- fivetot_clean %>%
+  bind_rows(fifteenhundred_clean)
 
 
+mile_progression_final <- mile_progression_clean %>%
+  select(Time, Athlete, Nationality, Date, Venue) %>%
+  rename(Location = Venue) %>%
+  mutate(Date = ymd(Date),
+         Time = period_to_seconds(ms(Time)),
+         Time = as.double(Time),
+         Distance = "One Mile")
+seventot_clean <- sixtot_clean %>%
+  bind_rows(mile_progression_final)  
+  
+threethousand_clean <- threethousand_progression %>%
+  rename(Location = Place) %>%
+  mutate(Date = str_remove(Date, "\\[1\\]"),
+         Date = ymd(Date),
+         Time = period_to_seconds(ms(Time)),
+         Time = as.double(Time),
+         Distance = "3000 Meters")
+eighttot_clean <- seventot_clean %>%
+  bind_rows(threethousand_clean)
 
 
+twomile_clean <- twomile %>%
+  rename(Nationality = PLACE, Athlete = ATHLETE, Date = DATE, Time = TIME) %>%
+  mutate(Date = ymd(Date),
+         Time = period_to_seconds(ms(Time)),
+         Time = as.double(Time),
+         Distance = "Two Mile")
+ninetot_clean <- eighttot_clean %>%
+  bind_rows(twomile_clean)
 
+fivethousand_clean <- fivethousand_progression %>%
+  mutate(Location = str_remove(Location, "\\[1\\]"),
+         Location = str_remove(Location, "\\[4\\]"),
+         Date = ymd(Date),
+         Time = period_to_seconds(ms(Time)),
+         Time = as.double(Time),
+         Distance = "5000 Meters")
+tentot_clean <- ninetot_clean %>%
+  bind_rows(fivethousand_clean)
+
+tenthousand_clean <- tenthousand_progression %>%
+  select(-Auto) %>%
+  rename(Location = Place) %>%
+  mutate(Location = str_remove(Location, "\\[1\\]"),
+         Date = mdy(Date),
+         Time = period_to_seconds(ms(Time)),
+         Time = as.double(Time),
+         Distance = "10000 Meters")
+eleventot_clean <- tentot_clean %>%
+  bind_rows(tenthousand_clean)
+
+halfmarathon_clean <- halfmarathon %>%
+  select(Time, Nationality, Date, Name, `Event/Place`) %>%
+  rename(Location = `Event/Place`, Athlete = Name) %>%
+  arrange(Time) %>%
+  mutate(Location = str_remove(Location, "\\[1\\]"),
+         Date = dmy(Date),
+         Time = ifelse(Date <= "1993-04-15", period_to_seconds(hms(Time)), period_to_seconds(ms(Time))),
+         Time = as.double(Time),
+         Distance = "Half Marathon")
+halfmarathon_clean$Time[40] <- 3624
+twelvetot_clean <- eleventot_clean %>%
+  bind_rows(halfmarathon_clean)
+
+marathon_clean <- marathon %>%
+  select(Time, Nationality, Date, Name, `Event/Place`) %>%
+  rename(Location = `Event/Place`, Athlete = Name) %>%
+  arrange(Time) %>%
+  mutate(Date = str_remove(Date, "\\[nb 6\\]"),
+         Date = mdy(Date),
+         Time = period_to_seconds(hms(Time)),
+         Time = as.double(Time),
+         Distance = "Marathon")
+thirteentot_clean <- twelvetot_clean %>%
+  bind_rows(marathon_clean)
+write_rds(thirteentot_clean, "/Users/dunk/Projects/Athletics/RunningRecordsOverTime.rds")
+```
+
+## Quick plot and gganimate
+
+```{r}
+runningrecords <- read_rds("/Users/dunk/Projects/Athletics/RunningRecordsOverTime.rds")
+
+records_label <- runningrecords %>% 
+  group_by(Distance) %>%
+  slice(which.min(Time))
+
+ggplot(runningrecords, aes(x = Date, y = Time, color = factor(Distance))) +
+  geom_line() +
+  geom_label(data = records_label, aes(label = Distance), hjust = -0.1) +
+  scale_color_viridis_d() +
+  scale_y_time(breaks = scales::breaks_pretty(n = 10)) +
+  theme(legend.position = "none")
+
+runningrecords %>%
+  mutate(Distance = factor(Distance, levels = c("100 Meters","200 Meters","400 Meters","800 Meters","1000 Meters","1500 Meters",
+                                                    "One Mile","2000 Meters","3000 Meters","5000 Meters", "10000 Meters", "Half Marathon","Marathon"))) %>%
+  arrange(Distance) %>%
+  slice(1:153) %>%
+  ggplot(aes(x = Date, y = Time, color = Distance)) +
+  geom_line() +
+  scale_color_viridis_d() +
+  scale_y_time(breaks = scales::breaks_pretty(n = 10)) +
+  ggtitle("Short Distance Track Records Over Time") +
+  theme(legend.position = "none")
+
+runningrecords %>%
+  mutate(Distance = factor(Distance, levels = c("100 Meters","200 Meters","400 Meters","800 Meters","1000 Meters","1500 Meters",
+                                                    "One Mile","2000 Meters","3000 Meters","5000 Meters", "10000 Meters", "Half Marathon","Marathon"))) %>%
+  arrange(Distance) %>%
+  slice(154:350) %>%
+  ggplot(aes(x = Date, y = Time, color = Distance)) +
+  geom_line() +
+  scale_color_viridis_d() +
+  scale_y_time(breaks = scales::breaks_pretty(n = 10)) +
+  ggtitle("Middle Distance Track Records Over Time") +
+  theme(legend.position = "none")
+
+runningrecords %>%
+  mutate(Distance = factor(Distance, levels = c("100 Meters","200 Meters","400 Meters","800 Meters","1000 Meters","1500 Meters",
+                                                    "One Mile","2000 Meters","3000 Meters","5000 Meters", "10000 Meters", "Half Marathon","Marathon"))) %>%
+  arrange(Distance) %>%
+  slice(350:474) %>%
+  ggplot(aes(x = Date, y = Time, color = Distance)) +
+  geom_line() +
+  scale_color_viridis_d() +
+  scale_y_time(breaks = scales::breaks_pretty(n = 10)) +
+  ggtitle("Long Distance Track Records Over Time") +
+  theme(legend.position = "none")
 
 ```
 
+Which records have improved the most?
 
+```{r}
+runningrecords %>%
+  group_by(Distance) %>%
+  slice(which.min(Time), which.max(Time)) %>%
+  mutate(Difference = 1/ (Time / lead(Time)),
+         `Improvement Time` = year(Date) - year(lead(Date))) %>%
+  gt::gt()
+```
 
 
 
