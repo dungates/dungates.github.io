@@ -135,6 +135,7 @@ ny <- get_acs(geography = "tract",
 ```
 
 ```{r message = F, warning = F, echo = F, error = F}
+library(mapview)
 mapview(ny, zcol = "estimate", legend = TRUE)
 ```
 
@@ -291,42 +292,52 @@ race_data2 <- get_acs(geography = "county",
 #   left_join(ed_table)
 ed_data_join <- ed_data %>% select(variable, GEOID, NAME, estimate) %>% rename(education_level = variable)
 race_data_join <- race_data2 %>% mutate(estimate_percent = estimate/summary_est) %>% select(GEOID, NAME, variable, estimate_percent, geometry) %>% rename(race = variable)
-test <- ed_data_join %>% left_join(race_data_join, by = c("GEOID", "NAME"))
+test <- ed_data_join %>% left_join(race_data_join, by = c("GEOID", "NAME")) #%>%
+  # mutate(race_percent = 100*estimate_percent) %>%
+  # select(-estimate_percent)
 ```
 
 ## A plot of educational attainment that should only be run on specific counties
 
 ```{r include = F, eval = F}
 # Don't run this, way too much data need to filter to certain counties
-test %>% mutate(year = 2018) %>%
-  ggplot(aes(x = year, 
-             y = estimate, 
-             fill = factor(education_level))) + 
-    geom_col(color= 'gray', width = .8) +
-    scale_fill_brewer(palette = 'Blues') +
-    coord_flip()+
-    facet_wrap(~NAME, ncol = 3)+
-    theme(legend.position="bottom", 
-          legend.title = element_blank(), 
-          plot.title = element_text(size=14))+
-    labs(title="Educational attainment profiles",
-         subtitle="2018")
+# test %>% mutate(year = 2018) %>%
+#   ggplot(aes(x = year, 
+#              y = estimate, 
+#              fill = factor(education_level))) + 
+#     geom_col(color= 'gray', width = .8) +
+#     scale_fill_brewer(palette = 'Blues') +
+#     coord_flip()+
+#     facet_wrap(~NAME, ncol = 3)+
+#     theme(legend.position="none", 
+#           legend.title = element_blank(), 
+#           plot.title = element_text(size=14))+
+#     labs(title="Educational attainment profiles",
+#          subtitle="2018")
 ```
 
 ## Map of the racial data
 
+
+
 ```{r fig.width=10}
 race_data_join %>%
   mutate(Percent = 100 * (estimate_percent)) %>%
-  ggplot(aes(fill = Percent, color = Percent)) +
-  facet_wrap(~ race) +
+  ggplot(aes(fill = Percent)) +
+  facet_wrap(~ factor(race, levels = c("White", "Black", "Asian", "Hispanic"))) +
   geom_sf() +
   scale_fill_viridis_c(direction = -1) +
   scale_color_viridis_c(direction = -1) +
-  labs(title = "Racial geography of the US",
-       caption = "Source: American Community Survey") +
-  theme_void()
+  labs(title = "Racial geography of the US in 2018",
+       caption = "Source: American Community Survey",
+       fill = "Percent\nby County") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "bottom",
+        legend.justification = "right",
+        legend.direction = "horizontal")
 ```
+
 
 
 ## Map of the Educational Data
@@ -346,11 +357,14 @@ ed_data_2 %>%
   geom_sf() +
   scale_fill_viridis_c(direction = -1) +
   scale_color_viridis_c(direction = -1) +
+  guides(color = element_blank()) +
   labs(title = "Educational Geography of the US",
        caption = "Source: American Community Survey",
        color = "Percent") +
   theme_void() + 
   theme(legend.position = "bottom",
+        legend.justification = "right",
+        legend.direction = "horizontal"
         plot.title = element_text(hjust = 0.5))
 ```
 
@@ -398,6 +412,37 @@ ed_data_state <- ed_data_state %>% as_tibble() %>%
 race_education_state <- ed_data_state %>% left_join(race_data_state, by = c("NAME")) %>% rename(education_percent = estimate, state = NAME)
 
 # Plot to go here
+library(urbnmapr)
+states_sf <- get_urbn_map("states", sf = TRUE)
+states_df <- states_sf %>%
+  left_join(race_education_state, by = c("state_name" = "state"))
+ggplot(states_df, aes(fill = race_percent)) +
+  facet_wrap(~ factor(race, levels = c("White", "Black", "Asian", "Hispanic"))) +
+  geom_sf() +
+  scale_fill_viridis_c(direction = -1) +
+  scale_color_manual(values = "black") +
+  scale_alpha_manual(values = 0.2) +
+  labs(title = "Racial Geography of the US in 2018",
+       caption = "Source: American Community Survey",
+       fill = "Percent\nby State") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "bottom",
+        legend.direction = "horizontal")
+ggplot(states_df, aes(fill = education_percent)) +
+  facet_wrap(~ education_level) +
+  geom_sf() +
+  scale_fill_viridis_c(direction = -1) +
+  scale_color_manual(values = "black") +
+  scale_alpha_manual(values = 0.2) +
+  labs(title = "Educational Geography of the US in 2018",
+       caption = "Source: American Community Survey",
+       fill = "Percent\nby State") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "bottom",
+        legend.direction = "horizontal")
+
 ```
 
 
