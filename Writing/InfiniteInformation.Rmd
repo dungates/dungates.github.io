@@ -21,26 +21,28 @@ header-includes:
 
 # The Issue with Infinite Information: Bending Truth with Big Data
 
-Cathy O’Neil’s new book Weapons of Math Destruction explores how institutions are increasingly using “big data” to simplify. Algorithms and mathematical models now shape a big part of our lives — and not only Amazon’s personalized advertisements. Formulas are used to calculate user-specific car insurance rates, sort résumés, assess loan applications, predict recidivism rates, and more.
+Bigger data is better data, but bigger data isn't inherently truthful, factual, or even useful - it doesn't necessarily inform us any better than deep understanding and experience with an issue. When I first started out in data science one of my mentor's started out teaching a program I was in by saying he would much rather teach a biologist to code, than teach a coder how to go about a biological issue. At the time I saw little difference, but now most of the time when I see data-based solutions in fields where I have attained even a moderate level of expertise their analyses are woefully lacking of the necessary context. Now of course there are still some outcries over privacy but that battle was lost long ago, we live in the era of information, and how that information is used is where the debate now lies.
+
+Algorithms and mathematical models now shape our lives to an uncomfortable extent, it takes effort to not scroll in the way that Twitter or Tik Tok want you to — and Amazon’s highly personalized advertisements are certainly directing many people's purchasing habits. Formulas are used to calculate user-specific car insurance rates, sort résumés, assess loan applications, predict recidivism rates, and more. To what extent should we let mathematical description of natural phenomena as it has been conducted in science to pervade the business, consumer, and subsequently private world?
 
 ```{r echo = F, message = F, warning = F}
-#https://fee.org/articles/big-data-cannot-solve-the-infinite-information-problem/
-library(tidyverse)
-library(ggthemes)
-ggplot(data = tibble(x = c(-5, 5), y = c(10, 10)), aes(x = x, y = y, fill = x)) + 
-  geom_col() + 
-  ggtitle("Data!!!") + 
-    theme(plot.background = element_rect(fill = "#E8E8E8"),
-          panel.background = element_rect(fill = "#E8E8E8"),
-          panel.border = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        plot.title = element_text(hjust = 0.5)) +
-  theme_clean()
+f <- function(x) exp(x)
+ggplot() + 
+  geom_function(fun = f, aes(color = ..x..)) + 
+  xlim(0, 25) + 
+  scale_color_distiller(palette = "Reds") +
+  scale_y_continuous(labels = scales::comma, breaks = scales::breaks_pretty(n = 10)) +
+  labs(y = "Data", x = "Time", title = "Data Getting Bigger", color = "Bigness") +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
+There has long been a split between "math-driven" and "political-philosophy-driven" elites, but this split has historically resulted in two different policy worlds, one where people philosophize, and one where wacky math is done. Now the math is starting to rule, in private industry and public policy alike. There seems to be some notion that when math is involved objectivity is suddenly no longer an issue, but anyone who has spent any time in the field of statistics knows the two phrases "bias in, bias out", and "all models are wrong, some are useful" are two much more accurate idioms to describe the ability and purpose of algorithmic thinking. As Cathy O’Neil, author of *Weapons of Math Destruction* told NPR, “we really have no idea what’s happening to most algorithms under the hood.” In K-12, we’ve seen this very debate rage related to “value-added” models of student performance. O’Neil argues these models can have discriminatory effects, exacerbating racial, economic, gender, and geographic inequalities. Once again though, this is obvious to anyone who has studied statistics or data science, a much more fundamental question needs answering: whether modelling can answer questions in a communicable and meaningful way to the public. 
 
-But such systems pose major risks. As the Wall Street Journal noted in its book review, we should be wary of “the biases of people who encode their notions in algorithms.” Worse, the details of the models are typically opaque to both those being assessed and those using the assessments for high-stakes decisions. As O’Neil told NPR, “we really have no idea what’s happening to most algorithms under the hood.” In K-12, we’ve seen this very debate rage related to “value-added” models of student performance.
+If this cannot be done, then all statistics/data science become is a way to mask elitism and force policies upon those who cannot "understand" that which is really a bunch of jargon filled with gatekeeping. How is that any different from fields such as law, medicine, or even the origin of statistics which was primarily used to establish eugenic falshoods with a "scientific basis". The data can say whatever you want it to  once you learn enough techniques, and that fact is sinfully wielded every day by columnists from academia. So now that we have information on everything, and everyone what can be done to stop these data-quoting fact challening poseurs? The fundamental approach to mathematics in the US must be changed, it's framing lends itself only to insulation to those naturally inclined to it, and provides a false aura of objectivity that is now damaging the nation.
+
+There is data-driven decision making, and data-driven obfuscation of reality occurring everywhere in consultancy, government, and technology because of this fundamental disconnect that math, and especially statistics is truth. In 5th grade my class did an activity where we rated the factualness of each area of science, everyone put math as the most factual, but the reality is it doesn't even fit on a scale of factualness. Math is just a description of the world, and whoever is describing the world therefore has the ability to frame things truthfully or insidiously false. Economists have for years claimed there to be objective truths based on false theory that one input such as raising the minumum wage will increase unemployment; mathematicians, statisticians, and data scientists would do well to avoid such claimstaking.
+
+
 
 
 
