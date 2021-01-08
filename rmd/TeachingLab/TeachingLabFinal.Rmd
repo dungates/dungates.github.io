@@ -28,7 +28,7 @@ student_ratio <- readr::read_csv("https://raw.githubusercontent.com/rfordatascie
 
 # The Flow of Race and Education
 
-This circle diagram shows how each race listed distributes amongst the various levels of educational attainments, there are some very obvious patterns that emerge as you specify each group by mousing over it. The sums of each racial group is 100, but the sums of the educational categories are larger than 100 because it is accounting for each race separately and the data is in percentages, but it is a useful visualization nonetheless. The data is pulled from the 2017 census.
+This circle diagram shows how each race listed distributes amongst the various levels of educational attainments, there are some very obvious patterns that emerge as you specify each group by mousing over it. The sums of each racial group is 100, but the sums of the educational categories are larger than 100 because it is accounting for each race separately and the data is in percentages, but it is a useful visualization nonetheless. The data is pulled from the 2018 census.
 
 ```{r echo = F, message = F, warning = F, fig.height=15}
 library(chorddiag)
@@ -52,14 +52,17 @@ chorddiag(test_matrix, type = "bipartite",
           groupnamePadding = 20, showTicks = F, categorynameFontsize = 0, groupnameFontsize = 12)
 ```
 
-The next two images show some of the basic geography of the US in terms of education and race, these are a lot more useful in county level data, but together these two maps show that most of the US does not complete college, and is very racially-geographically compounded unless you are white.
+The next two images show some of the basic geography of the US in terms of education and race, these are a lot more useful in county level data, but together these two maps show that most of the US does not complete college, and is very racially-geographically compounded, unless you are white.
 
-![](/Users/dunk/Projects/NewWebsite.io/img/rmd/racialgeo.png)
+```{r}
 
-![](/Users/dunk/Projects/NewWebsite.io/img/rmd/educationalgeo.png)
+```
 
+Now comparing the distribution of race to the distribution of education some very interesting yet historically representative patterns emerge - certain communities are obviously very underserved.
 
+```{r}
 
+```
 
 
 Below I analyze data from UNESCO's Institute of Statistics, the World Development Indicators Database (WDI), and evaluate the impact of student-teacher ratio's on education taking into context different levels of wealth. The UNESCO data can be found [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-05-07/student_teacher_ratio.csv), and the WDI data can be found [here](https://databank.worldbank.org/databases/education).
