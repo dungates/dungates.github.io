@@ -403,3 +403,10 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.dropdown > .dropdown-menu {
+  display: none; //hides .dropdown-menu directly inside .dropdown
+}
+.dropdown.open > .dropdown-menu {
+  display: block; //shows .dropdown-menu directly inside .dropdown if it has class .open
+}
