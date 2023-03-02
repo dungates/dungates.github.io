@@ -12,23 +12,22 @@ library(dplyr)
 generative_files <- list.files("art/generative") %>%
   tibble::as_tibble() %>%
   mutate(title = stringr::str_to_title(stringr::str_remove(value, ".png")),
-         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/_art/generative/", value),
-         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/_art/generative/", value)
+         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/generative/", value),
+         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/generative/", value)
          )
 maps_files <- list.files("art/maps") %>%
   tibble::as_tibble() %>%
   mutate(title = stringr::str_to_title(stringr::str_remove(value, ".png")),
-         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/_art/maps/", value),
-         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/_art/maps/", value)
+         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/maps/", value),
+         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/maps/", value)
          )
 recreation_files <- list.files("art/recreations") %>%
   tibble::as_tibble() %>%
   mutate(title = stringr::str_to_title(stringr::str_remove(value, ".png")),
-         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/_art/recreations/", value),
-         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/_art/recreations/", value)
+         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/recreations/", value),
+         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/recreations/", value)
          )
 ```
-
 
 # Generative Art
 
@@ -42,7 +41,6 @@ generative_files %>%
   )
 ```
 
-
 # Maps
 
 ```{r}
@@ -55,7 +53,6 @@ maps_files %>%
   )
 ```
 
-
 # Recreations
 
 ```{r}
@@ -67,4 +64,3 @@ recreation_files %>%
     layout = "label-below"
   )
 ```
-
