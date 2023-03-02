@@ -1,0 +1,33 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About Me",
+      "author": [],
+      "contents": "\nHey! I am a data scientist at Teaching Lab with a BS in Mathematical Economics as well as minors in Actuarial Science, Political Science, and Spanish. My diversity of interests going into college lead to me (clearly) taking a variety of paths that ultimately coalesced into a career in data science, with many other interests and hobbies in which I avidly take armchair expertise.\nI had actually never REALLY coded (not counting TI-83 programming in algebra classes) until an econometrics class I took in my junior year of college, in which I was introduced to R. The basis of this course was essentially just learning to type summary(lm(y ~ x, data = econ)) in R, but I quickly realized how much more was possible as I was first introduced to the tidyverse, then spent most of my summer working in R for an internship at Data Science for the Public Good at Oregon State. This summer was of course in the midst of the beginning of the ongoing covid-19 pandemic which spurred my interest and time spent in the world & community of R.\nI am very much not a poster or active on social media, and although I am not prominent in the R community I very actively follow it on twitter, through blog posts, and occasionally in user meetups such as the Portland R User Group. Most of my participation can be found in my package development on github where I have thus far made a personal theme package {DGThemes}, a {NewYoRkTimes} app that solves both the Spelling Bee game, and the mini crossword each day. Additionally I have some interesting/fun Shiny apps such as my [Spotify data exploration app]{https://dungates.shinyapps.io/Spotify/}, Housing analysis app, Image Manipulation app, and others I write about in the Projects/Writing part.\nI have had the tremendous fortune to have extremely capable and helpful teachers in my education of R, statistics, and data science. My infinite thanks goes to the people who helped me get to where I am today\nCharlotte Wickham\nDaniel Faltesek\nMichael Jerman\n\n\n\n",
+      "last_modified": "2023-03-01T22:39:37-05:00"
+    },
+    {
+      "path": "art.html",
+      "title": "Art",
+      "author": [],
+      "contents": "\n\n\n\nGenerative Art\n\n\n\n\n\n\n\n\nBubblycircle\n\n\n\n\n\n\n\n\nCircleart\n\n\n\n\n\n\n\n\nCool_stream3\n\n\n\n\n\n\n\n\nPerlincircles\n\n\n\n\n\n\n\n\nSpaceflower\n\n\n\n\n\n\n\n\nTiling_intersects\n\n\n\n\n\n\n\n\nTripleflametree\n\n\n\n\n\n\nMaps\n\n\n\n\n\n\n\n\nPortland_buildings_created\n\n\n\n\n\n\n\n\nPortland_buildings_created2\n\n\n\n\n\n\n\n\nPortland_circle_map\n\n\n\n\n\n\nRecreations\n\n\n\n\n\n\n\n\nHeart\n\n\n\n\n\n\n\n\nThree_sisters_abstract\n\n\n\n\n\n\n\n\n\n",
+      "last_modified": "2023-03-01T22:39:37-05:00"
+    },
+    {
+      "path": "data_and_more.html",
+      "title": "Data & More",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2023-03-01T22:39:38-05:00"
+    },
+    {
+      "path": "index.html",
+      "title": "My Blog",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2023-03-01T22:39:38-05:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}

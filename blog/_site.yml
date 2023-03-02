@@ -1,0 +1,17 @@
+name: "blog"
+title: "Duncan's Data & More"
+description: |
+  All of my garbled thoughts and writings are collected for the public here.
+base_url: https://duncangates.me
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Data & More"
+      href: data_and_more.html
+    - text: "Art"
+      href: art.html
+output: distill::distill_article

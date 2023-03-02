@@ -1,0 +1,43 @@
+---
+title: "About Me"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r metathis, message=FALSE, warning=FALSE, include=FALSE}
+library(metathis)
+
+meta() %>%
+  meta_description(
+    "About Duncan Gates"
+  ) %>%
+  meta_name("github-repo" = "dungates/duncangates-distill") %>%
+  meta_viewport() %>%
+  meta_social(
+    title = "DUNCAN GATES: About Me",
+    url = "https://ellakaye.rbind.io/about",
+    image = "https://ellakaye.rbind.io/images/duncan_profile.jpeg",
+    image_alt = "A photo of Duncan Gates",
+    og_type = "website",
+    og_author = c("Duncan Gates"),
+    twitter_card_type = "summary",
+    twitter_creator = "@gates_duncan"
+  )
+```
+
+
+Hey! I am a data scientist at [Teaching Lab](https://www.teachinglab.org/) with a BS in Mathematical Economics as well as minors in Actuarial Science, Political Science, and Spanish. My diversity of interests going into college lead to me (clearly) taking a variety of paths that ultimately coalesced into a career in data science, with many other interests and hobbies in which I avidly take armchair expertise.
+
+I had actually never REALLY coded (not counting TI-83 programming in algebra classes) until an econometrics class I took in my junior year of college, in which I was introduced to R. The basis of this course was essentially just learning to type `summary(lm(y ~ x, data = econ))` in R, but I quickly realized how much more was possible as I was first introduced to the [tidyverse](https://www.tidyverse.org/), then spent most of my summer working in R for an internship at [Data Science for the Public Good](https://datascienceforthepublicgood.org/) at Oregon State. This summer was of course in the midst of the beginning of the ongoing covid-19 pandemic which spurred my interest and time spent in the world & community of R.
+
+I am very much *not* a poster or active on social media, and although I am not prominent in the R community I very actively follow it on twitter, through blog posts, and occasionally in user meetups such as the [Portland R User Group](https://www.meetup.com/portland-r-user-group/). Most of my participation can be found in my package development on github where I have thus far made a personal theme package {DGThemes}, a {NewYoRkTimes} app that solves both the [Spelling Bee](https://www.nytimes.com/puzzles/spelling-bee) game, and the mini crossword each day. Additionally I have some interesting/fun Shiny apps such as my [Spotify data exploration app]{https://dungates.shinyapps.io/Spotify/}, [Housing analysis app](shinyapps.duncangates.me/Housing), [Image Manipulation app](https://dungates.shinyapps.io/image_to_art/), and others I write about in the Projects/Writing part.
+
+I have had the tremendous fortune to have extremely capable and helpful teachers in my education of R, statistics, and data science. My infinite thanks goes to the people who helped me get to where I am today
+
+- [Charlotte Wickham](https://www.cwick.co.nz/)
+
+- [Daniel Faltesek](http://www.danielfaltesek.com/default.html)
+
+- [Michael Jerman](https://michaeljerman.com/)
