@@ -3,7 +3,7 @@ title: "Duncan's Data & More"
 description: |
   All of my garbled thoughts and writings are collected for the public here.
 base_url: https://duncangates.me
-output_dir: "_site"
+output_dir: "site"
 navbar:
   right:
     - text: "Home"
