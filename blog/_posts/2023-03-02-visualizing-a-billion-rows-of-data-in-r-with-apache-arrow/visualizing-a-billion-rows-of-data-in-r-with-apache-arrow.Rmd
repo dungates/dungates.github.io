@@ -1,0 +1,172 @@
+
+## The NYC Taxi Data
+
+Almost everyone has heard of the NYC taxi data at this point, in its current form it is about 24 columns and just under 1.7 billion rows. Each row represents a ride that occurred somewhere between 2009 and 2022. The important columns in this visualization are
+
+- `pickup_longitude` (double): Longitude data for the pickup location
+- `pickup_latitude` (double): Latitude data for the pickup location
+- `dropoff_longitude` (double): Longitude data for the dropoff location
+- `dropoff_latitude` (double): Latitude data for the dropoff location
+
+## Libraries
+
+There are the libraries used for tranforming and visualizing.
+
+```{r}
+library(arrow)
+library(dplyr)
+library(tictoc)
+library(tidyr)
+library(ggplot2)
+```
+
+## Loading the Data 
+
+This transfers the nearly 70 gigabytes of taxi data to my computer.
+
+```{r eval = F}
+copy_files(
+  from = s3_bucket("ursa-labs-taxi-data-v2"),
+  to = "~/Downloads/nyc-taxi"
+)
+```
+
+The datasets can subsequently be opened as such.
+
+```{r}
+nyc_taxi_tiny <- open_dataset("~/Downloads/nyc-taxi-tiny/")
+nyc_taxi <- open_dataset("~/Downloads/nyc-taxi/")
+```
+
+## Checking it out
+
+```{r}
+glimpse(nyc_taxi_tiny)
+```
+
+## Plotting a million rows
+
+```{r}
+tic()
+nyc_pickups <- nyc_taxi_tiny |>
+  select(pickup_longitude, pickup_latitude) |>
+  filter(
+    !is.na(pickup_longitude),
+    !is.na(pickup_latitude)
+  ) |>
+  collect()
+toc()
+```
+
+
+Let's check out `nyc_pickups`
+
+```{r}
+glimpse(nyc_pickups)
+```
+
+This goes pretty quick now
+
+```{r}
+x0 <- -74.05 # minimum longitude to plot
+y0 <- 40.6   # minimum latitude to plot
+span <- 0.3  # size of the lat/long window to plot
+
+tic()
+pic <- ggplot(nyc_pickups) +
+  geom_point(
+    aes(pickup_longitude, pickup_latitude), 
+    size = .2, 
+    stroke = 0, 
+    colour = "#800020"
+  ) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme_void() +
+  coord_equal(
+    xlim = x0 + c(0, span), 
+    ylim = y0 + c(0, span)
+  )
+pic
+toc()
+```
+
+
+## Plotting a billion rows
+
+```{r}
+tic()
+pixels <- 4000
+pickup <- nyc_taxi |>
+  filter(
+    !is.na(pickup_longitude),
+    !is.na(pickup_latitude),
+    pickup_longitude > x0,
+    pickup_longitude < x0 + span,
+    pickup_latitude > y0,
+    pickup_latitude < y0 + span
+  ) |>
+  mutate(
+    unit_scaled_x = (pickup_longitude - x0) / span,
+    unit_scaled_y = (pickup_latitude - y0) / span,
+    x = as.integer(round(pixels * unit_scaled_x)), 
+    y = as.integer(round(pixels * unit_scaled_y))
+  ) |>
+  count(x, y, name = "pickup") |>
+  collect()
+toc()
+```
+
+My laptop solves this in 27.51 seconds, again lets take a look at the resulting dataframe.
+
+```{r}
+glimpse(pickup)
+```
+
+
+```{r}
+tic()
+grid <- expand_grid(x = 1:pixels, y = 1:pixels) |>
+  left_join(pickup, by = c("x", "y")) |>
+  mutate(pickup = replace_na(pickup,  0))
+toc()
+```
+
+```{r}
+tic()
+pickup_grid <- matrix(
+  data = grid$pickup,
+  nrow = pixels,
+  ncol = pixels
+)
+toc()
+```
+
+```{r}
+render_image <- function(mat, cols = c("white", "#800020")) {
+  op <- par(mar = c(0, 0, 0, 0))
+  shades <- colorRampPalette(cols)
+  image(
+    z = log10(t(mat + 1)),
+    axes = FALSE,
+    asp = 1,
+    col = shades(256),
+    useRaster = TRUE
+  )
+  par(op)
+}
+```
+
+## Rendering and saving
+
+```{r}
+tic()
+png(file = here::here("imgs/taxi_viz_billion_rows.png"),
+    bg = "#002222",
+    width = 4000,
+    height = 4000)
+render_image(pickup_grid, cols = c("#002222", "white", "#800020"))
+dev.off()
+toc()
+```
+

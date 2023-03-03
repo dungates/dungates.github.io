@@ -1,10 +1,22 @@
-name: "blog"
-title: "Duncan's Data & More"
+name: "data-w-dunc"
+title: "Data with Duncan"
 description: |
-  All of my garbled thoughts and writings are collected for the public here.
+  All of my garbled thoughts, data ponderings, and writings are collected for the public here.
 base_url: https://duncangates.me
+theme: dg_theme.css
+favicon: imgs/logo.png
+collections:
+  posts:
+    categories: true
+    disqus: data-w-dunc
+    share: [twitter, linkedin]
+    subscribe: _subscribe.html
 output_dir: "site"
 navbar:
+  logo: 
+    image: imgs/logo.png
+    href: https://duncangates.me
+  search: false
   right:
     - text: "Home"
       href: index.html

@@ -13,7 +13,7 @@ meta() %>%
   meta_description(
     "About Duncan Gates"
   ) %>%
-  meta_name("github-repo" = "dungates/duncangates-distill") %>%
+  meta_name("github-repo" = "dungates/dungates.github.io") %>%
   meta_viewport() %>%
   meta_social(
     title = "DUNCAN GATES: About Me",
