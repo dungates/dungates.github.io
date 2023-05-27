@@ -1,6 +1,5 @@
 ---
-title: ""
+title: "The Data Dive"
 site: distill::distill_website
 listing: posts
 ---
-

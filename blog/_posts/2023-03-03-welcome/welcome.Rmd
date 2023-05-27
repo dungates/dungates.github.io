@@ -1,22 +1,31 @@
 ---
-title: "welcome"
+title: "Welcome"
+categories:
+  - welcome
 description: |
-  A short description of the post.
+  An introductory post about what is here.
 author:
   - name: Duncan Gates
 date: 2023-03-03
-output:
-  distill::distill_article:
-    self_contained: false
+output: distill::distill_article
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(DGThemes)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+This is a blog where I write about anything that strikes my momentary interest, which often involves a lot of data.
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+```{r preview = TRUE}
+ggplot(mtcars, aes(x = wt, y = drat)) +
+  geom_point() +
+  geom_smooth(method = "gam") +
+  labs(title = "Duncan's Blog sure is Great!") +
+  theme_duncan()
+```
+
 
 

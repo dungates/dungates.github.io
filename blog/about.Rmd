@@ -17,8 +17,8 @@ meta() %>%
   meta_viewport() %>%
   meta_social(
     title = "DUNCAN GATES: About Me",
-    url = "https://ellakaye.rbind.io/about",
-    image = "https://ellakaye.rbind.io/images/duncan_profile.jpeg",
+    url = "https://dungates.github.io/about",
+    image = "https://dungates.github.io/images/duncan_profile.jpeg",
     image_alt = "A photo of Duncan Gates",
     og_type = "website",
     og_author = c("Duncan Gates"),

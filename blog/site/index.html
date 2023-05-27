@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
-  <link rel="alternate" type="application/rss+xml" href="https://duncangates.me/index.xml" />
+  <link rel="alternate" type="application/rss+xml" href="https://duncangates.me/blog/site/index.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -89,27 +89,27 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data with Duncan: </title>
+  <title>The Data Dive</title>
 
 
   <link rel="icon" type="image/png" href="imgs/logo.png"/>
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data with Duncan: "/>
+  <meta property="og:title" content="The Data Dive"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data with Duncan"/>
+  <meta property="og:site_name" content="The Data Dive"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data with Duncan: "/>
+  <meta property="twitter:title" content="The Data Dive"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":[""]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["The Data Dive"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -457,8 +457,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
@@ -1903,7 +1903,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /* Optional: embed custom fonts here with `@import`          */
   /* This must remain at the top of this file.                 */
-
+  @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 
   html {
@@ -1920,10 +1921,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color:     rgba(0, 0, 0, 0.6);
     --fig-cap-color:   rgba(0, 0, 0, 0.6);
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    sans-serif;
-    --mono-font:       monospace;
-    --body-font:       sans-serif;
-    --navbar-font:     sans-serif;  /* websites + blogs only */
+    --heading-font:    "Fira Sans" sans-serif;
+    --mono-font:       "Open Sans" monospace;
+    --body-font:       "Open Sans" sans-serif;
+    --navbar-font:     "Fira Sans" sans-serif;  /* websites + blogs only */
   }
 
   /*-- ARTICLE METADATA --*/
@@ -1968,7 +1969,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
-  </style>
+
+  .darkmode d-article,
+  .darkmode d-appendix,
+  .darkmode body {
+    background-color: #2f3030;
+    color: white;
+  }</style>
   <style type="text/css">
   /* base style */
 
@@ -2124,7 +2131,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: var(--hover-color, white);
   }</style>
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2144,7 +2151,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"","authors":[]}
+{"title":"The Data Dive","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2155,13 +2162,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a class="logo" href="https://duncangates.me">
 <img src="imgs/logo.png" alt="Logo"/>
 </a>
-<a href="index.html" class="title">Data with Duncan</a>
+<a href="index.html" class="title">The Data Dive</a>
 </div>
 <div class="nav-right">
-<a href="index.html">Home</a>
+<a href="index.html">Blog</a>
 <a href="about.html">About</a>
-<a href="data_and_more.html">Data &amp; More</a>
 <a href="art.html">Art</a>
+<a href="https://github.com/dungates">
+<i class="fa fa-github fa-lg" aria-hidden="true"></i>
+</a>
+<a href="https://twitter.com/gates_duncan">
+<i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+</a>
+<a href="https://www.linkedin.com/in/duncan-gates/">
+<i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
+</a>
+<a>
+<i class="fas fa-adjust" aria-hidden="true"></i>
+</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2304,7 +2322,46 @@ function init_posts_list() {
 
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
-<h1 class="posts-list-caption" data-caption=""></h1>
+<h1 class="posts-list-caption" data-caption="The Data Dive">The Data Dive</h1>
+<a href="posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["Apache Arrow","Visualizing"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 3, 2023</div>
+<div class="dt-authors">
+<div class="dt-author">Duncan Gates</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/distill-preview.png"/>
+</div>
+<div class="description">
+<h2>Visualizing a Billion Rows of Data</h2>
+<div class="dt-tags">
+<div class="dt-tag">Apache Arrow</div>
+<div class="dt-tag">Visualizing</div>
+</div>
+<p>A post about using apache arrow and efficiently visualizing in R</p>
+</div>
+</a>
+<a href="posts/2023-03-03-welcome/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["welcome"]}</script>
+<div class="metadata">
+<div class="publishedDate">March 3, 2023</div>
+<div class="dt-authors">
+<div class="dt-author">Duncan Gates</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/2023-03-03-welcome/distill-preview.png"/>
+</div>
+<div class="description">
+<h2>welcome</h2>
+<div class="dt-tags">
+<div class="dt-tag">welcome</div>
+</div>
+<p>An introductory post about what is here.</p>
+</div>
+</a>
 </div>
 <div class="posts-sidebar">
 <div class="sidebar-section subscribe">
@@ -2318,6 +2375,27 @@ function init_posts_list() {
   <input type='submit' value='Subscribe' />
 </form>
 </div>
+<div class="sidebar-section categories">
+<h3>Categories</h3>
+<ul>
+<li>
+<a href="#category:Articles">Articles</a>
+<span class="category-count">(2)</span>
+</li>
+<li>
+<a href="#category:Apache_Arrow">Apache Arrow</a>
+<span class="category-count">(1)</span>
+</li>
+<li>
+<a href="#category:Visualizing">Visualizing</a>
+<span class="category-count">(1)</span>
+</li>
+<li>
+<a href="#category:welcome">welcome</a>
+<span class="category-count">(1)</span>
+</li>
+</ul>
+</div>
 </div>
 <div class="posts-more">
 <a href="#">More articles &raquo;</a>
@@ -2326,7 +2404,7 @@ function init_posts_list() {
 <!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>index.knit</h1>
+<h1>The Data Dive</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2344,6 +2422,40 @@ function init_posts_list() {
 
 
 <!--radix_placeholder_site_after_body-->
+<script>
+const darkmodeToggle = document.getElementsByClassName("fas fa-adjust")[0];
+let theme = localStorage.getItem("theme");
+
+if (!theme) {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches ) {
+    theme = "dark";
+  } else {
+    theme = "light";
+  }
+}
+setTheme();
+
+function switchTheme() {
+  if (theme === "light") {
+    theme = "dark";
+  } else {
+    theme = "light";
+  }
+  localStorage.setItem("theme", theme);
+  setTheme();
+  console.log(theme);
+}
+
+function setTheme() {
+  if (theme === "dark") {
+    document.body.classList.add('darkmode');
+  } else {
+    document.body.classList.remove('darkmode');
+  }
+}
+
+darkmodeToggle.addEventListener('click', switchTheme)
+</script>
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom"></div>

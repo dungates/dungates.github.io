@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>Data with Duncan</title>
-    <link>https://duncangates.me</link>
-    <atom:link href="https://duncangates.me/index.xml" rel="self" type="application/rss+xml"/>
-    <description>All of my garbled thoughts, data ponderings, and writings are collected for the public here.
+    <title>The Data Dive</title>
+    <link>https://duncangates.me/blog/site/</link>
+    <atom:link href="https://duncangates.me/blog/site/index.xml" rel="self" type="application/rss+xml"/>
+    <description>All of my wandering interests, semi-dilettantish data ponderings, and writings are collected for the public here.
 </description>
     <image>
-      <title>Data with Duncan</title>
-      <url>https://duncangates.me/imgs/logo.png</url>
-      <link>https://duncangates.me</link>
+      <title>The Data Dive</title>
+      <url>https://duncangates.me/blog/site/imgs/logo.png</url>
+      <link>https://duncangates.me/blog/site/</link>
     </image>
     <generator>Distill</generator>
     <lastBuildDate>Fri, 03 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Visualizing a Billion Rows of Data</title>
+      <dc:creator>Duncan Gates</dc:creator>
+      <link>https://duncangates.me/blog/site/posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow</link>
+      <description>A post about using apache arrow and efficiently visualizing in R</description>
+      <category>Apache Arrow</category>
+      <category>Visualizing</category>
+      <guid>https://duncangates.me/blog/site/posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow</guid>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
+      <media:content url="https://duncangates.me/blog/site/posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/distill-preview.png" medium="image" type="image/png" width="4000" height="4000"/>
+    </item>
+    <item>
+      <title>welcome</title>
+      <dc:creator>Duncan Gates</dc:creator>
+      <link>https://duncangates.me/blog/site/posts/2023-03-03-welcome</link>
+      <description>An introductory post about what is here.</description>
+      <category>welcome</category>
+      <guid>https://duncangates.me/blog/site/posts/2023-03-03-welcome</guid>
+      <pubDate>Fri, 03 Mar 2023 00:00:00 +0000</pubDate>
+      <media:content url="https://duncangates.me/blog/site/posts/2023-03-03-welcome/distill-preview.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
   </channel>
 </rss>

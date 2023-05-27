@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "path": "posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/",
+    "title": "Visualizing a Billion Rows of Data",
+    "description": "A post about using apache arrow and efficiently visualizing in R",
+    "author": [
+      {
+        "name": "Duncan Gates",
+        "url": {}
+      }
+    ],
+    "date": "2023-03-03",
+    "categories": [
+      "Apache Arrow",
+      "Visualizing"
+    ],
+    "contents": "\nThe NYC Taxi Data\nAlmost everyone has heard of the NYC taxi data at this point, in its current form it is about 24 columns and just under 1.7 billion rows. Each row represents a ride that occurred somewhere between 2009 and 2022. The important columns in this visualization are\npickup_longitude (double): Longitude data for the pickup location\npickup_latitude (double): Latitude data for the pickup location\ndropoff_longitude (double): Longitude data for the dropoff location\ndropoff_latitude (double): Latitude data for the dropoff location\nLibraries\nThere are the libraries used for tranforming and visualizing.\nLoading the Data\nThis transfers the nearly 70 gigabytes of taxi data to my computer.\n\n\ncopy_files(\n  from = s3_bucket(\"ursa-labs-taxi-data-v2\"),\n  to = \"~/Downloads/nyc-taxi\"\n)\n\n\nThe datasets can subsequently be opened as such.\n\n\nnyc_taxi_tiny <- open_dataset(\"~/Downloads/nyc-taxi-tiny/\")\nnyc_taxi <- open_dataset(\"~/Downloads/nyc-taxi/\")\n\n\nChecking it out\n\n\nglimpse(nyc_taxi_tiny)\n\n\nPlotting a million rows\n\n\ntic()\nnyc_pickups <- nyc_taxi_tiny |>\n  select(pickup_longitude, pickup_latitude) |>\n  filter(\n    !is.na(pickup_longitude),\n    !is.na(pickup_latitude)\n  ) |>\n  collect()\ntoc()\n\n\nLet’s check out nyc_pickups\n\n\nglimpse(nyc_pickups)\n\n\nThis goes pretty quick now\n\n\nx0 <- -74.05 # minimum longitude to plot\ny0 <- 40.6   # minimum latitude to plot\nspan <- 0.3  # size of the lat/long window to plot\n\ntic()\npic <- ggplot(nyc_pickups) +\n  geom_point(\n    aes(pickup_longitude, pickup_latitude), \n    size = .2, \n    stroke = 0, \n    colour = \"#800020\"\n  ) +\n  scale_x_continuous(expand = c(0, 0)) +\n  scale_y_continuous(expand = c(0, 0)) +\n  theme_void() +\n  coord_equal(\n    xlim = x0 + c(0, span), \n    ylim = y0 + c(0, span)\n  )\npic\ntoc()\n\n\nPlotting a billion rows\n\n\ntic()\npixels <- 4000\npickup <- nyc_taxi |>\n  dplyr::filter(\n    !is.na(pickup_longitude),\n    !is.na(pickup_latitude),\n    pickup_longitude > x0,\n    pickup_longitude < x0 + span,\n    pickup_latitude > y0,\n    pickup_latitude < y0 + span\n  ) |>\n  dplyr::mutate(\n    unit_scaled_x = (pickup_longitude - x0) / span,\n    unit_scaled_y = (pickup_latitude - y0) / span,\n    x = as.integer(round(pixels * unit_scaled_x)), \n    y = as.integer(round(pixels * unit_scaled_y))\n  ) |>\n  dplyr::group_by(x, y) |>\n  dplyr::summarise(pickup = n()) |>\n  # dplyr::count(x, y, name = \"pickup\") |>\n  dplyr::collect()\ntoc()\n\n\nMy laptop solves this in 27.51 seconds, again lets take a look at the resulting dataframe.\n\n\nglimpse(pickup)\n\n\n\n\ntic()\ngrid <- expand_grid(x = 1:pixels, y = 1:pixels) |>\n  left_join(pickup, by = c(\"x\", \"y\")) |>\n  mutate(pickup = replace_na(pickup,  0))\ntoc()\n\n\n\n\ntic()\npickup_grid <- matrix(\n  data = grid$pickup,\n  nrow = pixels,\n  ncol = pixels\n)\ntoc()\n\n\n\n\nrender_image <- function(mat, cols = c(\"white\", \"#800020\")) {\n  op <- par(mar = c(0, 0, 0, 0))\n  shades <- colorRampPalette(cols)\n  image(\n    z = log10(t(mat + 1)),\n    axes = FALSE,\n    asp = 1,\n    col = shades(1000),\n    useRaster = TRUE\n  )\n  par(op)\n}\n\n\nRendering and saving\n\n\ntic()\npng(file = here::here(\"imgs/taxi_viz_billion_rows.png\"),\n    bg = \"#27233a\",\n    width = 4000,\n    height = 4000)\nrender_image(pickup_grid, cols = c(\"#27233a\", \"white\", \"#F46036\"))\ndev.off()\ntoc()\n\n\n\n\nknitr::include_graphics(here::here(\"imgs/taxi_viz_billion_rows.png\"))\n\n\n\n\n\n\n",
+    "preview": "posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/distill-preview.png",
+    "last_modified": "2023-05-27T12:20:55-07:00",
+    "input_file": {},
+    "preview_width": 4000,
+    "preview_height": 4000
+  },
+  {
+    "path": "posts/2023-03-03-welcome/",
+    "title": "welcome",
+    "description": "An introductory post about what is here.",
+    "author": [
+      {
+        "name": "Duncan Gates",
+        "url": {}
+      }
+    ],
+    "date": "2023-03-03",
+    "categories": [
+      "welcome"
+    ],
+    "contents": "\nThis is a blog where I write about anything that strikes my momentary interest, which often involves a lot of data.\n\n\n\n\n\n\n",
+    "preview": "posts/2023-03-03-welcome/distill-preview.png",
+    "last_modified": "2023-05-27T12:24:46-07:00",
+    "input_file": {},
+    "preview_width": 1248,
+    "preview_height": 768
+  }
+]

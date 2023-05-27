@@ -88,21 +88,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data with Duncan: About Me</title>
+  <title>The Data Dive: About Me</title>
 
 
   <link rel="icon" type="image/png" href="imgs/logo.png"/>
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data with Duncan: About Me"/>
+  <meta property="og:title" content="The Data Dive: About Me"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data with Duncan"/>
+  <meta property="og:site_name" content="The Data Dive"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data with Duncan: About Me"/>
+  <meta property="twitter:title" content="The Data Dive: About Me"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
@@ -456,8 +456,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
@@ -1902,7 +1902,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /* Optional: embed custom fonts here with `@import`          */
   /* This must remain at the top of this file.                 */
-
+  @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 
   html {
@@ -1919,10 +1920,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color:     rgba(0, 0, 0, 0.6);
     --fig-cap-color:   rgba(0, 0, 0, 0.6);
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    sans-serif;
-    --mono-font:       monospace;
-    --body-font:       sans-serif;
-    --navbar-font:     sans-serif;  /* websites + blogs only */
+    --heading-font:    "Fira Sans" sans-serif;
+    --mono-font:       "Open Sans" monospace;
+    --body-font:       "Open Sans" sans-serif;
+    --navbar-font:     "Fira Sans" sans-serif;  /* websites + blogs only */
   }
 
   /*-- ARTICLE METADATA --*/
@@ -1967,7 +1968,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   /*-- Additional custom styles --*/
   /* Add any additional CSS rules below                      */
-  </style>
+
+  .darkmode d-article,
+  .darkmode d-appendix,
+  .darkmode body {
+    background-color: #2f3030;
+    color: white;
+  }</style>
   <style type="text/css">
   /* base style */
 
@@ -2123,22 +2130,22 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     color: var(--hover-color, white);
   }</style>
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, orientation=auto"/>
   <meta name="description" content="About Duncan Gates"/>
   <meta name="github-repo" content="dungates/dungates.github.io"/>
   <meta name="twitter:title" content="DUNCAN GATES: About Me"/>
   <meta name="twitter:description" content="About Duncan Gates"/>
-  <meta name="twitter:url" content="https://ellakaye.rbind.io/about"/>
-  <meta name="twitter:image" content="https://ellakaye.rbind.io/images/duncan_profile.jpeg"/>
+  <meta name="twitter:url" content="https://dungates.github.io/about"/>
+  <meta name="twitter:image" content="https://dungates.github.io/images/duncan_profile.jpeg"/>
   <meta name="twitter:image:alt" content="A photo of Duncan Gates"/>
   <meta name="twitter:card" content="summary"/>
   <meta name="twitter:creator" content="@gates_duncan"/>
   <meta name="twitter:site" content="@gates_duncan"/>
   <meta property="og:title" content="DUNCAN GATES: About Me"/>
   <meta property="og:description" content="About Duncan Gates"/>
-  <meta property="og:url" content="https://ellakaye.rbind.io/about"/>
-  <meta property="og:image" content="https://ellakaye.rbind.io/images/duncan_profile.jpeg"/>
+  <meta property="og:url" content="https://dungates.github.io/about"/>
+  <meta property="og:image" content="https://dungates.github.io/images/duncan_profile.jpeg"/>
   <meta property="og:image:alt" content="A photo of Duncan Gates"/>
   <meta property="og:type" content="website"/>
   <meta property="og:locale" content="en_US"/>
@@ -2173,13 +2180,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a class="logo" href="https://duncangates.me">
 <img src="imgs/logo.png" alt="Logo"/>
 </a>
-<a href="index.html" class="title">Data with Duncan</a>
+<a href="index.html" class="title">The Data Dive</a>
 </div>
 <div class="nav-right">
-<a href="index.html">Home</a>
+<a href="index.html">Blog</a>
 <a href="about.html">About</a>
-<a href="data_and_more.html">Data &amp; More</a>
 <a href="art.html">Art</a>
+<a href="https://github.com/dungates">
+<i class="fa fa-github fa-lg" aria-hidden="true"></i>
+</a>
+<a href="https://twitter.com/gates_duncan">
+<i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+</a>
+<a href="https://www.linkedin.com/in/duncan-gates/">
+<i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
+</a>
+<a>
+<i class="fas fa-adjust" aria-hidden="true"></i>
+</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
 </div>
 </nav>
@@ -2216,6 +2234,40 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
 <!--radix_placeholder_site_after_body-->
+<script>
+const darkmodeToggle = document.getElementsByClassName("fas fa-adjust")[0];
+let theme = localStorage.getItem("theme");
+
+if (!theme) {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches ) {
+    theme = "dark";
+  } else {
+    theme = "light";
+  }
+}
+setTheme();
+
+function switchTheme() {
+  if (theme === "light") {
+    theme = "dark";
+  } else {
+    theme = "light";
+  }
+  localStorage.setItem("theme", theme);
+  setTheme();
+  console.log(theme);
+}
+
+function setTheme() {
+  if (theme === "dark") {
+    document.body.classList.add('darkmode');
+  } else {
+    document.body.classList.remove('darkmode');
+  }
+}
+
+darkmodeToggle.addEventListener('click', switchTheme)
+</script>
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom"></div>

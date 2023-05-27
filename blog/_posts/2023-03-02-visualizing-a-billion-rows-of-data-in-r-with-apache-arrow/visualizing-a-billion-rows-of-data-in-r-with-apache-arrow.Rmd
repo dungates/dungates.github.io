@@ -1,3 +1,15 @@
+---
+title: "Visualizing a Billion Rows of Data"
+categories:
+  - Apache Arrow
+  - Visualizing
+description: |
+  A post about using apache arrow and efficiently visualizing in R
+author:
+  - name: Duncan Gates
+date: 2023-03-03
+output: distill::distill_article
+---
 
 ## The NYC Taxi Data
 
@@ -12,12 +24,14 @@ Almost everyone has heard of the NYC taxi data at this point, in its current for
 
 There are the libraries used for tranforming and visualizing.
 
-```{r}
+```{r setup, include=FALSE, eval = FALSE}
 library(arrow)
 library(dplyr)
 library(tictoc)
 library(tidyr)
 library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = FALSE)
 ```
 
 ## Loading the Data 
@@ -98,7 +112,7 @@ toc()
 tic()
 pixels <- 4000
 pickup <- nyc_taxi |>
-  filter(
+  dplyr::filter(
     !is.na(pickup_longitude),
     !is.na(pickup_latitude),
     pickup_longitude > x0,
@@ -106,14 +120,16 @@ pickup <- nyc_taxi |>
     pickup_latitude > y0,
     pickup_latitude < y0 + span
   ) |>
-  mutate(
+  dplyr::mutate(
     unit_scaled_x = (pickup_longitude - x0) / span,
     unit_scaled_y = (pickup_latitude - y0) / span,
     x = as.integer(round(pixels * unit_scaled_x)), 
     y = as.integer(round(pixels * unit_scaled_y))
   ) |>
-  count(x, y, name = "pickup") |>
-  collect()
+  dplyr::group_by(x, y) |>
+  dplyr::summarise(pickup = n()) |>
+  # dplyr::count(x, y, name = "pickup") |>
+  dplyr::collect()
 toc()
 ```
 
@@ -150,7 +166,7 @@ render_image <- function(mat, cols = c("white", "#800020")) {
     z = log10(t(mat + 1)),
     axes = FALSE,
     asp = 1,
-    col = shades(256),
+    col = shades(1000),
     useRaster = TRUE
   )
   par(op)
@@ -162,11 +178,16 @@ render_image <- function(mat, cols = c("white", "#800020")) {
 ```{r}
 tic()
 png(file = here::here("imgs/taxi_viz_billion_rows.png"),
-    bg = "#002222",
+    bg = "#27233a",
     width = 4000,
     height = 4000)
-render_image(pickup_grid, cols = c("#002222", "white", "#800020"))
+render_image(pickup_grid, cols = c("#27233a", "white", "#F46036"))
 dev.off()
 toc()
 ```
+
+```{r eval = TRUE}
+knitr::include_graphics(here::here("imgs/taxi_viz_billion_rows.png"))
+```
+
 

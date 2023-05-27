@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
-    <loc>https://duncangates.me/about.html</loc>
-    <lastmod>2023-03-03T08:00:08-05:00</lastmod>
+    <loc>https://duncangates.me/blog/site/about.html</loc>
+    <lastmod>2023-05-27T11:02:47-07:00</lastmod>
   </url>
   <url>
-    <loc>https://duncangates.me/art.html</loc>
-    <lastmod>2023-03-02T13:53:35-05:00</lastmod>
+    <loc>https://duncangates.me/blog/site/art.html</loc>
+    <lastmod>2023-03-02T10:53:35-08:00</lastmod>
   </url>
   <url>
-    <loc>https://duncangates.me/</loc>
-    <lastmod>2023-03-03T08:00:46-05:00</lastmod>
+    <loc>https://duncangates.me/blog/site/</loc>
+    <lastmod>2023-05-27T11:34:16-07:00</lastmod>
+  </url>
+  <url>
+    <loc>https://duncangates.me/blog/site/posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/</loc>
+    <lastmod>2023-05-27T12:20:55-07:00</lastmod>
+  </url>
+  <url>
+    <loc>https://duncangates.me/blog/site/posts/2023-03-03-welcome/</loc>
+    <lastmod>2023-05-27T12:24:46-07:00</lastmod>
   </url>
 </urlset>
