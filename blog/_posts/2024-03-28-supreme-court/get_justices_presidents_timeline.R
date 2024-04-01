@@ -130,12 +130,39 @@ average_justice_tenure <- supreme_presidents |>
 
 average_justice_tenure |> pull() |> as.numeric() / 365 # In years
 
+# Average tenure by party all time
+average_justice_tenure_by_party <- supreme_presidents |>
+  filter(party != "Other") |>
+  mutate(tenure = terminated - nominated) |>
+  group_by(party) |>
+  summarise(mean_tenure = mean(tenure, na.rm = TRUE))
+
+# Average tenure by party last 80 years
+supreme_presidents |>
+  filter(party != "Other" & nominated >= as.Date("1980-01-01")) |>
+  mutate(tenure = terminated - nominated) |>
+  group_by(party) |>
+  summarise(mean_tenure = mean(tenure, na.rm = TRUE))
+
+# Rolling average tenure by president
+
 modern_supreme_presidents <- supreme_presidents |>
   filter(party != "Other")
 
 # Group every 15 years and see how many republican and how many democratic nominees there are
-modern_supreme_presidents |>
-  mutate(tenure_)
+every_15_years_pres_sup <- modern_supreme_presidents |>
+  mutate(every_15 = floor_date(nominated, unit = "15 years")) |>
+  group_by(every_15, party) |>
+  count() |>
+  ungroup() 
+every_15_years_pres_sup |>
+  ggplot(aes(x = every_15, y = n, fill = party)) +
+  geom_col(position = position_dodge(), alpha = 0.9) +
+  scale_fill_manual(values = c("blue", "red")) +
+  scale_x_date(date_breaks = "20 years", date_labels = "%Y") +
+  labs(title = "Nominations by Party every 15 Years", x = "year") +
+  DGThemes::theme_duncan() +
+  theme(legend.title = element_blank())
 
 # adjust the marker size by directly accessing the aes_params
 # p$layers[[3]]$aes_params$size <- 20
