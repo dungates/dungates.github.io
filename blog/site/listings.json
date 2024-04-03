@@ -1,0 +1,19 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/blog/2024-04-03-supreme-court/index.html",
+      "/blog/2023-03-03-welcome/index.html",
+      "/blog/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/art.html",
+      "/blog.html",
+      "/maps.html",
+      "/apps.html"
+    ]
+  }
+]

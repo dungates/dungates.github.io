@@ -1,0 +1,30 @@
+---
+title: "The Data Dive"
+description: "Where I write"
+image: "imgs/banner.png"
+listing:
+  contents: blog
+  id: blog-list
+  sort: "date desc"
+  type: default
+  categories: true
+  image-align: 'right'
+  image-placeholder: 'imgs/logo.png'
+  feed: true
+format: 
+  html: 
+    page-layout: full
+---
+
+```{css, echo=FALSE}
+.quarto-title {
+    display: none;
+  }
+  
+.description {
+    display: none;
+  }
+```
+
+::: {#blog-list}
+:::

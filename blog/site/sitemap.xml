@@ -1,23 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://duncangates.me/blog/site/about.html</loc>
-    <lastmod>2023-05-27T11:02:47-07:00</lastmod>
+    <loc>https://duncangates.me/blog/site/blog.html</loc>
+    <lastmod>2024-04-03T17:44:17.982Z</lastmod>
   </url>
   <url>
     <loc>https://duncangates.me/blog/site/art.html</loc>
-    <lastmod>2023-03-02T10:53:35-08:00</lastmod>
+    <lastmod>2024-04-03T17:50:36.986Z</lastmod>
   </url>
   <url>
-    <loc>https://duncangates.me/blog/site/</loc>
-    <lastmod>2023-05-27T11:34:16-07:00</lastmod>
+    <loc>https://duncangates.me/blog/site/blog/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/index.html</loc>
+    <lastmod>2024-04-03T17:10:21.077Z</lastmod>
   </url>
   <url>
-    <loc>https://duncangates.me/blog/site/posts/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/</loc>
-    <lastmod>2023-05-27T12:20:55-07:00</lastmod>
+    <loc>https://duncangates.me/blog/site/blog/2023-03-03-welcome/index.html</loc>
+    <lastmod>2024-04-03T16:57:50.455Z</lastmod>
   </url>
   <url>
-    <loc>https://duncangates.me/blog/site/posts/2023-03-03-welcome/</loc>
-    <lastmod>2023-05-27T12:24:46-07:00</lastmod>
+    <loc>https://duncangates.me/blog/site/index.html</loc>
+    <lastmod>2024-04-03T17:56:27.086Z</lastmod>
+  </url>
+  <url>
+    <loc>https://duncangates.me/blog/site/apps.html</loc>
+    <lastmod>2024-04-03T17:52:36.651Z</lastmod>
+  </url>
+  <url>
+    <loc>https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/index.html</loc>
+    <lastmod>2024-04-03T17:05:24.920Z</lastmod>
+  </url>
+  <url>
+    <loc>https://duncangates.me/blog/site/about.html</loc>
+    <lastmod>2024-04-03T17:31:19.084Z</lastmod>
+  </url>
+  <url>
+    <loc>https://duncangates.me/blog/site/maps.html</loc>
+    <lastmod>2024-04-03T17:53:54.915Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,25 @@
+---
+title: "Welcome"
+categories:
+  - welcome
+description: "An introductory post about what is here."
+author: "Duncan Gates"
+date: 2023-03-03
+lightbox: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(DGThemes)
+```
+
+This is a blog where I write about anything that strikes my momentary interest, which often involves a lot of data.
+
+```{r preview = TRUE}
+ggplot(mtcars, aes(x = wt, y = drat)) +
+  geom_point() +
+  geom_smooth(method = "gam") +
+  labs(title = "Duncan's Blog sure is Great!") +
+  theme_duncan()
+```

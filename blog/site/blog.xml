@@ -1,0 +1,3628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>The Data Dive</title>
+<link>https://duncangates.me/blog/site/blog.html</link>
+<atom:link href="https://duncangates.me/blog/site/blog.xml" rel="self" type="application/rss+xml"/>
+<description>Where I write</description>
+<image>
+<url>https://duncangates.me/blog/site/imgs/banner.png</url>
+<title>The Data Dive</title>
+<link>https://duncangates.me/blog/site/blog.html</link>
+<height>96</height>
+<width>144</width>
+</image>
+<generator>quarto-1.4.552</generator>
+<lastBuildDate>Wed, 03 Apr 2024 07:00:00 GMT</lastBuildDate>
+<item>
+  <title>Supreme Court Appointments in the Democratic-Republican Era</title>
+  <dc:creator>Duncan Gates</dc:creator>
+  <link>https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Since Harry Reid took the nuclear option in 2013 to reduce the cloture threshold for nominations, the idea that the Supreme Court is a non-partisan institution has been under severe threat. Subsequently, in 2017 the use once again by Mitch McConnell established a long running trend as a precedent - that of extreme partisan interest in every Supreme Court justice. This is clearly evident in the trend of votes for/against nominees, as well as the veto rate on nominees. An interesting, and annoying feature of nominations I discovered while conducting research on this is that <a href="https://www.senate.gov/about/powers-procedures/voting.htm#:~:text=In%20a%20voice%20vote%2C%20the,of%20votes%20are%20not%20recorded.">voice votes</a> in the Senate do not record any votes, and simply report whether or not the vote was approved, meaning that of 165 votes in the senate we instead only get 98 distinct votes with which to gauge justice approval rates. Despite this setback, quickly using <code>rvest</code> to get the data to visualize <a href="https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm">official Senate data</a> shows the following:</p>
+<div class="cell" data-preview="true">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">senate_page <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_html</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm"</span>)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3">nomination_table <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> senate_page <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-4">  rvest<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">html_elements</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".contenttext"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-5">  purrr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pluck</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-6">  rvest<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">html_table</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-7">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">slice</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-8">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-9">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">row_to_names</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">row_number =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-10">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Replace =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,</span>
+<span id="cb1-11">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Nominated =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>,</span>
+<span id="cb1-12">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Vote =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,</span>
+<span id="cb1-13">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Result =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,</span>
+<span id="cb1-14">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Date =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-15">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(Result <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"N"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"W"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"P"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"D"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"R"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-16">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Vote =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace_all</span>(Vote, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\\</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">s.*"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>),</span>
+<span id="cb1-17">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">For =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_extract</span>(Vote, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".*(?=-)"</span>)),</span>
+<span id="cb1-18">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Against =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.character</span>(stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_extract</span>(Vote, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"(?&lt;=-).*"</span>)),</span>
+<span id="cb1-19">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Date =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(Date, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%b %d, %Y"</span>),</span>
+<span id="cb1-20">                <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Nominated =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(Nominated, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%b %d, %Y"</span>))</span>
+<span id="cb1-21"></span>
+<span id="cb1-22">nomination_table <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-23">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(Vote <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"V"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-24">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>Vote) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-25">  tidyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(For, Against), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Vote"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Count"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-26">  tidyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">drop_na</span>(Count) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-27">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">arrange</span>(dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">desc</span>(Date)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-28">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Count =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(Count)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-29">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> Nominated, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> Count, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> Vote)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-30">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_area</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">position_stack</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-31">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># facet_wrap(~ Nominee) +</span></span>
+<span id="cb1-32">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#040404"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#04abeb"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-33">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_date</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">date_breaks =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"20 years"</span>, </span>
+<span id="cb1-34">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">date_labels =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%Y"</span>, </span>
+<span id="cb1-35">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">limits =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1795-01-01"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2024-01-01"</span>))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb1-36">  DGThemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_duncan</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It seems pretty clear from this visual that there has been a massive increase in votes against approval of supreme court justices over the last approximately 20 years. One could of course claim that this doesn’t account for control of the senate, but here is a chart showing senate composition over the last 40 years, which should be immediately make clear the question of that necessity.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="sen_composition.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/sen_composition.png" class="img-fluid figure-img" width="500"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Just to make sure we’re not missing anything here, lets also look at the data on whether or not appointees were confirmed, declined, withdrawn, rejected, postponed, or no action was taken.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">nomination_table <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Date =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.factor</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>(lubridate<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">year</span>(Date)))) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> Date, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> Result)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_col</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">limits =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_discrete</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">breaks =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1800"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1861"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1902"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1941"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1981"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2022"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> MetBrewer<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">met.brewer</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Archambault"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>),</span>
+<span id="cb2-8">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">labels =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Confirmed"</span>,</span>
+<span id="cb2-9">                               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"N"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"No Action"</span>,</span>
+<span id="cb2-10">                               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"R"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rejected"</span>,</span>
+<span id="cb2-11">                               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"D"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Declined"</span>,</span>
+<span id="cb2-12">                               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"P"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Postponed"</span>,</span>
+<span id="cb2-13">                               <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"W"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Withdrawn"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-14">  DGThemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_duncan</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb2-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-16">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.title.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>(),</span>
+<span id="cb2-17">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.direction =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"horizontal"</span>,</span>
+<span id="cb2-18">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottom"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/confirmed-or-other-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/index_files/figure-html/confirmed-or-other-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>That “No Action” sure pops up out of nowhere, wow! Even more interestingly you can see that there is a long period of confirmations from the late 1800s up to about 1970-1990 when a few famous rejections take place - those of Clement Haynsworth Jr., Harrold. G. Carswell, and Robert H. Bork. One last interesting blip here is that of Harriet Miers withdrawn nomination in 2005, where in the face of bipartisan opposition President George Bush did a rare political takeback. This withdrawal was a fascinating <a href="https://en.wikipedia.org/wiki/Harriet_Miers#Supreme_Court_nomination_and_withdrawal">wikipedia read</a> that I was mostly unfamiliar with due to being 6 years old at the time, but the idea of Lindsey Graham and Sam Brownback asking the President’s office for a letter “in order to elucidate her views on political matters” is unthinkable in the modern era (and in light of the fact that the Supreme Court is of course apolitical!!).</p>
+<p>My last statement on this is that it is pretty clear from the data, and historical viewpoint (that I don’t have time to devolve into right now), that after the initial turmoil of the Supreme Court’s establishment due to a lack of clarity in Article 3, Marbury v. Madison, slavery and the Civil War (okay tiny little dive into the history) there was an established precedent of concord on the Supreme Court that FDR briefly tried to break, and then the Republicans demolished in the 70s and 80s. The shocking lack of response from the Democratic party in this regard is showcased in the data as there is no political blowback until too late in 2013. If it’s too late, what can be done now? In the clearly apolitical landscape of the Supreme Court you would think nothing, but if you look at Supreme Court tenureship you might actually think, well, something.</p>
+<p>Taking a look at the data for Republican vs.&nbsp;Democratic nominees tenureship and appointment rates we see more of the same trend, and more of a solution for the Democratic party.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">supreme_court <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://epstein.usc.edu/s/justicesdata2022.csv"</span>)</span>
+<span id="cb3-2"></span>
+<span id="cb3-3">supreme_court_final <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> supreme_court <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-4">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">justice =</span> name,</span>
+<span id="cb3-5">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nominated =</span> datenom,</span>
+<span id="cb3-6">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">terminated =</span> datesere,</span>
+<span id="cb3-7">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">president =</span> presname) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-8">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(terminated <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"888. NOMINEE NOT CONFIRMED OR DIDN'T SERVE"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-9">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb3-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nominated =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(nominated, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%m/%d/%Y"</span>),</span>
+<span id="cb3-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">terminated =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(terminated, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%m/%d/%Y"</span>),</span>
+<span id="cb3-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">id =</span> readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">parse_number</span>(president),</span>
+<span id="cb3-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">president =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_remove_all</span>(president, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\\</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">d+</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\\</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">. "</span>)</span>
+<span id="cb3-14">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-15">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>president)</span>
+<span id="cb3-16"></span>
+<span id="cb3-17">presidents_page <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rvest<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_html</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://en.wikipedia.org/wiki/List_of_presidents_of_the_United_States"</span>)</span>
+<span id="cb3-18"></span>
+<span id="cb3-19">presidents_terms <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> presidents_page <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-20">  rvest<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">html_elements</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">".wikitable"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-21">  rvest<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">html_table</span>()</span>
+<span id="cb3-22"></span>
+<span id="cb3-23">presidents_terms_final <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> presidents_terms[[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-24">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-25">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">no =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">No.[a]</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>,</span>
+<span id="cb3-26">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Name(Birth–Death)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>,</span>
+<span id="cb3-27">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">term =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Term[14]</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>,</span>
+<span id="cb3-28">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">party =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Party[b][15]</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>,</span>
+<span id="cb3-29">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">election =</span> Election,</span>
+<span id="cb3-30">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">vice_president =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">Vice President[16]</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">`</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-31">  tidyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">separate_wider_delim</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> term, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">delim =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"–"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"start_pres"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"end_pres"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-32">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> stringr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_remove_all</span>(name, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\\</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">(.*?</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\\</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">).*"</span>),</span>
+<span id="cb3-33">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">start_pres =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(start_pres, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%b %d, %Y"</span>),</span>
+<span id="cb3-34">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">end_pres =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(end_pres, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">format =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%b %d, %Y"</span>))</span>
+<span id="cb3-35"></span>
+<span id="cb3-36">supreme_presidents <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> presidents_terms_final <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-37">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(no, name, start_pres, end_pres, party) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-38">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(supreme_court_final, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"no"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"id"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb3-39">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">party =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ifelse</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span>party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Democratic"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Republican"</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span>, party),</span>
+<span id="cb3-40">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">case_when</span>(party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Democratic"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"blue"</span>,</span>
+<span id="cb3-41">                           party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Republican"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>,</span>
+<span id="cb3-42">                           party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gray30"</span>)</span>
+<span id="cb3-43">         )</span></code></pre></div>
+</div>
+<p>First a little tidbit - which President had the most supreme court appointments? FDR seems likely given his length of tenure as President, but actually its George Washington! The rest of the field is quite a distance back, and the only modern President with more than 4 is Eisenhower which says quite a bit about the Warren court era, and the shift in the Republican party’s politics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(name) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-3">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sort =</span> T) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-4">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-5">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gt</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-6">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cols_label</span>(</span>
+<span id="cb4-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"President"</span>,</span>
+<span id="cb4-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">n =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Appointments"</span>,</span>
+<span id="cb4-9">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-10">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data_color</span>(</span>
+<span id="cb4-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">columns =</span> n,</span>
+<span id="cb4-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">target_columns =</span> n,</span>
+<span id="cb4-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numeric"</span>,</span>
+<span id="cb4-14">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">palette =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ggsci::blue_material"</span></span>
+<span id="cb4-15">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-16">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">opt_interactive</span>(</span>
+<span id="cb4-17">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">use_search =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>,</span>
+<span id="cb4-18">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">page_size_default =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb4-19">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-20">  DGThemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div id="bdfnvdivzx" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#bdfnvdivzx table {
+  font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bdfnvdivzx thead, #bdfnvdivzx tbody, #bdfnvdivzx tfoot, #bdfnvdivzx tr, #bdfnvdivzx td, #bdfnvdivzx th {
+  border-style: none;
+}
+
+#bdfnvdivzx p {
+  margin: 0;
+  padding: 0;
+}
+
+#bdfnvdivzx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 5px;
+  border-top-color: #000000;
+  border-right-style: solid;
+  border-right-width: 3px;
+  border-right-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-color: #000000;
+  border-left-style: solid;
+  border-left-width: 3px;
+  border-left-color: #000000;
+}
+
+#bdfnvdivzx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bdfnvdivzx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bdfnvdivzx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bdfnvdivzx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 4px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bdfnvdivzx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bdfnvdivzx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bdfnvdivzx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bdfnvdivzx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bdfnvdivzx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bdfnvdivzx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bdfnvdivzx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bdfnvdivzx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bdfnvdivzx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bdfnvdivzx .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bdfnvdivzx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdfnvdivzx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bdfnvdivzx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bdfnvdivzx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bdfnvdivzx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdfnvdivzx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bdfnvdivzx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdfnvdivzx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bdfnvdivzx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdfnvdivzx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 0px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 0px;
+  border-right-color: #D3D3D3;
+}
+
+#bdfnvdivzx .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bdfnvdivzx .gt_left {
+  text-align: left;
+}
+
+#bdfnvdivzx .gt_center {
+  text-align: center;
+}
+
+#bdfnvdivzx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bdfnvdivzx .gt_font_normal {
+  font-weight: normal;
+}
+
+#bdfnvdivzx .gt_font_bold {
+  font-weight: bold;
+}
+
+#bdfnvdivzx .gt_font_italic {
+  font-style: italic;
+}
+
+#bdfnvdivzx .gt_super {
+  font-size: 65%;
+}
+
+#bdfnvdivzx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bdfnvdivzx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bdfnvdivzx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bdfnvdivzx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bdfnvdivzx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bdfnvdivzx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bdfnvdivzx .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<div id="bdfnvdivzx" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="bdfnvdivzx">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"name":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"n":[12,9,8,6,6,6,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1]},"columns":[{"id":"name","name":"President","type":"character","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}},{"id":"n","name":"Appointments","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["12","9","8","6","6","6","4","4","4","4","4","4","4","4","4","4","3","3","3","3","3","2","2","2","2","2","2","2","2","2","2","2","1","1","1","1","1","1","1","1","1","1","1","1","1"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}}],"searchable":true,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"4px","borderTopColor":"black","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"bdfnvdivzx","dataKey":"5d5e4bc6dd53cf78db1049e1d9751c2a"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<p>Alright now the juicy stuff - lets look at appointments by party of president over time (excluding data prior to the clear formation of the modern dominant political parties). Looks like a rough last 40 years for the Democratic party, as usual its a really good thing that the Supreme Court is apolitical and rests its laurels on its impartiality!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">just_pres <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(name, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.keep_all =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb5-3">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(name, start_pres, end_pres)</span>
+<span id="cb5-4"></span>
+<span id="cb5-5">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> vistime<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gg_vistime</span>(supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb5-6">                           dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb5-7">                           dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">distinct</span>(justice, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">.keep_all =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>),</span>
+<span id="cb5-8">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.event =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"name"</span>,</span>
+<span id="cb5-9">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.start =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nominated"</span>,</span>
+<span id="cb5-10">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.end =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"terminated"</span>,</span>
+<span id="cb5-11">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.group =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"party"</span>,</span>
+<span id="cb5-12">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>,</span>
+<span id="cb5-13">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">show_labels =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,</span>
+<span id="cb5-14">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">optimize_y =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>,</span>
+<span id="cb5-15">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"color"</span>,</span>
+<span id="cb5-16">        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Supreme Court Appointments by President and Party"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-17">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># geom_text(data = just_pres, aes(label = name, x = start_pres, y = 1)) +</span></span>
+<span id="cb5-18">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_light</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb5-19">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(</span>
+<span id="cb5-20">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">plot.title =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fira Sans Bold"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">face =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bold"</span>),</span>
+<span id="cb5-21">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># text = element_text(family = "Fira Sans SemiBold", size = 5),</span></span>
+<span id="cb5-22">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fira Sans"</span>),</span>
+<span id="cb5-23">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axis.text.x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fira Sans"</span>)</span>
+<span id="cb5-24">  )</span>
+<span id="cb5-25"></span>
+<span id="cb5-26">p</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While the visual makes some things clear it also prompts more questions - what is the average period of time for which a Supreme Court justice sits?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">average_justice_tenure <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tenure =</span> terminated <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> nominated) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-3">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_tenure =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(tenure, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>))</span>
+<span id="cb6-4"></span>
+<span id="cb6-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Convert from days to years</span></span>
+<span id="cb6-6">average_justice_tenure <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pull</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">365</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.11006</code></pre>
+</div>
+</div>
+<p>15 years is a good amount of time, but that average over all of the court’s history might not be as relevant anymore, additionally that number accounts for the pre-two party era, so what does the breakdown look like for more recent data and by party?</p>
+<p>First for all time, it looks like the Democratic Party has healthier nominees by about 2 years!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">average_justice_tenure_by_party <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-3">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tenure =</span> terminated <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> nominated) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-4">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(party) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-5">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_tenure =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(tenure, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-6">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>()</span>
+<span id="cb8-7"></span>
+<span id="cb8-8">average_justice_tenure_by_party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-9">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gt</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-10">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cols_label</span>(</span>
+<span id="cb8-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">party =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Party of President at Time of Nomination"</span>,</span>
+<span id="cb8-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_tenure =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Avg. Tenure (Days)"</span></span>
+<span id="cb8-13">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb8-14">  DGThemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="ikzydoinbp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#ikzydoinbp table {
+  font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ikzydoinbp thead, #ikzydoinbp tbody, #ikzydoinbp tfoot, #ikzydoinbp tr, #ikzydoinbp td, #ikzydoinbp th {
+  border-style: none;
+}
+
+#ikzydoinbp p {
+  margin: 0;
+  padding: 0;
+}
+
+#ikzydoinbp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 5px;
+  border-top-color: #000000;
+  border-right-style: solid;
+  border-right-width: 3px;
+  border-right-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-color: #000000;
+  border-left-style: solid;
+  border-left-width: 3px;
+  border-left-color: #000000;
+}
+
+#ikzydoinbp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ikzydoinbp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ikzydoinbp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ikzydoinbp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 4px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ikzydoinbp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ikzydoinbp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ikzydoinbp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ikzydoinbp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ikzydoinbp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ikzydoinbp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ikzydoinbp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ikzydoinbp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ikzydoinbp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ikzydoinbp .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ikzydoinbp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikzydoinbp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ikzydoinbp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ikzydoinbp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ikzydoinbp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikzydoinbp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ikzydoinbp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikzydoinbp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ikzydoinbp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikzydoinbp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 0px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 0px;
+  border-right-color: #D3D3D3;
+}
+
+#ikzydoinbp .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikzydoinbp .gt_left {
+  text-align: left;
+}
+
+#ikzydoinbp .gt_center {
+  text-align: center;
+}
+
+#ikzydoinbp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ikzydoinbp .gt_font_normal {
+  font-weight: normal;
+}
+
+#ikzydoinbp .gt_font_bold {
+  font-weight: bold;
+}
+
+#ikzydoinbp .gt_font_italic {
+  font-style: italic;
+}
+
+#ikzydoinbp .gt_super {
+  font-size: 65%;
+}
+
+#ikzydoinbp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ikzydoinbp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ikzydoinbp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ikzydoinbp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ikzydoinbp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ikzydoinbp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ikzydoinbp .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Party of President at Time of Nomination" class="gt_col_heading gt_columns_bottom_border gt_center" style="text-align: center;" data-quarto-table-cell-role="th" scope="col">Party of President at Time of Nomination</th>
+<th id="Avg. Tenure (Days)" class="gt_col_heading gt_columns_bottom_border gt_center" style="text-align: center;" data-quarto-table-cell-role="th" scope="col">Avg. Tenure (Days)</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="party" style="text-align: center; font-size: medium;">Democratic</td>
+<td class="gt_row gt_center" headers="mean_tenure" style="text-align: center; font-size: medium;">6051.925</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="party" style="text-align: center; font-size: medium;">Republican</td>
+<td class="gt_row gt_center" headers="mean_tenure" style="text-align: center; font-size: medium;">5486.56</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Looking at just the last 80 years, or since the end of WWII this actually continues to hold true, the Democratic parties nominees have an additional ~3 years on Republican nominees on average. What does this say? Democratic nominees sure love to hang around on the Supreme Court for a while!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-2">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> nominated <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.Date</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1980-01-01"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-3">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">tenure =</span> terminated <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> nominated) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-4">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(party) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-5">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_tenure =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(tenure, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">na.rm =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" days"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-6">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-7">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gt</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-8">  gt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cols_label</span>(</span>
+<span id="cb9-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">party =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Party of President at Time of Nomination"</span>,</span>
+<span id="cb9-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_tenure =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Avg. Tenure"</span></span>
+<span id="cb9-11">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-12">  DGThemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<div id="cjasakchow" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#cjasakchow table {
+  font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cjasakchow thead, #cjasakchow tbody, #cjasakchow tfoot, #cjasakchow tr, #cjasakchow td, #cjasakchow th {
+  border-style: none;
+}
+
+#cjasakchow p {
+  margin: 0;
+  padding: 0;
+}
+
+#cjasakchow .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 5px;
+  border-top-color: #000000;
+  border-right-style: solid;
+  border-right-width: 3px;
+  border-right-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-color: #000000;
+  border-left-style: solid;
+  border-left-width: 3px;
+  border-left-color: #000000;
+}
+
+#cjasakchow .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cjasakchow .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cjasakchow .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cjasakchow .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cjasakchow .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjasakchow .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 4px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cjasakchow .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cjasakchow .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cjasakchow .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cjasakchow .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cjasakchow .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cjasakchow .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cjasakchow .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cjasakchow .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cjasakchow .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cjasakchow .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cjasakchow .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cjasakchow .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjasakchow .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cjasakchow .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cjasakchow .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cjasakchow .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjasakchow .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cjasakchow .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cjasakchow .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjasakchow .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjasakchow .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cjasakchow .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjasakchow .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cjasakchow .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cjasakchow .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cjasakchow .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjasakchow .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 0px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 0px;
+  border-right-color: #D3D3D3;
+}
+
+#cjasakchow .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cjasakchow .gt_left {
+  text-align: left;
+}
+
+#cjasakchow .gt_center {
+  text-align: center;
+}
+
+#cjasakchow .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cjasakchow .gt_font_normal {
+  font-weight: normal;
+}
+
+#cjasakchow .gt_font_bold {
+  font-weight: bold;
+}
+
+#cjasakchow .gt_font_italic {
+  font-style: italic;
+}
+
+#cjasakchow .gt_super {
+  font-size: 65%;
+}
+
+#cjasakchow .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cjasakchow .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cjasakchow .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cjasakchow .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cjasakchow .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cjasakchow .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cjasakchow .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Party of President at Time of Nomination" class="gt_col_heading gt_columns_bottom_border gt_center" style="text-align: center;" data-quarto-table-cell-role="th" scope="col">Party of President at Time of Nomination</th>
+<th id="Avg. Tenure" class="gt_col_heading gt_columns_bottom_border gt_center" style="text-align: center;" data-quarto-table-cell-role="th" scope="col">Avg. Tenure</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="party" style="text-align: center; font-size: medium;">Democratic</td>
+<td class="gt_row gt_center" headers="mean_tenure" style="text-align: center; font-size: medium;">10097 days</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="party" style="text-align: center; font-size: medium;">Republican</td>
+<td class="gt_row gt_center" headers="mean_tenure" style="text-align: center; font-size: medium;">8977.6 days</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Since Democratic nominees love to hang around lets see who gets more nominations - since we calculated the all time average tenure of a Justice to be about 15 years earlier I’ll chart the number of justices each party gets to nominate every 15 years. This shows about what we saw in the data earlier - aside from FDR the Republican party has done a fantastic job nominating new justices, at about ~ 2.5x the rate of the Democratic Party!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Rolling average tenure by president</span></span>
+<span id="cb10-2"></span>
+<span id="cb10-3">modern_supreme_presidents <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-4">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(party <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Other"</span>)</span>
+<span id="cb10-5"></span>
+<span id="cb10-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Group every 15 years and see how many republican and how many democratic nominees there are</span></span>
+<span id="cb10-7">every_15_years_pres_sup <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> modern_supreme_presidents <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-8">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">every_15 =</span> lubridate<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">floor_date</span>(nominated, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">unit =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"15 years"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-9">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(every_15, party) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-10">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">count</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-11">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>() </span>
+<span id="cb10-12"></span>
+<span id="cb10-13">every_15_years_pres_sup <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb10-14">  ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> every_15, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> n, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> party)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-15">  ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_col</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">position =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">position_dodge</span>(), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-16">  ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_fill_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"blue"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-17">  ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_date</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">date_breaks =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"20 years"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">date_labels =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"%Y"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-18">  ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Nominations by Party every 15 Years"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"year"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-19">  DGThemes<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_duncan</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb10-20">  ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.title =</span> ggplot2<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">element_blank</span>())</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>politics</category>
+  <guid>https://duncangates.me/blog/site/blog/2024-04-03-supreme-court/</guid>
+  <pubDate>Wed, 03 Apr 2024 07:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome</title>
+  <dc:creator>Duncan Gates</dc:creator>
+  <link>https://duncangates.me/blog/site/blog/2023-03-03-welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is a blog where I write about anything that strikes my momentary interest, which often involves a lot of data.</p>
+<div class="cell" data-preview="true">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ s(x, bs = "cs")'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://duncangates.me/blog/site/blog/2023-03-03-welcome/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>welcome</category>
+  <guid>https://duncangates.me/blog/site/blog/2023-03-03-welcome/</guid>
+  <pubDate>Fri, 03 Mar 2023 08:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Visualizing a Billion Rows of Data</title>
+  <dc:creator>Duncan Gates</dc:creator>
+  <link>https://duncangates.me/blog/site/blog/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="the-nyc-taxi-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-nyc-taxi-data">The NYC Taxi Data</h2>
+<p>Almost everyone has heard of the NYC taxi data at this point, in its current form it is about 24 columns and just under 1.7 billion rows. Each row represents a ride that occurred somewhere between 2009 and 2022. The important columns in this visualization are</p>
+<ul>
+<li><code>pickup_longitude</code> (double): Longitude data for the pickup location</li>
+<li><code>pickup_latitude</code> (double): Latitude data for the pickup location</li>
+<li><code>dropoff_longitude</code> (double): Longitude data for the dropoff location</li>
+<li><code>dropoff_latitude</code> (double): Latitude data for the dropoff location</li>
+</ul>
+</section>
+<section id="libraries" class="level2">
+<h2 class="anchored" data-anchor-id="libraries">Libraries</h2>
+<p>There are the libraries used for tranforming and visualizing.</p>
+</section>
+<section id="loading-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-the-data">Loading the Data</h2>
+<p>This transfers the nearly 70 gigabytes of taxi data to my computer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">copy_files</span>(</span>
+<span id="cb1-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">from =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">s3_bucket</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ursa-labs-taxi-data-v2"</span>),</span>
+<span id="cb1-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~/Downloads/nyc-taxi"</span></span>
+<span id="cb1-4">)</span></code></pre></div>
+</div>
+<p>The datasets can subsequently be opened as such.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">nyc_taxi_tiny <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> arrow<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">open_dataset</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~/Downloads/nyc-taxi-tiny/"</span>)</span>
+<span id="cb2-2">nyc_taxi <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> arrow<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">open_dataset</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"~/Downloads/nyc-taxi/"</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="checking-it-out" class="level2">
+<h2 class="anchored" data-anchor-id="checking-it-out">Checking it out</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glimpse</span>(nyc_taxi_tiny)</span></code></pre></div>
+</div>
+</section>
+<section id="plotting-a-million-rows" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-a-million-rows">Plotting a million rows</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tic</span>()</span>
+<span id="cb4-2">nyc_pickups <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> nyc_taxi_tiny <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(pickup_longitude, pickup_latitude) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(</span>
+<span id="cb4-5">    <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(pickup_longitude),</span>
+<span id="cb4-6">    <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(pickup_latitude)</span>
+<span id="cb4-7">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">collect</span>()</span>
+<span id="cb4-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toc</span>()</span></code></pre></div>
+</div>
+<p>Let’s check out <code>nyc_pickups</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glimpse</span>(nyc_pickups)</span></code></pre></div>
+</div>
+<p>This goes pretty quick now</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">x0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">74.05</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># minimum longitude to plot</span></span>
+<span id="cb6-2">y0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40.6</span>   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># minimum latitude to plot</span></span>
+<span id="cb6-3">span <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.3</span>  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># size of the lat/long window to plot</span></span>
+<span id="cb6-4"></span>
+<span id="cb6-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tic</span>()</span>
+<span id="cb6-6">pic <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(nyc_pickups) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(</span>
+<span id="cb6-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(pickup_longitude, pickup_latitude), </span>
+<span id="cb6-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, </span>
+<span id="cb6-10">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">stroke =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, </span>
+<span id="cb6-11">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#800020"</span></span>
+<span id="cb6-12">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_x_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">expand =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_y_continuous</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">expand =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_void</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coord_equal</span>(</span>
+<span id="cb6-17">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xlim =</span> x0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, span), </span>
+<span id="cb6-18">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ylim =</span> y0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, span)</span>
+<span id="cb6-19">  )</span>
+<span id="cb6-20">pic</span>
+<span id="cb6-21"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toc</span>()</span></code></pre></div>
+</div>
+</section>
+<section id="plotting-a-billion-rows" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-a-billion-rows">Plotting a billion rows</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tic</span>()</span>
+<span id="cb7-2">pixels <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4000</span></span>
+<span id="cb7-3">pickup <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> nyc_taxi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-4">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(</span>
+<span id="cb7-5">    <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(pickup_longitude),</span>
+<span id="cb7-6">    <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">is.na</span>(pickup_latitude),</span>
+<span id="cb7-7">    pickup_longitude <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> x0,</span>
+<span id="cb7-8">    pickup_longitude <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> x0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> span,</span>
+<span id="cb7-9">    pickup_latitude <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> y0,</span>
+<span id="cb7-10">    pickup_latitude <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> y0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> span</span>
+<span id="cb7-11">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-12">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb7-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">unit_scaled_x =</span> (pickup_longitude <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> x0) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> span,</span>
+<span id="cb7-14">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">unit_scaled_y =</span> (pickup_latitude <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> y0) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> span,</span>
+<span id="cb7-15">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(pixels <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> unit_scaled_x)), </span>
+<span id="cb7-16">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.integer</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">round</span>(pixels <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> unit_scaled_y))</span>
+<span id="cb7-17">  ) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-18">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(x, y) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-19">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarise</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pickup =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">n</span>()) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-20">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dplyr::count(x, y, name = "pickup") |&gt;</span></span>
+<span id="cb7-21">  dplyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">collect</span>()</span>
+<span id="cb7-22"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toc</span>()</span></code></pre></div>
+</div>
+<p>My laptop solves this in 27.51 seconds, again lets take a look at the resulting dataframe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glimpse</span>(pickup)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tic</span>()</span>
+<span id="cb9-2">grid <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">expand_grid</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>pixels, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>pixels) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(pickup, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">by =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"x"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"y"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pickup =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replace_na</span>(pickup,  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))</span>
+<span id="cb9-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toc</span>()</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tic</span>()</span>
+<span id="cb10-2">pickup_grid <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span>(</span>
+<span id="cb10-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> grid<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>pickup,</span>
+<span id="cb10-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nrow =</span> pixels,</span>
+<span id="cb10-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ncol =</span> pixels</span>
+<span id="cb10-6">)</span>
+<span id="cb10-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toc</span>()</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">render_image <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span>(mat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#800020"</span>)) {</span>
+<span id="cb11-2">  op <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mar =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>))</span>
+<span id="cb11-3">  shades <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colorRampPalette</span>(cols)</span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">image</span>(</span>
+<span id="cb11-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">z =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log10</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">t</span>(mat <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)),</span>
+<span id="cb11-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">axes =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,</span>
+<span id="cb11-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">asp =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb11-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">shades</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1000</span>),</span>
+<span id="cb11-9">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">useRaster =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb11-10">  )</span>
+<span id="cb11-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">par</span>(op)</span>
+<span id="cb11-12">}</span></code></pre></div>
+</div>
+</section>
+<section id="rendering-and-saving" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-and-saving">Rendering and saving</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tic</span>()</span>
+<span id="cb12-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">png</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">file =</span> here<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">here</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"imgs/taxi_viz_billion_rows.png"</span>),</span>
+<span id="cb12-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bg =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#27233a"</span>,</span>
+<span id="cb12-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">width =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4000</span>,</span>
+<span id="cb12-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">height =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4000</span>)</span>
+<span id="cb12-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">render_image</span>(pickup_grid, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#27233a"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"white"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#F46036"</span>))</span>
+<span id="cb12-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dev.off</span>()</span>
+<span id="cb12-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">toc</span>()</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">knitr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">include_graphics</span>(here<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">here</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"imgs/taxi_viz_billion_rows.png"</span>))</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="../../imgs/taxi_viz_billion_rows.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://duncangates.me/blog/site/imgs/taxi_viz_billion_rows.png" class="img-fluid figure-img" width="2000"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <category>Apache Arrow</category>
+  <category>Visualizing</category>
+  <guid>https://duncangates.me/blog/site/blog/2023-03-02-visualizing-a-billion-rows-of-data-in-r-with-apache-arrow/</guid>
+  <pubDate>Thu, 02 Mar 2023 08:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

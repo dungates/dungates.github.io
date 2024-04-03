@@ -1,0 +1,68 @@
+---
+title: "Art"
+description: "Art that I have made writing R code most of the time, occasionally other languages as well"
+image: "art/generative/CircleArt.png"
+format:
+  html:
+    page-layout: full
+---
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = F, warning = F)
+library(bs4cards)
+library(dplyr)
+generative_files <- list.files("art/generative") |>
+  tibble::as_tibble() |>
+  mutate(title = stringr::str_to_title(stringr::str_remove(value, ".png")),
+         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/generative/", value),
+         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/generative/", value)
+         )
+maps_files <- list.files("art/maps") |>
+  tibble::as_tibble() |>
+  mutate(title = stringr::str_to_title(stringr::str_remove(value, ".png")),
+         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/maps/", value),
+         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/maps/", value)
+         )
+recreation_files <- list.files("art/recreations") |>
+  tibble::as_tibble() |>
+  mutate(title = stringr::str_to_title(stringr::str_remove(value, ".png")),
+         link = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/recreations/", value),
+         image = paste0("https://raw.githubusercontent.com/dungates/dungates.github.io/master/blog/art/recreations/", value)
+         )
+```
+
+# Generative Art
+
+```{r echo = FALSE}
+generative_files |>
+  cards(
+    title = title,
+    link = link,
+    image = image,
+    layout = "label-below"
+  )
+```
+
+# Maps
+
+```{r}
+maps_files |>
+  cards(
+    title = title,
+    link = link,
+    image = image,
+    layout = "label-below"
+  )
+```
+
+# Recreations
+
+```{r}
+recreation_files |>
+  cards(
+    title = title,
+    link = link,
+    image = image,
+    layout = "label-below"
+  )
+```

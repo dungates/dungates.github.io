@@ -1,0 +1,70 @@
+---
+title: "The Data Dive"
+image: imgs/logo.png
+toc: false
+listing:
+  contents: 
+    - art.qmd
+    - blog.qmd
+    - maps.qmd
+    - apps.qmd
+    - front_page/front_page.yaml
+  sort-ui: false
+  filter-ui: false
+  id: front-list
+  sort: "order"
+  type: grid
+  grid-columns: 3
+  categories: false
+  image-align: 'right'
+  image-height: '100%'
+format:
+  html:
+    page-layout: full
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo= FALSE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+```{css, echo=FALSE}
+.quarto-title {
+    display: none;
+  }
+  
+.description {
+    display: none;
+  }
+  
+div.quarto-post .metadata {
+    display: none;
+  }
+  
+div.quarto-post .thumbnail {
+    flex-basis: 50%;
+}
+
+p {
+    max-width: 100%;
+}
+
+```
+
+```{r banner}
+#| echo: FALSE
+#| out.width: 60%
+#| fig.align: "center"
+# knitr::include_graphics('imgs/banner.png')
+```
+
+<center>Welcome to Duncan's blog! Here you can find web apps that I have made, art, writings, and whatever else I decide needs to go on the internet.</center>
+
+## Pages
+
+::: {#front-list}
+:::
