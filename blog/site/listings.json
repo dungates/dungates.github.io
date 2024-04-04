@@ -10,8 +10,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/art.html",
       "/blog.html",
+      "/art.html",
       "/maps.html",
       "/apps.html"
     ]

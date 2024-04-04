@@ -1,6 +1,6 @@
 ---
-title: "The Data Dive"
-description: "Where I write"
+title: ""
+description: "Where I write about whatever crosses my mind - and generally tie in some data to those thoughts"
 image: "imgs/banner.png"
 listing:
   contents: blog
@@ -9,22 +9,12 @@ listing:
   type: default
   categories: true
   image-align: 'right'
-  image-placeholder: 'imgs/logo.png'
+  image-placeholder: 'imgs/banner.png'
   feed: true
 format: 
   html: 
     page-layout: full
 ---
-
-```{css, echo=FALSE}
-.quarto-title {
-    display: none;
-  }
-  
-.description {
-    display: none;
-  }
-```
 
 ::: {#blog-list}
 :::

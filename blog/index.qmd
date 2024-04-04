@@ -4,11 +4,11 @@ image: imgs/logo.png
 toc: false
 listing:
   contents: 
-    - art.qmd
     - blog.qmd
+    - art.qmd
     - maps.qmd
     - apps.qmd
-    - front_page/front_page.yaml
+    - front_page/front_page.yml
   sort-ui: false
   filter-ui: false
   id: front-list
@@ -63,6 +63,8 @@ p {
 ```
 
 <center>Welcome to Duncan's blog! Here you can find web apps that I have made, art, writings, and whatever else I decide needs to go on the internet.</center>
+
+<br>
 
 ## Pages
 

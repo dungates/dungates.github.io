@@ -5,6 +5,12 @@ project:
     port: 4200
 website: 
   title: "The Data Dive"
+  favicon: favicon.ico
+  google-analytics: "G-7YKVK73EZ4"
+  cookie-consent: 
+    type: implied
+    style: simple
+    palette: light
   description: |
     All of my wandering interests, semi-dilettantish data ponderings, and writings are collected for the public here.
   site-url: https://duncangates.me/blog/site/

@@ -1,0 +1,17 @@
+{
+  "hash": "dcb6174467a975fdae2ea401bbf31a42",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Welcome\"\ncategories:\n  - welcome\ndescription: \"An introductory post about what is here.\"\nauthor: \"Duncan Gates\"\ndate: 2023-03-03\nlightbox: true\n---\n\n\n\n\nThis is a blog where I write about anything that strikes my momentary interest, which often involves a lot of data.\n\n\n::: {.cell preview='true'}\n::: {.cell-output .cell-output-stderr}\n\n```\n`geom_smooth()` using formula = 'y ~ s(x, bs = \"cs\")'\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

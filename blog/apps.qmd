@@ -1,6 +1,6 @@
 ---
 title: "Web Apps"
-description: "Web apps that I have made to do various things, mostly data related."
+description: "Web apps that I have made to do various things, mostly data related, specifically I have largely written them in R, Python, Java, JavaScript, and of course a little CSS and HTML."
 image: "imgs/web_apps.webp"
 format:
   html:
