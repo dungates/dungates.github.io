@@ -7,6 +7,8 @@ description: "A post about using apache arrow and efficiently visualizing in R"
 author: "Duncan Gates"
 date: 2023-03-02
 lightbox: true
+execute:
+  freeze: true
 ---
 
 ## The NYC Taxi Data

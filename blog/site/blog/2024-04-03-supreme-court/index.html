@@ -186,6 +186,10 @@ cookieconsent.run({
     <a class="nav-link" href="../../maps.html"> 
 <span class="menu-text">Maps</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../art.html"> 
+<span class="menu-text">Art</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -217,7 +221,7 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Supreme Court Appointments in the Democratic-Republican Era</h1>
+<div class="quarto-title-block"><div><h1 class="title">Supreme Court Appointments in the Democratic-Republican Era</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">politics</div>
   </div>
@@ -254,8 +258,11 @@ cookieconsent.run({
 </header>
 
 
-<p>Since Harry Reid took the nuclear option in 2013 to reduce the cloture threshold for nominations, the idea that the Supreme Court is a non-partisan institution has been under severe threat. Subsequently, in 2017 the use once again by Mitch McConnell established a long running trend as a precedent - that of extreme partisan interest in every Supreme Court justice. This is clearly evident in the trend of votes for/against nominees, as well as the veto rate on nominees. An interesting, and annoying feature of nominations I discovered while conducting research on this is that <a href="https://www.senate.gov/about/powers-procedures/voting.htm#:~:text=In%20a%20voice%20vote%2C%20the,of%20votes%20are%20not%20recorded.">voice votes</a> in the Senate do not record any votes, and simply report whether or not the vote was approved, meaning that of 165 votes in the senate we instead only get 98 distinct votes with which to gauge justice approval rates. Despite this setback, quickly using <code>rvest</code> to get the data to visualize <a href="https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm">official Senate data</a> shows the following:</p>
-<div class="cell" data-preview="true">
+<p>Since Harry Reid took the nuclear option in 2013 to reduce the cloture threshold for nominations, the idea that the Supreme Court is a non-partisan institution has been under severe threat. The subsequent 2017 usage by Mitch McConnell established a long running trend as a precedent - that of extreme partisan interest in every Supreme Court justice. This is clearly evident in the trend of votes for/against nominees, as well as the veto rate on nominees. An interesting, and annoying feature of nominations I discovered while conducting research on this is that <a href="https://www.senate.gov/about/powers-procedures/voting.htm#:~:text=In%20a%20voice%20vote%2C%20the,of%20votes%20are%20not%20recorded.">voice votes</a> in the Senate do not record any votes, and simply report whether or not the vote was approved, meaning that of 165 votes in the senate we instead only get 98 distinct votes with which to gauge justice approval rates.</p>
+<p>Despite this setback, quickly using <code>rvest</code> to get the data to visualize <a href="https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm">official Senate data</a> shows the following when visualized:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>senate_page <span class="ot">&lt;-</span> <span class="fu">read_html</span>(<span class="st">"https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>nomination_table <span class="ot">&lt;-</span> senate_page <span class="sc">|&gt;</span></span>
@@ -292,10 +299,11 @@ cookieconsent.run({
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>               <span class="at">date_labels =</span> <span class="st">"%Y"</span>, </span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>               <span class="at">limits =</span> <span class="fu">as.Date</span>(<span class="fu">c</span>(<span class="st">"1795-01-01"</span>, <span class="st">"2024-01-01"</span>))) <span class="sc">+</span></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">theme_duncan</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/votes-for-against-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/votes-for-against-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
@@ -305,13 +313,15 @@ cookieconsent.run({
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="sen_composition.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="sen_composition.png" class="img-fluid figure-img" width="500"></a></p>
+<p><a href="sen_composition.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="sen_composition.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Just to make sure we’re not missing anything here, lets also look at the data on whether or not appointees were confirmed, declined, withdrawn, rejected, postponed, or no action was taken.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nomination_table <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.factor</span>(<span class="fu">as.numeric</span>(lubridate<span class="sc">::</span><span class="fu">year</span>(Date)))) <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">fill =</span> Result)) <span class="sc">+</span></span>
@@ -330,6 +340,7 @@ cookieconsent.run({
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.direction =</span> <span class="st">"horizontal"</span>,</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -339,9 +350,11 @@ cookieconsent.run({
 </div>
 </div>
 <p>That “No Action” sure pops up out of nowhere, wow! Even more interestingly you can see that there is a long period of confirmations from the late 1800s up to about 1970-1990 when a few famous rejections take place - those of Clement Haynsworth Jr., Harrold. G. Carswell, and Robert H. Bork. One last interesting blip here is that of Harriet Miers withdrawn nomination in 2005, where in the face of bipartisan opposition President George Bush did a rare political takeback. This withdrawal was a fascinating <a href="https://en.wikipedia.org/wiki/Harriet_Miers#Supreme_Court_nomination_and_withdrawal">wikipedia read</a> that I was mostly unfamiliar with due to being 6 years old at the time, but the idea of Lindsey Graham and Sam Brownback asking the President’s office for a letter “in order to elucidate her views on political matters” is unthinkable in the modern era (and in light of the fact that the Supreme Court is of course apolitical!!).</p>
-<p>My last statement on this is that it is pretty clear from the data, and historical viewpoint (that I don’t have time to devolve into right now), that after the initial turmoil of the Supreme Court’s establishment due to a lack of clarity in Article 3, Marbury v. Madison, slavery and the Civil War (okay tiny little dive into the history) there was an established precedent of concord on the Supreme Court that FDR briefly tried to break, and then the Republicans demolished in the 70s and 80s. The shocking lack of response from the Democratic party in this regard is showcased in the data as there is no political blowback until too late in 2013. If it’s too late, what can be done now? In the clearly apolitical landscape of the Supreme Court you would think nothing, but if you look at Supreme Court tenureship you might actually think, well, something.</p>
-<p>Taking a look at the data for Republican vs.&nbsp;Democratic nominees tenureship and appointment rates we see more of the same trend, and more of a solution for the Democratic party.</p>
+<p>My last statement on this is that it is pretty clear from the data, and historical viewpoint (that I don’t have time to dive into right now), that after the initial turmoil of the Supreme Court’s establishment due to a lack of clarity in Article 3, Marbury v. Madison, slavery and the Civil War (okay tiny little dive into the history) there was an established precedent of concord on the Supreme Court that FDR briefly tried to break, and then the Republicans demolished in the 70s and 80s. The shocking lack of response from the Democratic party in this regard is showcased in the data as there is no evident political blowback until too late in 2013. If it’s too late, what can be done now? In the “apolitical” landscape of the Supreme Court you would think nothing, but if you look at Supreme Court tenureship you might actually think, well, something.</p>
+<p>Taking a look at the data for Republican vs.&nbsp;Democratic nominees tenureship and appointment rates we see more of the same trend, and more of a solution for the Democratic party. First I grab the Supreme Court Justice’s data from Lee Epstein’s very helpful, comprehensive dataset which can be found here: https://epstein.usc.edu/justicesdata, and secondarily scrape Wikipedia for data on President’s and their relevant political parties.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>supreme_court <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://epstein.usc.edu/s/justicesdata2022.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>supreme_court_final <span class="ot">&lt;-</span> supreme_court <span class="sc">|&gt;</span></span>
@@ -385,9 +398,12 @@ cookieconsent.run({
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                           party <span class="sc">==</span> <span class="st">"Republican"</span> <span class="sc">~</span> <span class="st">"red"</span>,</span>
 <span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                           party <span class="sc">==</span> <span class="st">"Other"</span> <span class="sc">~</span> <span class="st">"gray30"</span>)</span>
 <span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>First a little tidbit - which President had the most supreme court appointments? FDR seems likely given his length of tenure as President, but actually its George Washington! The rest of the field is quite a distance back, and the only modern President with more than 4 is Eisenhower which says quite a bit about the Warren court era, and the shift in the Republican party’s politics.</p>
+<p>First a little tidbit - which President had the most supreme court appointments? FDR seems likely given his length of tenure as President, but actually its George Washington! The rest of the field is quite a distance back, and the only modern President with more than 4 appointments is Eisenhower which says quite a bit about the Warren court era, and maybe, possibly hints at a greater shift in the role of politics in the Supreme Court.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>supreme_presidents <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(name) <span class="sc">|&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(<span class="at">sort =</span> T) <span class="sc">|&gt;</span></span>
@@ -408,25 +424,26 @@ cookieconsent.run({
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">page_size_default =</span> <span class="dv">10</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">gt_theme_duncan</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div id="hbwjtfjxiu" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qeybldxkme" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#hbwjtfjxiu table {
+#qeybldxkme table {
   font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hbwjtfjxiu thead, #hbwjtfjxiu tbody, #hbwjtfjxiu tfoot, #hbwjtfjxiu tr, #hbwjtfjxiu td, #hbwjtfjxiu th {
+#qeybldxkme thead, #qeybldxkme tbody, #qeybldxkme tfoot, #qeybldxkme tr, #qeybldxkme td, #qeybldxkme th {
   border-style: none;
 }
 
-#hbwjtfjxiu p {
+#qeybldxkme p {
   margin: 0;
   padding: 0;
 }
 
-#hbwjtfjxiu .gt_table {
+#qeybldxkme .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -452,12 +469,12 @@ cookieconsent.run({
   border-left-color: #000000;
 }
 
-#hbwjtfjxiu .gt_caption {
+#qeybldxkme .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hbwjtfjxiu .gt_title {
+#qeybldxkme .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -469,7 +486,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#hbwjtfjxiu .gt_subtitle {
+#qeybldxkme .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -481,7 +498,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#hbwjtfjxiu .gt_heading {
+#qeybldxkme .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -493,13 +510,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_bottom_border {
+#qeybldxkme .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_col_headings {
+#qeybldxkme .gt_col_headings {
   border-top-style: solid;
   border-top-width: 4px;
   border-top-color: #000000;
@@ -514,7 +531,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_col_heading {
+#qeybldxkme .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -534,7 +551,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#hbwjtfjxiu .gt_column_spanner_outer {
+#qeybldxkme .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -546,15 +563,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#hbwjtfjxiu .gt_column_spanner_outer:first-child {
+#qeybldxkme .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hbwjtfjxiu .gt_column_spanner_outer:last-child {
+#qeybldxkme .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hbwjtfjxiu .gt_column_spanner {
+#qeybldxkme .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -566,11 +583,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#hbwjtfjxiu .gt_spanner_row {
+#qeybldxkme .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hbwjtfjxiu .gt_group_heading {
+#qeybldxkme .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -596,7 +613,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#hbwjtfjxiu .gt_empty_group_heading {
+#qeybldxkme .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -611,15 +628,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#hbwjtfjxiu .gt_from_md > :first-child {
+#qeybldxkme .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hbwjtfjxiu .gt_from_md > :last-child {
+#qeybldxkme .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hbwjtfjxiu .gt_row {
+#qeybldxkme .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -638,7 +655,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#hbwjtfjxiu .gt_stub {
+#qeybldxkme .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -651,7 +668,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#hbwjtfjxiu .gt_stub_row_group {
+#qeybldxkme .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -665,15 +682,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#hbwjtfjxiu .gt_row_group_first td {
+#qeybldxkme .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hbwjtfjxiu .gt_row_group_first th {
+#qeybldxkme .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hbwjtfjxiu .gt_summary_row {
+#qeybldxkme .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -683,16 +700,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#hbwjtfjxiu .gt_first_summary_row {
+#qeybldxkme .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_first_summary_row.thick {
+#qeybldxkme .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hbwjtfjxiu .gt_last_summary_row {
+#qeybldxkme .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -702,7 +719,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_grand_summary_row {
+#qeybldxkme .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -712,7 +729,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#hbwjtfjxiu .gt_first_grand_summary_row {
+#qeybldxkme .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -722,7 +739,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_last_grand_summary_row_top {
+#qeybldxkme .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -732,11 +749,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_striped {
+#qeybldxkme .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hbwjtfjxiu .gt_table_body {
+#qeybldxkme .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -745,7 +762,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_footnotes {
+#qeybldxkme .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -759,7 +776,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_footnote {
+#qeybldxkme .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -768,7 +785,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#hbwjtfjxiu .gt_sourcenotes {
+#qeybldxkme .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -782,7 +799,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#hbwjtfjxiu .gt_sourcenote {
+#qeybldxkme .gt_sourcenote {
   font-size: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -790,73 +807,75 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#hbwjtfjxiu .gt_left {
+#qeybldxkme .gt_left {
   text-align: left;
 }
 
-#hbwjtfjxiu .gt_center {
+#qeybldxkme .gt_center {
   text-align: center;
 }
 
-#hbwjtfjxiu .gt_right {
+#qeybldxkme .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hbwjtfjxiu .gt_font_normal {
+#qeybldxkme .gt_font_normal {
   font-weight: normal;
 }
 
-#hbwjtfjxiu .gt_font_bold {
+#qeybldxkme .gt_font_bold {
   font-weight: bold;
 }
 
-#hbwjtfjxiu .gt_font_italic {
+#qeybldxkme .gt_font_italic {
   font-style: italic;
 }
 
-#hbwjtfjxiu .gt_super {
+#qeybldxkme .gt_super {
   font-size: 65%;
 }
 
-#hbwjtfjxiu .gt_footnote_marks {
+#qeybldxkme .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hbwjtfjxiu .gt_asterisk {
+#qeybldxkme .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hbwjtfjxiu .gt_indent_1 {
+#qeybldxkme .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hbwjtfjxiu .gt_indent_2 {
+#qeybldxkme .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hbwjtfjxiu .gt_indent_3 {
+#qeybldxkme .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hbwjtfjxiu .gt_indent_4 {
+#qeybldxkme .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hbwjtfjxiu .gt_indent_5 {
+#qeybldxkme .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<div id="hbwjtfjxiu" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="hbwjtfjxiu">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"name":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"n":[12,9,8,6,6,6,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1]},"columns":[{"id":"name","name":"President","type":"character","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}},{"id":"n","name":"Appointments","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["12","9","8","6","6","6","4","4","4","4","4","4","4","4","4","4","3","3","3","3","3","2","2","2","2","2","2","2","2","2","2","2","1","1","1","1","1","1","1","1","1","1","1","1","1"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}}],"searchable":true,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"4px","borderTopColor":"black","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"hbwjtfjxiu","dataKey":"5d5e4bc6dd53cf78db1049e1d9751c2a"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+<div id="qeybldxkme" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="qeybldxkme">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"name":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"n":[12,9,8,6,6,6,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1]},"columns":[{"id":"name","name":"President","type":"character","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}},{"id":"n","name":"Appointments","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["12","9","8","6","6","6","4","4","4","4","4","4","4","4","4","4","3","3","3","3","3","2","2","2","2","2","2","2","2","2","2","2","1","1","1","1","1","1","1","1","1","1","1","1","1"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}}],"searchable":true,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"4px","borderTopColor":"black","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"qeybldxkme","dataKey":"5d5e4bc6dd53cf78db1049e1d9751c2a"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
-<p>Alright now the juicy stuff - lets look at appointments by party of president over time (excluding data prior to the clear formation of the modern dominant political parties). Looks like a rough last 40 years for the Democratic party, as usual its a really good thing that the Supreme Court is apolitical and rests its laurels on its impartiality!</p>
+<p>Alright, now the juicy stuff - lets look at appointments by the President’s political party over time (excluding data prior to the clear formation of the modern dominant political parties such as the Whigs, Federalists, etc.). Looks like a rough last 40 years for the Democratic party, as usual its a really good thing that the Supreme Court is apolitical and rests its laurels on its impartiality!</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>just_pres <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>(name, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(name, start_pres, end_pres)</span>
@@ -883,29 +902,41 @@ cookieconsent.run({
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="960"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>While the visual makes some things clear it also prompts more questions - what is the average period of time for which a Supreme Court justice sits?</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>average_justice_tenure <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">tenure =</span> terminated <span class="sc">-</span> nominated) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_tenure =</span> <span class="fu">mean</span>(tenure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert from days to years</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>average_justice_tenure <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">pull</span>() <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>() <span class="sc">/</span> <span class="dv">365</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>average_justice_tenure <span class="sc">|&gt;</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  base<span class="sc">::</span><span class="st">`</span><span class="at">/</span><span class="st">`</span>(<span class="dv">365</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="at">... =</span> _, <span class="st">"years"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 15.11006</code></pre>
+<pre><code>[1] "15.11 years"</code></pre>
 </div>
 </div>
 <p>15 years is a good amount of time, but that average over all of the court’s history might not be as relevant anymore, additionally that number accounts for the pre-two party era, so what does the breakdown look like for more recent data and by party?</p>
-<p>First for all time, it looks like the Democratic Party has healthier nominees by about 2 years!</p>
+<p>It looks like the Democratic Party has healthier nominees by about 2 years, and that the average of 15 years is about the same irregardless of ignoring the first ~80 years of judiciary history of the United States since this next table only shows Justices nominated by either a Republican or Democratic President!</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>average_justice_tenure_by_party <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(party <span class="sc">!=</span> <span class="st">"Other"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">tenure =</span> terminated <span class="sc">-</span> nominated) <span class="sc">|&gt;</span></span>
@@ -920,26 +951,27 @@ cookieconsent.run({
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_tenure =</span> <span class="st">"Avg. Tenure (Days)"</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">gt_theme_duncan</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
-<div id="vzaaogeths" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="grjlayvbrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vzaaogeths table {
+#grjlayvbrx table {
   font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vzaaogeths thead, #vzaaogeths tbody, #vzaaogeths tfoot, #vzaaogeths tr, #vzaaogeths td, #vzaaogeths th {
+#grjlayvbrx thead, #grjlayvbrx tbody, #grjlayvbrx tfoot, #grjlayvbrx tr, #grjlayvbrx td, #grjlayvbrx th {
   border-style: none;
 }
 
-#vzaaogeths p {
+#grjlayvbrx p {
   margin: 0;
   padding: 0;
 }
 
-#vzaaogeths .gt_table {
+#grjlayvbrx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -965,12 +997,12 @@ cookieconsent.run({
   border-left-color: #000000;
 }
 
-#vzaaogeths .gt_caption {
+#grjlayvbrx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vzaaogeths .gt_title {
+#grjlayvbrx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -982,7 +1014,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#vzaaogeths .gt_subtitle {
+#grjlayvbrx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -994,7 +1026,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#vzaaogeths .gt_heading {
+#grjlayvbrx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1006,13 +1038,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_bottom_border {
+#grjlayvbrx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_col_headings {
+#grjlayvbrx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 4px;
   border-top-color: #000000;
@@ -1027,7 +1059,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_col_heading {
+#grjlayvbrx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1047,7 +1079,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#vzaaogeths .gt_column_spanner_outer {
+#grjlayvbrx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1059,15 +1091,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#vzaaogeths .gt_column_spanner_outer:first-child {
+#grjlayvbrx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vzaaogeths .gt_column_spanner_outer:last-child {
+#grjlayvbrx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vzaaogeths .gt_column_spanner {
+#grjlayvbrx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1079,11 +1111,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#vzaaogeths .gt_spanner_row {
+#grjlayvbrx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vzaaogeths .gt_group_heading {
+#grjlayvbrx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1109,7 +1141,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#vzaaogeths .gt_empty_group_heading {
+#grjlayvbrx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1124,15 +1156,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#vzaaogeths .gt_from_md > :first-child {
+#grjlayvbrx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vzaaogeths .gt_from_md > :last-child {
+#grjlayvbrx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vzaaogeths .gt_row {
+#grjlayvbrx .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1151,7 +1183,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#vzaaogeths .gt_stub {
+#grjlayvbrx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1164,7 +1196,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#vzaaogeths .gt_stub_row_group {
+#grjlayvbrx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1178,15 +1210,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#vzaaogeths .gt_row_group_first td {
+#grjlayvbrx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vzaaogeths .gt_row_group_first th {
+#grjlayvbrx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vzaaogeths .gt_summary_row {
+#grjlayvbrx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1196,16 +1228,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#vzaaogeths .gt_first_summary_row {
+#grjlayvbrx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_first_summary_row.thick {
+#grjlayvbrx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vzaaogeths .gt_last_summary_row {
+#grjlayvbrx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1215,7 +1247,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_grand_summary_row {
+#grjlayvbrx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1225,7 +1257,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#vzaaogeths .gt_first_grand_summary_row {
+#grjlayvbrx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1235,7 +1267,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_last_grand_summary_row_top {
+#grjlayvbrx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1245,11 +1277,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_striped {
+#grjlayvbrx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vzaaogeths .gt_table_body {
+#grjlayvbrx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1258,7 +1290,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_footnotes {
+#grjlayvbrx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1272,7 +1304,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_footnote {
+#grjlayvbrx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1281,7 +1313,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#vzaaogeths .gt_sourcenotes {
+#grjlayvbrx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1295,7 +1327,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#vzaaogeths .gt_sourcenote {
+#grjlayvbrx .gt_sourcenote {
   font-size: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1303,63 +1335,63 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#vzaaogeths .gt_left {
+#grjlayvbrx .gt_left {
   text-align: left;
 }
 
-#vzaaogeths .gt_center {
+#grjlayvbrx .gt_center {
   text-align: center;
 }
 
-#vzaaogeths .gt_right {
+#grjlayvbrx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vzaaogeths .gt_font_normal {
+#grjlayvbrx .gt_font_normal {
   font-weight: normal;
 }
 
-#vzaaogeths .gt_font_bold {
+#grjlayvbrx .gt_font_bold {
   font-weight: bold;
 }
 
-#vzaaogeths .gt_font_italic {
+#grjlayvbrx .gt_font_italic {
   font-style: italic;
 }
 
-#vzaaogeths .gt_super {
+#grjlayvbrx .gt_super {
   font-size: 65%;
 }
 
-#vzaaogeths .gt_footnote_marks {
+#grjlayvbrx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vzaaogeths .gt_asterisk {
+#grjlayvbrx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vzaaogeths .gt_indent_1 {
+#grjlayvbrx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vzaaogeths .gt_indent_2 {
+#grjlayvbrx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vzaaogeths .gt_indent_3 {
+#grjlayvbrx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vzaaogeths .gt_indent_4 {
+#grjlayvbrx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vzaaogeths .gt_indent_5 {
+#grjlayvbrx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1387,8 +1419,10 @@ cookieconsent.run({
 </div>
 </div>
 </div>
-<p>Looking at just the last 80 years, or since the end of WWII this actually continues to hold true, the Democratic parties nominees have an additional ~3 years on Republican nominees on average. What does this say? Democratic nominees sure love to hang around on the Supreme Court for a while!</p>
+<p>Looking at just the last 80 years, or since the end of WWII this actually continues to hold true, the Democratic parties nominees have an additional ~3 years on Republican nominees on average. What does this say? Democratic nominees sure love to hang around on the Supreme Court for a while and convey their deep judicial and constitutional knowledge that nobody else has!</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>supreme_presidents <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(party <span class="sc">!=</span> <span class="st">"Other"</span> <span class="sc">&amp;</span> nominated <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"1980-01-01"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">tenure =</span> terminated <span class="sc">-</span> nominated) <span class="sc">|&gt;</span></span>
@@ -1401,26 +1435,27 @@ cookieconsent.run({
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_tenure =</span> <span class="st">"Avg. Tenure"</span></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">gt_theme_duncan</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
-<div id="kxapiofjsf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vzbbodxpov" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kxapiofjsf table {
+#vzbbodxpov table {
   font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kxapiofjsf thead, #kxapiofjsf tbody, #kxapiofjsf tfoot, #kxapiofjsf tr, #kxapiofjsf td, #kxapiofjsf th {
+#vzbbodxpov thead, #vzbbodxpov tbody, #vzbbodxpov tfoot, #vzbbodxpov tr, #vzbbodxpov td, #vzbbodxpov th {
   border-style: none;
 }
 
-#kxapiofjsf p {
+#vzbbodxpov p {
   margin: 0;
   padding: 0;
 }
 
-#kxapiofjsf .gt_table {
+#vzbbodxpov .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1446,12 +1481,12 @@ cookieconsent.run({
   border-left-color: #000000;
 }
 
-#kxapiofjsf .gt_caption {
+#vzbbodxpov .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kxapiofjsf .gt_title {
+#vzbbodxpov .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1463,7 +1498,7 @@ cookieconsent.run({
   border-bottom-width: 0;
 }
 
-#kxapiofjsf .gt_subtitle {
+#vzbbodxpov .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1475,7 +1510,7 @@ cookieconsent.run({
   border-top-width: 0;
 }
 
-#kxapiofjsf .gt_heading {
+#vzbbodxpov .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1487,13 +1522,13 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_bottom_border {
+#vzbbodxpov .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_col_headings {
+#vzbbodxpov .gt_col_headings {
   border-top-style: solid;
   border-top-width: 4px;
   border-top-color: #000000;
@@ -1508,7 +1543,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_col_heading {
+#vzbbodxpov .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1528,7 +1563,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#kxapiofjsf .gt_column_spanner_outer {
+#vzbbodxpov .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1540,15 +1575,15 @@ cookieconsent.run({
   padding-right: 4px;
 }
 
-#kxapiofjsf .gt_column_spanner_outer:first-child {
+#vzbbodxpov .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kxapiofjsf .gt_column_spanner_outer:last-child {
+#vzbbodxpov .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kxapiofjsf .gt_column_spanner {
+#vzbbodxpov .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1560,11 +1595,11 @@ cookieconsent.run({
   width: 100%;
 }
 
-#kxapiofjsf .gt_spanner_row {
+#vzbbodxpov .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kxapiofjsf .gt_group_heading {
+#vzbbodxpov .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1590,7 +1625,7 @@ cookieconsent.run({
   text-align: left;
 }
 
-#kxapiofjsf .gt_empty_group_heading {
+#vzbbodxpov .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1605,15 +1640,15 @@ cookieconsent.run({
   vertical-align: middle;
 }
 
-#kxapiofjsf .gt_from_md > :first-child {
+#vzbbodxpov .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kxapiofjsf .gt_from_md > :last-child {
+#vzbbodxpov .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kxapiofjsf .gt_row {
+#vzbbodxpov .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1632,7 +1667,7 @@ cookieconsent.run({
   overflow-x: hidden;
 }
 
-#kxapiofjsf .gt_stub {
+#vzbbodxpov .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1645,7 +1680,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#kxapiofjsf .gt_stub_row_group {
+#vzbbodxpov .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1659,15 +1694,15 @@ cookieconsent.run({
   vertical-align: top;
 }
 
-#kxapiofjsf .gt_row_group_first td {
+#vzbbodxpov .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kxapiofjsf .gt_row_group_first th {
+#vzbbodxpov .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kxapiofjsf .gt_summary_row {
+#vzbbodxpov .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1677,16 +1712,16 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#kxapiofjsf .gt_first_summary_row {
+#vzbbodxpov .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_first_summary_row.thick {
+#vzbbodxpov .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kxapiofjsf .gt_last_summary_row {
+#vzbbodxpov .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1696,7 +1731,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_grand_summary_row {
+#vzbbodxpov .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1706,7 +1741,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#kxapiofjsf .gt_first_grand_summary_row {
+#vzbbodxpov .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1716,7 +1751,7 @@ cookieconsent.run({
   border-top-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_last_grand_summary_row_top {
+#vzbbodxpov .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1726,11 +1761,11 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_striped {
+#vzbbodxpov .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kxapiofjsf .gt_table_body {
+#vzbbodxpov .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1739,7 +1774,7 @@ cookieconsent.run({
   border-bottom-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_footnotes {
+#vzbbodxpov .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1753,7 +1788,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_footnote {
+#vzbbodxpov .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1762,7 +1797,7 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#kxapiofjsf .gt_sourcenotes {
+#vzbbodxpov .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1776,7 +1811,7 @@ cookieconsent.run({
   border-right-color: #D3D3D3;
 }
 
-#kxapiofjsf .gt_sourcenote {
+#vzbbodxpov .gt_sourcenote {
   font-size: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1784,63 +1819,63 @@ cookieconsent.run({
   padding-right: 5px;
 }
 
-#kxapiofjsf .gt_left {
+#vzbbodxpov .gt_left {
   text-align: left;
 }
 
-#kxapiofjsf .gt_center {
+#vzbbodxpov .gt_center {
   text-align: center;
 }
 
-#kxapiofjsf .gt_right {
+#vzbbodxpov .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kxapiofjsf .gt_font_normal {
+#vzbbodxpov .gt_font_normal {
   font-weight: normal;
 }
 
-#kxapiofjsf .gt_font_bold {
+#vzbbodxpov .gt_font_bold {
   font-weight: bold;
 }
 
-#kxapiofjsf .gt_font_italic {
+#vzbbodxpov .gt_font_italic {
   font-style: italic;
 }
 
-#kxapiofjsf .gt_super {
+#vzbbodxpov .gt_super {
   font-size: 65%;
 }
 
-#kxapiofjsf .gt_footnote_marks {
+#vzbbodxpov .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kxapiofjsf .gt_asterisk {
+#vzbbodxpov .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kxapiofjsf .gt_indent_1 {
+#vzbbodxpov .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kxapiofjsf .gt_indent_2 {
+#vzbbodxpov .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kxapiofjsf .gt_indent_3 {
+#vzbbodxpov .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kxapiofjsf .gt_indent_4 {
+#vzbbodxpov .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kxapiofjsf .gt_indent_5 {
+#vzbbodxpov .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1868,8 +1903,10 @@ cookieconsent.run({
 </div>
 </div>
 </div>
-<p>Since Democratic nominees love to hang around lets see who gets more nominations - since we calculated the all time average tenure of a Justice to be about 15 years earlier I’ll chart the number of justices each party gets to nominate every 15 years. This shows about what we saw in the data earlier - aside from FDR the Republican party has done a fantastic job nominating new justices, at about ~ 2.5x the rate of the Democratic Party!</p>
+<p>Since Democratic nominees love to hang around lets see which political party gets more nominations as a result - since we calculated the all time average tenure of a Justice to be about 15 years earlier I’ll chart the number of justices each party gets to nominate every 15 years. This shows about what we saw in the data earlier - aside from FDR the Republican party has done a fantastic job nominating new justices, at about ~ 2.5x the rate of the Democratic Party!</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rolling average tenure by president</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>modern_supreme_presidents <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
@@ -1890,15 +1927,52 @@ cookieconsent.run({
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nominations by Party every 15 Years"</span>, <span class="at">x =</span> <span class="st">"year"</span>) <span class="sc">+</span></span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">theme_duncan</span>() <span class="sc">+</span></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="index_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This 15 year split is mostly arbitrary and could be swayed by surges in Justice appointment in specific years so to finish off this post, here is a table showing what the rolling rate of appointment looks like every 4 years to simply account for every President, again I think the trend is clear, Democratic nominees stick around, and Republicans get more nominations.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>every_4_years_pres_sup <span class="ot">&lt;-</span> modern_supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">every_4 =</span> lubridate<span class="sc">::</span><span class="fu">floor_date</span>(nominated, <span class="at">unit =</span> <span class="st">"4 years"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(every_4, party) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">president =</span> dplyr<span class="sc">::</span><span class="fu">first</span>(name)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">president =</span> stringr<span class="sc">::</span><span class="fu">str_wrap</span>(president, <span class="at">width =</span> <span class="dv">10</span>))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>every_4_years_pres_sup <span class="sc">|&gt;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> every_4, <span class="at">y =</span> n, <span class="at">fill =</span> party)) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> president),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                     <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"8 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nominations by Party every 4 Years"</span>, <span class="at">x =</span> <span class="st">"year"</span>) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">theme_duncan</span>() <span class="sc">+</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="1920"></a></p>
 </figure>
 </div>
 </div>
 </div>
 
+
+<!-- -->
 
 
 </main> <!-- /main -->
@@ -2125,6 +2199,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/duncangates\.me\/blog\/site\/");
@@ -2454,7 +2579,326 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Supreme Court Appointments in the Democratic-Republican Era"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">  - politics</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "In a time where the completely impartial Supreme Court is continually accused of being politically biased, it is worth considering which party has more strongly controlled the nomination process. This post explores various dimensions of appointee data over the last 150 years, concluding with a rolling mean score of how many appointees are appointed by each party that shows a shocking trend!"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Duncan Gates"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-04-03</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="an">lightbox:</span><span class="co"> true</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Show the code"</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(warning = FALSE, </span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="in">                      message = FALSE,</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="in">                      cache = FALSE)</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="in">library(ggplot2)</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="in">library(janitor)</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="in">library(rvest)</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="in">library(stringr)</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyr)</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="in">library(DGThemes)</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>Since Harry Reid took the nuclear option in 2013 to reduce the cloture threshold for nominations, the idea that the Supreme Court is a non-partisan institution has been under severe threat. The subsequent 2017 usage by Mitch McConnell established a long running trend as a precedent - that of extreme partisan interest in every Supreme Court justice. This is clearly evident in the trend of votes for/against nominees, as well as the veto rate on nominees. An interesting, and annoying feature of nominations I discovered while conducting research on this is that <span class="co">[</span><span class="ot">voice votes</span><span class="co">](https://www.senate.gov/about/powers-procedures/voting.htm#:~:text=In%20a%20voice%20vote%2C%20the,of%20votes%20are%20not%20recorded.)</span> in the Senate do not record any votes, and simply report whether or not the vote was approved, meaning that of 165 votes in the senate we instead only get 98 distinct votes with which to gauge justice approval rates.</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>Despite this setback, quickly using <span class="in">`rvest`</span> to get the data to visualize <span class="co">[</span><span class="ot">official Senate data</span><span class="co">](https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm)</span> shows the following when visualized:</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r votes-for-against}</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="in">#| fig-width: 10</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="in">senate_page &lt;- read_html("https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm")</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="in">nomination_table &lt;- senate_page |&gt;</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="in">  rvest::html_elements(".contenttext") |&gt;</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="in">  purrr::pluck(2) |&gt;</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="in">  rvest::html_table() |&gt;</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::slice(-2) |&gt;</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::select(-2, -4, -6, -8, -10) |&gt;</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="in">  janitor::row_to_names(row_number = 1) |&gt;</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::rename(Replace = 2,</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="in">                Nominated = 3,</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="in">                Vote = 4,</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="in">                Result = 5,</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="in">                Date = 6) |&gt;</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::filter(Result %in% c("C", "N", "W", "P", "D", "R")) |&gt;</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::mutate(Vote = stringr::str_replace_all(Vote, "\\s.*", ""),</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="in">                For = as.character(stringr::str_extract(Vote, ".*(?=-)")),</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="in">                Against = as.character(stringr::str_extract(Vote, "(?&lt;=-).*")),</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="in">                Date = as.Date(Date, format = "%b %d, %Y"),</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="in">                Nominated = as.Date(Nominated, format = "%b %d, %Y"))</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="in">nomination_table |&gt;</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::filter(Vote != "V") |&gt;</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::select(-Vote) |&gt;</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="in">  tidyr::pivot_longer(cols = c(For, Against), names_to = "Vote", values_to = "Count") |&gt;</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="in">  tidyr::drop_na(Count) |&gt;</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::arrange(dplyr::desc(Date)) |&gt;</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::mutate(Count = as.numeric(Count)) |&gt;</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="in">  ggplot(aes(x = Nominated, y = Count, fill = Vote)) +</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_area(position = position_stack()) +</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="in">  # facet_wrap(~ Nominee) +</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_fill_manual(values = c("#040404", "#04abeb")) +</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_x_date(date_breaks = "20 years", </span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="in">               date_labels = "%Y", </span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="in">               limits = as.Date(c("1795-01-01", "2024-01-01"))) +</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="in">  DGThemes::theme_duncan()</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>It seems pretty clear from this visual that there has been a massive increase in votes against approval of supreme court justices over the last approximately 20 years. One could of course claim that this doesn't account for control of the senate, but here is a chart showing senate composition over the last 40 years, which should be immediately make clear the question of that necessity.</span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r dems-reps-sen, echo = FALSE, warning = FALSE, message = FALSE}</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::include_graphics("sen_composition.png")</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>Just to make sure we're not missing anything here, lets also look at the data on whether or not appointees were confirmed, declined, withdrawn, rejected, postponed, or no action was taken.</span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{r confirmed-or-other}</span></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="in">nomination_table |&gt;</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="in">  dplyr::mutate(Date = as.factor(as.numeric(lubridate::year(Date)))) |&gt;</span></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="in">  ggplot(aes(x = Date, y = 1, fill = Result)) +</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="in">  geom_col(width = 2) +</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_y_continuous(limits = c(0, 1)) +</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_x_discrete(breaks = c("1800", "1861", "1902", "1941", "1981", "2022")) +</span></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="in">  scale_fill_manual(values = MetBrewer::met.brewer("Archambault", n = 6),</span></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="in">                    labels = c("C" = "Confirmed",</span></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="in">                               "N" = "No Action",</span></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a><span class="in">                               "R" = "Rejected",</span></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="in">                               "D" = "Declined",</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="in">                               "P" = "Postponed",</span></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a><span class="in">                               "W" = "Withdrawn")) +</span></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="in">  DGThemes::theme_duncan() +</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a><span class="in">  theme(axis.text.y = element_blank(),</span></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="in">        axis.title.y = element_blank(),</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="in">        legend.direction = "horizontal",</span></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="in">        legend.position = "bottom")</span></span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>That "No Action" sure pops up out of nowhere, wow! Even more interestingly you can see that there is a long period of confirmations from the late 1800s up to about 1970-1990 when a few famous rejections take place - those of Clement Haynsworth Jr., Harrold. G. Carswell, and Robert H. Bork. One last interesting blip here is that of Harriet Miers withdrawn nomination in 2005, where in the face of bipartisan opposition President George Bush did a rare political takeback. This withdrawal was a fascinating <span class="co">[</span><span class="ot">wikipedia read</span><span class="co">](https://en.wikipedia.org/wiki/Harriet_Miers#Supreme_Court_nomination_and_withdrawal)</span> that I was mostly unfamiliar with due to being 6 years old at the time, but the idea of Lindsey Graham and Sam Brownback asking the President's office for a letter "in order to elucidate her views on political matters" is unthinkable in the modern era (and in light of the fact that the Supreme Court is of course apolitical!!).</span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>My last statement on this is that it is pretty clear from the data, and historical viewpoint (that I don't have time to dive into right now), that after the initial turmoil of the Supreme Court's establishment due to a lack of clarity in Article 3, Marbury v. Madison, slavery and the Civil War (okay tiny little dive into the history) there was an established precedent of concord on the Supreme Court that FDR briefly tried to break, and then the Republicans demolished in the 70s and 80s. The shocking lack of response from the Democratic party in this regard is showcased in the data as there is no evident political blowback until too late in 2013. If it's too late, what can be done now? In the "apolitical" landscape of the Supreme Court you would think nothing, but if you look at Supreme Court tenureship you might actually think, well, something.</span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>Taking a look at the data for Republican vs. Democratic nominees tenureship and appointment rates we see more of the same trend, and more of a solution for the Democratic party. First I grab the Supreme Court Justice's data from Lee Epstein's very helpful, comprehensive dataset which can be found here: https://epstein.usc.edu/justicesdata, and secondarily scrape Wikipedia for data on President's and their relevant political parties.</span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>supreme_court <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://epstein.usc.edu/s/justicesdata2022.csv"</span>)</span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a>supreme_court_final <span class="ot">&lt;-</span> supreme_court <span class="sc">|&gt;</span></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">justice =</span> name,</span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a>         <span class="at">nominated =</span> datenom,</span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>         <span class="at">terminated =</span> datesere,</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a>         <span class="at">president =</span> presname) <span class="sc">|&gt;</span></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(terminated <span class="sc">!=</span> <span class="st">"888. NOMINEE NOT CONFIRMED OR DIDN'T SERVE"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>    <span class="at">nominated =</span> <span class="fu">as.Date</span>(nominated, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a>    <span class="at">terminated =</span> <span class="fu">as.Date</span>(terminated, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> readr<span class="sc">::</span><span class="fu">parse_number</span>(president),</span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">president =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(president, <span class="st">"</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">. "</span>)</span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>president)</span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>presidents_page <span class="ot">&lt;-</span> rvest<span class="sc">::</span><span class="fu">read_html</span>(<span class="st">"https://en.wikipedia.org/wiki/List_of_presidents_of_the_United_States"</span>)</span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a>presidents_terms <span class="ot">&lt;-</span> presidents_page <span class="sc">|&gt;</span></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_elements</span>(<span class="st">".wikitable"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_table</span>()</span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>presidents_terms_final <span class="ot">&lt;-</span> presidents_terms[[<span class="dv">1</span>]] <span class="sc">|&gt;</span></span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">no =</span> <span class="st">`</span><span class="at">No.[a]</span><span class="st">`</span>,</span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a>         <span class="at">name =</span> <span class="st">`</span><span class="at">Name(Birth–Death)</span><span class="st">`</span>,</span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a>         <span class="at">term =</span> <span class="st">`</span><span class="at">Term[14]</span><span class="st">`</span>,</span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>         <span class="at">party =</span> <span class="st">`</span><span class="at">Party[b][15]</span><span class="st">`</span>,</span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>         <span class="at">election =</span> Election,</span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>         <span class="at">vice_president =</span> <span class="st">`</span><span class="at">Vice President[16]</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate_wider_delim</span>(<span class="at">cols =</span> term, <span class="at">delim =</span> <span class="st">"–"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"start_pres"</span>, <span class="st">"end_pres"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">name =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(name, <span class="st">"</span><span class="sc">\\</span><span class="st">(.*?</span><span class="sc">\\</span><span class="st">).*"</span>),</span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>         <span class="at">start_pres =</span> <span class="fu">as.Date</span>(start_pres, <span class="at">format =</span> <span class="st">"%b %d, %Y"</span>),</span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>         <span class="at">end_pres =</span> <span class="fu">as.Date</span>(end_pres, <span class="at">format =</span> <span class="st">"%b %d, %Y"</span>))</span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a>supreme_presidents <span class="ot">&lt;-</span> presidents_terms_final <span class="sc">|&gt;</span></span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(no, name, start_pres, end_pres, party) <span class="sc">|&gt;</span></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(supreme_court_final, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"no"</span> <span class="ot">=</span> <span class="st">"id"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">party =</span> <span class="fu">ifelse</span>(<span class="sc">!</span>party <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Democratic"</span>, <span class="st">"Republican"</span>), <span class="st">"Other"</span>, party),</span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(party <span class="sc">==</span> <span class="st">"Democratic"</span> <span class="sc">~</span> <span class="st">"blue"</span>,</span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>                           party <span class="sc">==</span> <span class="st">"Republican"</span> <span class="sc">~</span> <span class="st">"red"</span>,</span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a>                           party <span class="sc">==</span> <span class="st">"Other"</span> <span class="sc">~</span> <span class="st">"gray30"</span>)</span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a>First a little tidbit - which President had the most supreme court appointments? FDR seems likely given his length of tenure as President, but actually its George Washington! The rest of the field is quite a distance back, and the only modern President with more than 4 appointments is Eisenhower which says quite a bit about the Warren court era, and maybe, possibly hints at a greater shift in the role of politics in the Supreme Court.</span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a>supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(name) <span class="sc">|&gt;</span></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(<span class="at">sort =</span> T) <span class="sc">|&gt;</span></span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(</span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"President"</span>,</span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="st">"Appointments"</span>,</span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">data_color</span>(</span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> n,</span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a>    <span class="at">target_columns =</span> n,</span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">"numeric"</span>,</span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"ggsci::blue_material"</span></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">opt_interactive</span>(</span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a>    <span class="at">use_search =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a>    <span class="at">page_size_default =</span> <span class="dv">10</span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">gt_theme_duncan</span>()</span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a>Alright, now the juicy stuff - lets look at appointments by the President's political party over time (excluding data prior to the clear formation of the modern dominant political parties such as the Whigs, Federalists, etc.). Looks like a rough last 40 years for the Democratic party, as usual its a really good thing that the Supreme Court is apolitical and rests its laurels on its impartiality!</span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 10</span></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a>just_pres <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>(name, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(name, start_pres, end_pres)</span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> vistime<span class="sc">::</span><span class="fu">gg_vistime</span>(supreme_presidents <span class="sc">|&gt;</span> </span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a>                           dplyr<span class="sc">::</span><span class="fu">filter</span>(party <span class="sc">!=</span> <span class="st">"Other"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a>                           dplyr<span class="sc">::</span><span class="fu">distinct</span>(justice, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.event =</span> <span class="st">"name"</span>,</span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.start =</span> <span class="st">"nominated"</span>,</span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.end =</span> <span class="st">"terminated"</span>,</span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.group =</span> <span class="st">"party"</span>,</span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a>        <span class="at">linewidth =</span> <span class="dv">5</span>,</span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a>        <span class="at">optimize_y =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.color =</span> <span class="st">"color"</span>,</span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Supreme Court Appointments by President and Party"</span>) <span class="sc">+</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_text(data = just_pres, aes(label = name, x = start_pres, y = 1)) +</span></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">family =</span> <span class="st">"Fira Sans Bold"</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>    <span class="co"># text = element_text(family = "Fira Sans SemiBold", size = 5),</span></span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">17</span>, <span class="at">family =</span> <span class="st">"Fira Sans"</span>),</span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">17</span>, <span class="at">family =</span> <span class="st">"Fira Sans"</span>)</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a>p</span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a>While the visual makes some things clear it also prompts more questions - what is the average period of time for which a Supreme Court justice sits?</span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a>average_justice_tenure <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">tenure =</span> terminated <span class="sc">-</span> nominated) <span class="sc">|&gt;</span></span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_tenure =</span> <span class="fu">mean</span>(tenure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert from days to years</span></span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a>average_justice_tenure <span class="sc">|&gt;</span> </span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">pull</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a>  base<span class="sc">::</span><span class="st">`</span><span class="at">/</span><span class="st">`</span>(<span class="dv">365</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste</span>(<span class="at">... =</span> _, <span class="st">"years"</span>)</span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a>15 years is a good amount of time, but that average over all of the court's history might not be as relevant anymore, additionally that number accounts for the pre-two party era, so what does the breakdown look like for more recent data and by party?</span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a>It looks like the Democratic Party has healthier nominees by about 2 years, and that the average of 15 years is about the same irregardless of ignoring the first ~80 years of judiciary history of the United States since this next table only shows Justices nominated by either a Republican or Democratic President!</span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a>average_justice_tenure_by_party <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(party <span class="sc">!=</span> <span class="st">"Other"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">tenure =</span> terminated <span class="sc">-</span> nominated) <span class="sc">|&gt;</span></span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(party) <span class="sc">|&gt;</span></span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_tenure =</span> <span class="fu">mean</span>(tenure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a>average_justice_tenure_by_party <span class="sc">|&gt;</span></span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(</span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a>    <span class="at">party =</span> <span class="st">"Party of President at Time of Nomination"</span>,</span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_tenure =</span> <span class="st">"Avg. Tenure (Days)"</span></span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">gt_theme_duncan</span>()</span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a>Looking at just the last 80 years, or since the end of WWII this actually continues to hold true, the Democratic parties nominees have an additional \~3 years on Republican nominees on average. What does this say? Democratic nominees sure love to hang around on the Supreme Court for a while and convey their deep judicial and constitutional knowledge that nobody else has!</span>
+<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a>supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(party <span class="sc">!=</span> <span class="st">"Other"</span> <span class="sc">&amp;</span> nominated <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"1980-01-01"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">tenure =</span> terminated <span class="sc">-</span> nominated) <span class="sc">|&gt;</span></span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(party) <span class="sc">|&gt;</span></span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean_tenure =</span> <span class="fu">paste0</span>(<span class="fu">mean</span>(tenure, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">" days"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(</span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a>    <span class="at">party =</span> <span class="st">"Party of President at Time of Nomination"</span>,</span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_tenure =</span> <span class="st">"Avg. Tenure"</span></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">gt_theme_duncan</span>()</span>
+<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a>Since Democratic nominees love to hang around lets see which political party gets more nominations as a result - since we calculated the all time average tenure of a Justice to be about 15 years earlier I'll chart the number of justices each party gets to nominate every 15 years. This shows about what we saw in the data earlier - aside from FDR the Republican party has done a fantastic job nominating new justices, at about \~ 2.5x the rate of the Democratic Party!</span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a><span class="co"># Rolling average tenure by president</span></span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a>modern_supreme_presidents <span class="ot">&lt;-</span> supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(party <span class="sc">!=</span> <span class="st">"Other"</span>)</span>
+<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a><span class="co"># Group every 15 years and see how many republican and how many democratic nominees there are</span></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a>every_15_years_pres_sup <span class="ot">&lt;-</span> modern_supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">every_15 =</span> lubridate<span class="sc">::</span><span class="fu">floor_date</span>(nominated, <span class="at">unit =</span> <span class="st">"15 years"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(every_15, party) <span class="sc">|&gt;</span></span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() </span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a>every_15_years_pres_sup <span class="sc">|&gt;</span></span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> every_15, <span class="at">y =</span> n, <span class="at">fill =</span> party)) <span class="sc">+</span></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"20 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nominations by Party every 15 Years"</span>, <span class="at">x =</span> <span class="st">"year"</span>) <span class="sc">+</span></span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">theme_duncan</span>() <span class="sc">+</span></span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>())</span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a>This 15 year split is mostly arbitrary and could be swayed by surges in Justice appointment in specific years so to finish off this post, here is a table showing what the rolling rate of appointment looks like every 4 years to simply account for every President, again I think the trend is clear, Democratic nominees stick around, and Republicans get more nominations.</span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig.width: 20</span></span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a>every_4_years_pres_sup <span class="ot">&lt;-</span> modern_supreme_presidents <span class="sc">|&gt;</span></span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">every_4 =</span> lubridate<span class="sc">::</span><span class="fu">floor_date</span>(nominated, <span class="at">unit =</span> <span class="st">"4 years"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(every_4, party) <span class="sc">|&gt;</span></span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a>    <span class="at">president =</span> dplyr<span class="sc">::</span><span class="fu">first</span>(name)</span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">president =</span> stringr<span class="sc">::</span><span class="fu">str_wrap</span>(president, <span class="at">width =</span> <span class="dv">10</span>))</span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a>every_4_years_pres_sup <span class="sc">|&gt;</span></span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> every_4, <span class="at">y =</span> n, <span class="at">fill =</span> party)) <span class="sc">+</span></span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(), <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> president),</span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a>                     <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>,</span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a>                     <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">"8 years"</span>, <span class="at">date_labels =</span> <span class="st">"%Y"</span>) <span class="sc">+</span></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Nominations by Party every 4 Years"</span>, <span class="at">x =</span> <span class="st">"year"</span>) <span class="sc">+</span></span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a>  DGThemes<span class="sc">::</span><span class="fu">theme_duncan</span>() <span class="sc">+</span></span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">legend.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>())</span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -2469,7 +2913,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

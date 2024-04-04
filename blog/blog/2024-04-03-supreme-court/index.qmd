@@ -6,6 +6,11 @@ description: "In a time where the completely impartial Supreme Court is continua
 author: "Duncan Gates"
 date: 2024-04-03
 lightbox: true
+format:
+  html: 
+    code-fold: true
+    code-summary: "Show the code"
+    code-tools: true
 ---
 
 ```{r setup, include=FALSE}
@@ -21,9 +26,12 @@ library(tidyr)
 library(DGThemes)
 ```
 
-Since Harry Reid took the nuclear option in 2013 to reduce the cloture threshold for nominations, the idea that the Supreme Court is a non-partisan institution has been under severe threat. Subsequently, in 2017 the use once again by Mitch McConnell established a long running trend as a precedent - that of extreme partisan interest in every Supreme Court justice. This is clearly evident in the trend of votes for/against nominees, as well as the veto rate on nominees. An interesting, and annoying feature of nominations I discovered while conducting research on this is that [voice votes](https://www.senate.gov/about/powers-procedures/voting.htm#:~:text=In%20a%20voice%20vote%2C%20the,of%20votes%20are%20not%20recorded.) in the Senate do not record any votes, and simply report whether or not the vote was approved, meaning that of 165 votes in the senate we instead only get 98 distinct votes with which to gauge justice approval rates. Despite this setback, quickly using `rvest` to get the data to visualize [official Senate data](https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm) shows the following:
+Since Harry Reid took the nuclear option in 2013 to reduce the cloture threshold for nominations, the idea that the Supreme Court is a non-partisan institution has been under severe threat. The subsequent 2017 usage by Mitch McConnell established a long running trend as a precedent - that of extreme partisan interest in every Supreme Court justice. This is clearly evident in the trend of votes for/against nominees, as well as the veto rate on nominees. An interesting, and annoying feature of nominations I discovered while conducting research on this is that [voice votes](https://www.senate.gov/about/powers-procedures/voting.htm#:~:text=In%20a%20voice%20vote%2C%20the,of%20votes%20are%20not%20recorded.) in the Senate do not record any votes, and simply report whether or not the vote was approved, meaning that of 165 votes in the senate we instead only get 98 distinct votes with which to gauge justice approval rates.
 
-```{r preview = TRUE}
+Despite this setback, quickly using `rvest` to get the data to visualize [official Senate data](https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm) shows the following when visualized:
+
+```{r votes-for-against}
+#| fig-width: 10
 senate_page <- read_html("https://www.senate.gov/legislative/nominations/SupremeCourtNominations1789present.htm")
 
 nomination_table <- senate_page |>
@@ -64,6 +72,7 @@ nomination_table |>
 
 It seems pretty clear from this visual that there has been a massive increase in votes against approval of supreme court justices over the last approximately 20 years. One could of course claim that this doesn't account for control of the senate, but here is a chart showing senate composition over the last 40 years, which should be immediately make clear the question of that necessity.
 
+
 ```{r dems-reps-sen, echo = FALSE, warning = FALSE, message = FALSE}
 knitr::include_graphics("sen_composition.png")
 ```
@@ -93,9 +102,9 @@ nomination_table |>
 
 That "No Action" sure pops up out of nowhere, wow! Even more interestingly you can see that there is a long period of confirmations from the late 1800s up to about 1970-1990 when a few famous rejections take place - those of Clement Haynsworth Jr., Harrold. G. Carswell, and Robert H. Bork. One last interesting blip here is that of Harriet Miers withdrawn nomination in 2005, where in the face of bipartisan opposition President George Bush did a rare political takeback. This withdrawal was a fascinating [wikipedia read](https://en.wikipedia.org/wiki/Harriet_Miers#Supreme_Court_nomination_and_withdrawal) that I was mostly unfamiliar with due to being 6 years old at the time, but the idea of Lindsey Graham and Sam Brownback asking the President's office for a letter "in order to elucidate her views on political matters" is unthinkable in the modern era (and in light of the fact that the Supreme Court is of course apolitical!!).
 
-My last statement on this is that it is pretty clear from the data, and historical viewpoint (that I don't have time to devolve into right now), that after the initial turmoil of the Supreme Court's establishment due to a lack of clarity in Article 3, Marbury v. Madison, slavery and the Civil War (okay tiny little dive into the history) there was an established precedent of concord on the Supreme Court that FDR briefly tried to break, and then the Republicans demolished in the 70s and 80s. The shocking lack of response from the Democratic party in this regard is showcased in the data as there is no political blowback until too late in 2013. If it's too late, what can be done now? In the clearly apolitical landscape of the Supreme Court you would think nothing, but if you look at Supreme Court tenureship you might actually think, well, something.
+My last statement on this is that it is pretty clear from the data, and historical viewpoint (that I don't have time to dive into right now), that after the initial turmoil of the Supreme Court's establishment due to a lack of clarity in Article 3, Marbury v. Madison, slavery and the Civil War (okay tiny little dive into the history) there was an established precedent of concord on the Supreme Court that FDR briefly tried to break, and then the Republicans demolished in the 70s and 80s. The shocking lack of response from the Democratic party in this regard is showcased in the data as there is no evident political blowback until too late in 2013. If it's too late, what can be done now? In the "apolitical" landscape of the Supreme Court you would think nothing, but if you look at Supreme Court tenureship you might actually think, well, something.
 
-Taking a look at the data for Republican vs. Democratic nominees tenureship and appointment rates we see more of the same trend, and more of a solution for the Democratic party.
+Taking a look at the data for Republican vs. Democratic nominees tenureship and appointment rates we see more of the same trend, and more of a solution for the Democratic party. First I grab the Supreme Court Justice's data from Lee Epstein's very helpful, comprehensive dataset which can be found here: https://epstein.usc.edu/justicesdata, and secondarily scrape Wikipedia for data on President's and their relevant political parties.
 
 ```{r}
 supreme_court <- readr::read_csv("https://epstein.usc.edu/s/justicesdata2022.csv")
@@ -143,7 +152,7 @@ supreme_presidents <- presidents_terms_final |>
          )
 ```
 
-First a little tidbit - which President had the most supreme court appointments? FDR seems likely given his length of tenure as President, but actually its George Washington! The rest of the field is quite a distance back, and the only modern President with more than 4 is Eisenhower which says quite a bit about the Warren court era, and the shift in the Republican party's politics.
+First a little tidbit - which President had the most supreme court appointments? FDR seems likely given his length of tenure as President, but actually its George Washington! The rest of the field is quite a distance back, and the only modern President with more than 4 appointments is Eisenhower which says quite a bit about the Warren court era, and maybe, possibly hints at a greater shift in the role of politics in the Supreme Court.
 
 ```{r}
 supreme_presidents |>
@@ -168,9 +177,10 @@ supreme_presidents |>
   DGThemes::gt_theme_duncan()
 ```
 
-Alright now the juicy stuff - lets look at appointments by party of president over time (excluding data prior to the clear formation of the modern dominant political parties). Looks like a rough last 40 years for the Democratic party, as usual its a really good thing that the Supreme Court is apolitical and rests its laurels on its impartiality!
+Alright, now the juicy stuff - lets look at appointments by the President's political party over time (excluding data prior to the clear formation of the modern dominant political parties such as the Whigs, Federalists, etc.). Looks like a rough last 40 years for the Democratic party, as usual its a really good thing that the Supreme Court is apolitical and rests its laurels on its impartiality!
 
 ```{r}
+#| fig-width: 10
 just_pres <- supreme_presidents |>
   dplyr::distinct(name, .keep_all = TRUE) |>
   dplyr::select(name, start_pres, end_pres)
@@ -207,12 +217,18 @@ average_justice_tenure <- supreme_presidents |>
   dplyr::summarise(mean_tenure = mean(tenure, na.rm = TRUE))
 
 # Convert from days to years
-average_justice_tenure |> dplyr::pull() |> as.numeric() / 365
+average_justice_tenure |> 
+  dplyr::pull() |> 
+  as.numeric() |>
+  base::`/`(365) |>
+  round(digits = 2) |>
+  as.character() |>
+  paste(... = _, "years")
 ```
 
 15 years is a good amount of time, but that average over all of the court's history might not be as relevant anymore, additionally that number accounts for the pre-two party era, so what does the breakdown look like for more recent data and by party?
 
-First for all time, it looks like the Democratic Party has healthier nominees by about 2 years!
+It looks like the Democratic Party has healthier nominees by about 2 years, and that the average of 15 years is about the same irregardless of ignoring the first ~80 years of judiciary history of the United States since this next table only shows Justices nominated by either a Republican or Democratic President!
 
 ```{r}
 average_justice_tenure_by_party <- supreme_presidents |>
@@ -231,7 +247,7 @@ average_justice_tenure_by_party |>
   DGThemes::gt_theme_duncan()
 ```
 
-Looking at just the last 80 years, or since the end of WWII this actually continues to hold true, the Democratic parties nominees have an additional \~3 years on Republican nominees on average. What does this say? Democratic nominees sure love to hang around on the Supreme Court for a while!
+Looking at just the last 80 years, or since the end of WWII this actually continues to hold true, the Democratic parties nominees have an additional \~3 years on Republican nominees on average. What does this say? Democratic nominees sure love to hang around on the Supreme Court for a while and convey their deep judicial and constitutional knowledge that nobody else has!
 
 ```{r}
 supreme_presidents |>
@@ -248,7 +264,7 @@ supreme_presidents |>
   DGThemes::gt_theme_duncan()
 ```
 
-Since Democratic nominees love to hang around lets see who gets more nominations - since we calculated the all time average tenure of a Justice to be about 15 years earlier I'll chart the number of justices each party gets to nominate every 15 years. This shows about what we saw in the data earlier - aside from FDR the Republican party has done a fantastic job nominating new justices, at about \~ 2.5x the rate of the Democratic Party!
+Since Democratic nominees love to hang around lets see which political party gets more nominations as a result - since we calculated the all time average tenure of a Justice to be about 15 years earlier I'll chart the number of justices each party gets to nominate every 15 years. This shows about what we saw in the data earlier - aside from FDR the Republican party has done a fantastic job nominating new justices, at about \~ 2.5x the rate of the Democratic Party!
 
 ```{r}
 # Rolling average tenure by president
@@ -272,3 +288,31 @@ every_15_years_pres_sup |>
   DGThemes::theme_duncan() +
   ggplot2::theme(legend.title = ggplot2::element_blank())
 ```
+
+This 15 year split is mostly arbitrary and could be swayed by surges in Justice appointment in specific years so to finish off this post, here is a table showing what the rolling rate of appointment looks like every 4 years to simply account for every President, again I think the trend is clear, Democratic nominees stick around, and Republicans get more nominations.
+
+```{r}
+#| fig.width: 20
+every_4_years_pres_sup <- modern_supreme_presidents |>
+  dplyr::mutate(every_4 = lubridate::floor_date(nominated, unit = "4 years")) |>
+  dplyr::group_by(every_4, party) |>
+  dplyr::summarise(
+    n = dplyr::n(),
+    president = dplyr::first(name)
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::mutate(president = stringr::str_wrap(president, width = 10))
+
+every_4_years_pres_sup |>
+  ggplot2::ggplot(aes(x = every_4, y = n, fill = party)) +
+  ggplot2::geom_col(position = position_dodge(), alpha = 0.9) +
+  ggrepel::geom_text_repel(aes(label = president),
+                     vjust = -0.5,
+                     size = 5) +
+  ggplot2::scale_fill_manual(values = c("blue", "red")) +
+  ggplot2::scale_x_date(date_breaks = "8 years", date_labels = "%Y") +
+  ggplot2::labs(title = "Nominations by Party every 4 Years", x = "year") +
+  DGThemes::theme_duncan() +
+  ggplot2::theme(legend.title = ggplot2::element_blank())
+```
+

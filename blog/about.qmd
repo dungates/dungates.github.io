@@ -1,6 +1,8 @@
 ---
 title: "About"
 image: imgs/me.png
+execute:
+  freeze: true
 about:
   template: jolla
   links:
