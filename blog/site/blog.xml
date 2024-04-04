@@ -1022,24 +1022,24 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
 <div class="cell-output-display">
-<div id="puxykagniv" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hbwjtfjxiu" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#puxykagniv table {
+#hbwjtfjxiu table {
   font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#puxykagniv thead, #puxykagniv tbody, #puxykagniv tfoot, #puxykagniv tr, #puxykagniv td, #puxykagniv th {
+#hbwjtfjxiu thead, #hbwjtfjxiu tbody, #hbwjtfjxiu tfoot, #hbwjtfjxiu tr, #hbwjtfjxiu td, #hbwjtfjxiu th {
   border-style: none;
 }
 
-#puxykagniv p {
+#hbwjtfjxiu p {
   margin: 0;
   padding: 0;
 }
 
-#puxykagniv .gt_table {
+#hbwjtfjxiu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1065,12 +1065,12 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-left-color: #000000;
 }
 
-#puxykagniv .gt_caption {
+#hbwjtfjxiu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#puxykagniv .gt_title {
+#hbwjtfjxiu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1082,7 +1082,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#puxykagniv .gt_subtitle {
+#hbwjtfjxiu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1094,7 +1094,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-top-width: 0;
 }
 
-#puxykagniv .gt_heading {
+#hbwjtfjxiu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1106,13 +1106,13 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#puxykagniv .gt_bottom_border {
+#hbwjtfjxiu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#puxykagniv .gt_col_headings {
+#hbwjtfjxiu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 4px;
   border-top-color: #000000;
@@ -1127,7 +1127,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#puxykagniv .gt_col_heading {
+#hbwjtfjxiu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1147,7 +1147,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#puxykagniv .gt_column_spanner_outer {
+#hbwjtfjxiu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1159,15 +1159,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 4px;
 }
 
-#puxykagniv .gt_column_spanner_outer:first-child {
+#hbwjtfjxiu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#puxykagniv .gt_column_spanner_outer:last-child {
+#hbwjtfjxiu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#puxykagniv .gt_column_spanner {
+#hbwjtfjxiu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1179,11 +1179,11 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   width: 100%;
 }
 
-#puxykagniv .gt_spanner_row {
+#hbwjtfjxiu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#puxykagniv .gt_group_heading {
+#hbwjtfjxiu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1209,7 +1209,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   text-align: left;
 }
 
-#puxykagniv .gt_empty_group_heading {
+#hbwjtfjxiu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1224,15 +1224,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   vertical-align: middle;
 }
 
-#puxykagniv .gt_from_md > :first-child {
+#hbwjtfjxiu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#puxykagniv .gt_from_md > :last-child {
+#hbwjtfjxiu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#puxykagniv .gt_row {
+#hbwjtfjxiu .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1251,7 +1251,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#puxykagniv .gt_stub {
+#hbwjtfjxiu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1264,7 +1264,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#puxykagniv .gt_stub_row_group {
+#hbwjtfjxiu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1278,15 +1278,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   vertical-align: top;
 }
 
-#puxykagniv .gt_row_group_first td {
+#hbwjtfjxiu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#puxykagniv .gt_row_group_first th {
+#hbwjtfjxiu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#puxykagniv .gt_summary_row {
+#hbwjtfjxiu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1296,16 +1296,16 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#puxykagniv .gt_first_summary_row {
+#hbwjtfjxiu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#puxykagniv .gt_first_summary_row.thick {
+#hbwjtfjxiu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#puxykagniv .gt_last_summary_row {
+#hbwjtfjxiu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1315,7 +1315,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#puxykagniv .gt_grand_summary_row {
+#hbwjtfjxiu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1325,7 +1325,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#puxykagniv .gt_first_grand_summary_row {
+#hbwjtfjxiu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1335,7 +1335,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#puxykagniv .gt_last_grand_summary_row_top {
+#hbwjtfjxiu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1345,11 +1345,11 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#puxykagniv .gt_striped {
+#hbwjtfjxiu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#puxykagniv .gt_table_body {
+#hbwjtfjxiu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1358,7 +1358,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#puxykagniv .gt_footnotes {
+#hbwjtfjxiu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1372,7 +1372,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#puxykagniv .gt_footnote {
+#hbwjtfjxiu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1381,7 +1381,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#puxykagniv .gt_sourcenotes {
+#hbwjtfjxiu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1395,7 +1395,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#puxykagniv .gt_sourcenote {
+#hbwjtfjxiu .gt_sourcenote {
   font-size: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -1403,68 +1403,68 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#puxykagniv .gt_left {
+#hbwjtfjxiu .gt_left {
   text-align: left;
 }
 
-#puxykagniv .gt_center {
+#hbwjtfjxiu .gt_center {
   text-align: center;
 }
 
-#puxykagniv .gt_right {
+#hbwjtfjxiu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#puxykagniv .gt_font_normal {
+#hbwjtfjxiu .gt_font_normal {
   font-weight: normal;
 }
 
-#puxykagniv .gt_font_bold {
+#hbwjtfjxiu .gt_font_bold {
   font-weight: bold;
 }
 
-#puxykagniv .gt_font_italic {
+#hbwjtfjxiu .gt_font_italic {
   font-style: italic;
 }
 
-#puxykagniv .gt_super {
+#hbwjtfjxiu .gt_super {
   font-size: 65%;
 }
 
-#puxykagniv .gt_footnote_marks {
+#hbwjtfjxiu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#puxykagniv .gt_asterisk {
+#hbwjtfjxiu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#puxykagniv .gt_indent_1 {
+#hbwjtfjxiu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#puxykagniv .gt_indent_2 {
+#hbwjtfjxiu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#puxykagniv .gt_indent_3 {
+#hbwjtfjxiu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#puxykagniv .gt_indent_4 {
+#hbwjtfjxiu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#puxykagniv .gt_indent_5 {
+#hbwjtfjxiu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<div id="puxykagniv" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="puxykagniv">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"name":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"n":[12,9,8,6,6,6,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1]},"columns":[{"id":"name","name":"President","type":"character","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}},{"id":"n","name":"Appointments","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["12","9","8","6","6","6","4","4","4","4","4","4","4","4","4","4","3","3","3","3","3","2","2","2","2","2","2","2","2","2","2","2","1","1","1","1","1","1","1","1","1","1","1","1","1"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}}],"searchable":true,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"4px","borderTopColor":"black","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"puxykagniv","dataKey":"5d5e4bc6dd53cf78db1049e1d9751c2a"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
+<div id="hbwjtfjxiu" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="hbwjtfjxiu">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"name":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"n":[12,9,8,6,6,6,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1]},"columns":[{"id":"name","name":"President","type":"character","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["George Washington","Franklin D. Roosevelt","Dwight D. Eisenhower","Abraham Lincoln","Andrew Jackson","William Howard Taft","Benjamin Harrison","Grover Cleveland","Harry S. Truman","John Adams","Richard Nixon","Ronald Reagan","Theodore Roosevelt","Thomas Jefferson","Ulysses S. Grant","Warren G. Harding","Donald Trump","Herbert Hoover","James K. Polk","Martin Van Buren","Woodrow Wilson","Barack Obama","Bill Clinton","Chester A. Arthur","George H. W. Bush","George W. Bush","James Madison","James Monroe","John F. Kennedy","Lyndon B. Johnson","Millard Fillmore","Rutherford B. Hayes","Andrew Johnson","Calvin Coolidge","Franklin Pierce","Gerald Ford","James A. Garfield","James Buchanan","Jimmy Carter","Joe Biden","John Quincy Adams","John Tyler","William Henry Harrison","William McKinley","Zachary Taylor"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}},{"id":"n","name":"Appointments","type":"numeric","style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\nif (colInfo.id === 'name' & rowIndex === 1) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 2) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 3) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 4) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 5) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 6) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 7) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 8) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 9) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 10) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 11) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 12) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 13) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 14) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 15) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 16) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 17) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 18) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 19) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 20) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 21) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 22) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 23) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 24) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 25) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 26) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 27) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 28) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 29) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 30) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 31) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 32) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 33) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 34) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 35) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 36) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 37) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 38) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 39) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 40) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 41) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 42) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 43) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 44) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'name' & rowIndex === 45) {\n  return { fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 1) {\n  return { backgroundColor: '#0D47A1', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 2) {\n  return { backgroundColor: '#1B7EDB', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 3) {\n  return { backgroundColor: '#1F8CE9', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 4) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 5) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 6) {\n  return { backgroundColor: '#40A4F5', color: '#FFFFFF', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 7) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 8) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 9) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 10) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 11) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 12) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 13) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 14) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 15) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 16) {\n  return { backgroundColor: '#7DC0F8', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 17) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 18) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 19) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 20) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 21) {\n  return { backgroundColor: '#A0D1FA', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 22) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 23) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 24) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 25) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 26) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 27) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 28) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 29) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 30) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 31) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 32) {\n  return { backgroundColor: '#C3E2FB', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 33) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 34) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 35) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 36) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 37) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 38) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 39) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 40) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 41) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 42) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 43) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 44) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\nif (colInfo.id === 'n' & rowIndex === 45) {\n  return { backgroundColor: '#E3F2FD', color: '#000000', fontSize: 'medium', textAlign: 'center' }\n}\n\n}","cell":["12","9","8","6","6","6","4","4","4","4","4","4","4","4","4","4","3","3","3","3","3","2","2","2","2","2","2","2","2","2","2","2","1","1","1","1","1","1","1","1","1","1","1","1","1"],"html":true,"align":"center","headerStyle":{"font-weight":"normal"}}],"searchable":true,"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"showSortable":true,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"fontFamily":"'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"},"headerStyle":{"borderTopStyle":"solid","borderTopWidth":"4px","borderTopColor":"black","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"}},"elementId":"hbwjtfjxiu","dataKey":"5d5e4bc6dd53cf78db1049e1d9751c2a"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style"],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -1787,24 +1787,24 @@ background-color: null;
 font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ewylqsoroj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vzaaogeths" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ewylqsoroj table {
+#vzaaogeths table {
   font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ewylqsoroj thead, #ewylqsoroj tbody, #ewylqsoroj tfoot, #ewylqsoroj tr, #ewylqsoroj td, #ewylqsoroj th {
+#vzaaogeths thead, #vzaaogeths tbody, #vzaaogeths tfoot, #vzaaogeths tr, #vzaaogeths td, #vzaaogeths th {
   border-style: none;
 }
 
-#ewylqsoroj p {
+#vzaaogeths p {
   margin: 0;
   padding: 0;
 }
 
-#ewylqsoroj .gt_table {
+#vzaaogeths .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1830,12 +1830,12 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-left-color: #000000;
 }
 
-#ewylqsoroj .gt_caption {
+#vzaaogeths .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ewylqsoroj .gt_title {
+#vzaaogeths .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1847,7 +1847,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#ewylqsoroj .gt_subtitle {
+#vzaaogeths .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1859,7 +1859,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-top-width: 0;
 }
 
-#ewylqsoroj .gt_heading {
+#vzaaogeths .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1871,13 +1871,13 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_bottom_border {
+#vzaaogeths .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_col_headings {
+#vzaaogeths .gt_col_headings {
   border-top-style: solid;
   border-top-width: 4px;
   border-top-color: #000000;
@@ -1892,7 +1892,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_col_heading {
+#vzaaogeths .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1912,7 +1912,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#ewylqsoroj .gt_column_spanner_outer {
+#vzaaogeths .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1924,15 +1924,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 4px;
 }
 
-#ewylqsoroj .gt_column_spanner_outer:first-child {
+#vzaaogeths .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ewylqsoroj .gt_column_spanner_outer:last-child {
+#vzaaogeths .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ewylqsoroj .gt_column_spanner {
+#vzaaogeths .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1944,11 +1944,11 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   width: 100%;
 }
 
-#ewylqsoroj .gt_spanner_row {
+#vzaaogeths .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ewylqsoroj .gt_group_heading {
+#vzaaogeths .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1974,7 +1974,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   text-align: left;
 }
 
-#ewylqsoroj .gt_empty_group_heading {
+#vzaaogeths .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1989,15 +1989,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   vertical-align: middle;
 }
 
-#ewylqsoroj .gt_from_md > :first-child {
+#vzaaogeths .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ewylqsoroj .gt_from_md > :last-child {
+#vzaaogeths .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ewylqsoroj .gt_row {
+#vzaaogeths .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2016,7 +2016,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#ewylqsoroj .gt_stub {
+#vzaaogeths .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2029,7 +2029,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ewylqsoroj .gt_stub_row_group {
+#vzaaogeths .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2043,15 +2043,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   vertical-align: top;
 }
 
-#ewylqsoroj .gt_row_group_first td {
+#vzaaogeths .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ewylqsoroj .gt_row_group_first th {
+#vzaaogeths .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ewylqsoroj .gt_summary_row {
+#vzaaogeths .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2061,16 +2061,16 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ewylqsoroj .gt_first_summary_row {
+#vzaaogeths .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_first_summary_row.thick {
+#vzaaogeths .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ewylqsoroj .gt_last_summary_row {
+#vzaaogeths .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2080,7 +2080,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_grand_summary_row {
+#vzaaogeths .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2090,7 +2090,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ewylqsoroj .gt_first_grand_summary_row {
+#vzaaogeths .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2100,7 +2100,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_last_grand_summary_row_top {
+#vzaaogeths .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2110,11 +2110,11 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_striped {
+#vzaaogeths .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ewylqsoroj .gt_table_body {
+#vzaaogeths .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2123,7 +2123,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_footnotes {
+#vzaaogeths .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2137,7 +2137,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_footnote {
+#vzaaogeths .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2146,7 +2146,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ewylqsoroj .gt_sourcenotes {
+#vzaaogeths .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2160,7 +2160,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ewylqsoroj .gt_sourcenote {
+#vzaaogeths .gt_sourcenote {
   font-size: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -2168,63 +2168,63 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ewylqsoroj .gt_left {
+#vzaaogeths .gt_left {
   text-align: left;
 }
 
-#ewylqsoroj .gt_center {
+#vzaaogeths .gt_center {
   text-align: center;
 }
 
-#ewylqsoroj .gt_right {
+#vzaaogeths .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ewylqsoroj .gt_font_normal {
+#vzaaogeths .gt_font_normal {
   font-weight: normal;
 }
 
-#ewylqsoroj .gt_font_bold {
+#vzaaogeths .gt_font_bold {
   font-weight: bold;
 }
 
-#ewylqsoroj .gt_font_italic {
+#vzaaogeths .gt_font_italic {
   font-style: italic;
 }
 
-#ewylqsoroj .gt_super {
+#vzaaogeths .gt_super {
   font-size: 65%;
 }
 
-#ewylqsoroj .gt_footnote_marks {
+#vzaaogeths .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ewylqsoroj .gt_asterisk {
+#vzaaogeths .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ewylqsoroj .gt_indent_1 {
+#vzaaogeths .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ewylqsoroj .gt_indent_2 {
+#vzaaogeths .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ewylqsoroj .gt_indent_3 {
+#vzaaogeths .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ewylqsoroj .gt_indent_4 {
+#vzaaogeths .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ewylqsoroj .gt_indent_5 {
+#vzaaogeths .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2352,24 +2352,24 @@ background-color: null;
 font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
 <div class="cell-output-display">
 <div>
-<div id="ujbxiubdcg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kxapiofjsf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ujbxiubdcg table {
+#kxapiofjsf table {
   font-family: 'Open Sans', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ujbxiubdcg thead, #ujbxiubdcg tbody, #ujbxiubdcg tfoot, #ujbxiubdcg tr, #ujbxiubdcg td, #ujbxiubdcg th {
+#kxapiofjsf thead, #kxapiofjsf tbody, #kxapiofjsf tfoot, #kxapiofjsf tr, #kxapiofjsf td, #kxapiofjsf th {
   border-style: none;
 }
 
-#ujbxiubdcg p {
+#kxapiofjsf p {
   margin: 0;
   padding: 0;
 }
 
-#ujbxiubdcg .gt_table {
+#kxapiofjsf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2395,12 +2395,12 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-left-color: #000000;
 }
 
-#ujbxiubdcg .gt_caption {
+#kxapiofjsf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ujbxiubdcg .gt_title {
+#kxapiofjsf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2412,7 +2412,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-width: 0;
 }
 
-#ujbxiubdcg .gt_subtitle {
+#kxapiofjsf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2424,7 +2424,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-top-width: 0;
 }
 
-#ujbxiubdcg .gt_heading {
+#kxapiofjsf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2436,13 +2436,13 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_bottom_border {
+#kxapiofjsf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_col_headings {
+#kxapiofjsf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 4px;
   border-top-color: #000000;
@@ -2457,7 +2457,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_col_heading {
+#kxapiofjsf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2477,7 +2477,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#ujbxiubdcg .gt_column_spanner_outer {
+#kxapiofjsf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2489,15 +2489,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 4px;
 }
 
-#ujbxiubdcg .gt_column_spanner_outer:first-child {
+#kxapiofjsf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ujbxiubdcg .gt_column_spanner_outer:last-child {
+#kxapiofjsf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ujbxiubdcg .gt_column_spanner {
+#kxapiofjsf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2509,11 +2509,11 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   width: 100%;
 }
 
-#ujbxiubdcg .gt_spanner_row {
+#kxapiofjsf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ujbxiubdcg .gt_group_heading {
+#kxapiofjsf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2539,7 +2539,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   text-align: left;
 }
 
-#ujbxiubdcg .gt_empty_group_heading {
+#kxapiofjsf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2554,15 +2554,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   vertical-align: middle;
 }
 
-#ujbxiubdcg .gt_from_md > :first-child {
+#kxapiofjsf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ujbxiubdcg .gt_from_md > :last-child {
+#kxapiofjsf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ujbxiubdcg .gt_row {
+#kxapiofjsf .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2581,7 +2581,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   overflow-x: hidden;
 }
 
-#ujbxiubdcg .gt_stub {
+#kxapiofjsf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2594,7 +2594,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ujbxiubdcg .gt_stub_row_group {
+#kxapiofjsf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2608,15 +2608,15 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   vertical-align: top;
 }
 
-#ujbxiubdcg .gt_row_group_first td {
+#kxapiofjsf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ujbxiubdcg .gt_row_group_first th {
+#kxapiofjsf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ujbxiubdcg .gt_summary_row {
+#kxapiofjsf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2626,16 +2626,16 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ujbxiubdcg .gt_first_summary_row {
+#kxapiofjsf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_first_summary_row.thick {
+#kxapiofjsf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ujbxiubdcg .gt_last_summary_row {
+#kxapiofjsf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2645,7 +2645,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_grand_summary_row {
+#kxapiofjsf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2655,7 +2655,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ujbxiubdcg .gt_first_grand_summary_row {
+#kxapiofjsf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2665,7 +2665,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-top-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_last_grand_summary_row_top {
+#kxapiofjsf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2675,11 +2675,11 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_striped {
+#kxapiofjsf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ujbxiubdcg .gt_table_body {
+#kxapiofjsf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2688,7 +2688,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-bottom-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_footnotes {
+#kxapiofjsf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2702,7 +2702,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_footnote {
+#kxapiofjsf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2711,7 +2711,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ujbxiubdcg .gt_sourcenotes {
+#kxapiofjsf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2725,7 +2725,7 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   border-right-color: #D3D3D3;
 }
 
-#ujbxiubdcg .gt_sourcenote {
+#kxapiofjsf .gt_sourcenote {
   font-size: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -2733,63 +2733,63 @@ font-style: inherit;">gt_theme_duncan</span>()</span></code></pre></div>
   padding-right: 5px;
 }
 
-#ujbxiubdcg .gt_left {
+#kxapiofjsf .gt_left {
   text-align: left;
 }
 
-#ujbxiubdcg .gt_center {
+#kxapiofjsf .gt_center {
   text-align: center;
 }
 
-#ujbxiubdcg .gt_right {
+#kxapiofjsf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ujbxiubdcg .gt_font_normal {
+#kxapiofjsf .gt_font_normal {
   font-weight: normal;
 }
 
-#ujbxiubdcg .gt_font_bold {
+#kxapiofjsf .gt_font_bold {
   font-weight: bold;
 }
 
-#ujbxiubdcg .gt_font_italic {
+#kxapiofjsf .gt_font_italic {
   font-style: italic;
 }
 
-#ujbxiubdcg .gt_super {
+#kxapiofjsf .gt_super {
   font-size: 65%;
 }
 
-#ujbxiubdcg .gt_footnote_marks {
+#kxapiofjsf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ujbxiubdcg .gt_asterisk {
+#kxapiofjsf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ujbxiubdcg .gt_indent_1 {
+#kxapiofjsf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ujbxiubdcg .gt_indent_2 {
+#kxapiofjsf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ujbxiubdcg .gt_indent_3 {
+#kxapiofjsf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ujbxiubdcg .gt_indent_4 {
+#kxapiofjsf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ujbxiubdcg .gt_indent_5 {
+#kxapiofjsf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

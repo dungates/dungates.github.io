@@ -23,12 +23,12 @@ website:
         text: Home
       - text: "Blog"
         href: blog.qmd
-      - text: "Art"
-        href: art.qmd
-      - text: "Maps"
-        href: maps.qmd
       - text: "Web Apps"
         href: apps.qmd
+      - text: "Maps"
+        href: maps.qmd
+      - text: "Art"
+        href: art.qmd
     right:
       - about.qmd
       - icon: github

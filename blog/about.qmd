@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: imgs/data_img.webp
+image: imgs/me.png
 about:
   template: jolla
   links:
