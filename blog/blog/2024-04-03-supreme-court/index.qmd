@@ -292,7 +292,8 @@ every_15_years_pres_sup |>
 This 15 year split is mostly arbitrary and could be swayed by surges in Justice appointment in specific years so to finish off this post, here is a table showing what the rolling rate of appointment looks like every 4 years to simply account for every President, again I think the trend is clear, Democratic nominees stick around, and Republicans get more nominations.
 
 ```{r}
-#| fig.width: 20
+#| fig.width: 15
+#| fig.height: 15
 every_4_years_pres_sup <- modern_supreme_presidents |>
   dplyr::mutate(every_4 = lubridate::floor_date(nominated, unit = "4 years")) |>
   dplyr::group_by(every_4, party) |>
@@ -301,18 +302,68 @@ every_4_years_pres_sup <- modern_supreme_presidents |>
     president = dplyr::first(name)
   ) |>
   dplyr::ungroup() |>
-  dplyr::mutate(president = stringr::str_wrap(president, width = 10))
+  dplyr::mutate(president = ifelse(n < 2, 
+                                   gsub("(?<=[A-Z])[^A-Z]+", "\\.", president, perl = TRUE),
+                                   president))
+
+(as.numeric(lubridate::today() - as.Date("1991-10-15")) / 365.25) |> 
+  round(digits = 0) |>
+  paste(... = _, "years") -> days_clarence_thomas
 
 every_4_years_pres_sup |>
-  ggplot2::ggplot(aes(x = every_4, y = n, fill = party)) +
-  ggplot2::geom_col(position = position_dodge(), alpha = 0.9) +
-  ggrepel::geom_text_repel(aes(label = president),
-                     vjust = -0.5,
-                     size = 5) +
+  ggplot2::ggplot(aes(x = every_4, y = n, fill = party, group = party)) +
+  ggplot2::geom_col(position = ggplot2::position_dodge(), alpha = 0.8) +
+  ggplot2::geom_text(aes(x = every_4,
+                         y = n,
+                         label = president, 
+                         group = party),
+                     hjust = 1.1,
+                     size = 2,
+                     angle = 90,
+                     fontface = "bold",
+                     family = "Open Sans",
+                     color = "black",
+                     position = ggplot2::position_dodge(width = 1)) +
   ggplot2::scale_fill_manual(values = c("blue", "red")) +
   ggplot2::scale_x_date(date_breaks = "8 years", date_labels = "%Y") +
   ggplot2::labs(title = "Nominations by Party every 4 Years", x = "year") +
-  DGThemes::theme_duncan() +
+  ggplot2::coord_radial(rotate_angle = TRUE, expand = FALSE) +
+  DGThemes::theme_duncan(
+    grid_col = "gray92"
+  ) +
+  ggplot2::theme(legend.title = ggplot2::element_blank(),
+                 axis.line.theta = ggplot2::element_line(colour = "black", linewidth = 0.1),
+                 axis.text.x = ggplot2::element_text(margin = margin(0,0,0,10)))
+```
+
+The longest sitting Supreme Court justice is currently Clarence Thomas, bucking the trend, sitting for an impressive `r days_clarence_thomas`. Let's zoom in on just the period since his nomination to get one last look at what the nominations of the court have looked like by party in recent history.
+
+```{r}
+#| fig.width: 10
+#| fig.height: 10
+every_4_years_pres_sup |>
+  dplyr::filter(every_4 > as.Date("1985-01-01")) |>
+  ggplot2::ggplot(aes(x = every_4, y = n, fill = party)) +
+  ggplot2::geom_col(aes(fill = party), position = ggplot2::position_dodge2(), alpha = 0.8) +
+  ggplot2::geom_text(aes(x = every_4,
+                         y = n,
+                         label = president, 
+                         group = party),
+                     hjust = 1.1,
+                     size = 3,
+                     fontface = "bold",
+                     family = "Open Sans",
+                     color = "black",
+                     position = ggplot2::position_dodge2(reverse = TRUE)) +
+  ggplot2::scale_fill_manual(values = c("blue", "red")) +
+  ggplot2::scale_x_date(date_breaks = "4 years", date_labels = "%Y") +
+  ggplot2::scale_y_continuous(n.breaks = 3) +
+  ggplot2::labs(title = "Nominations by Party every 4 Years", x = "year") +
+  ggplot2::coord_flip() +
+  DGThemes::theme_duncan(
+    grid_col = "gray92"
+  ) +
   ggplot2::theme(legend.title = ggplot2::element_blank())
 ```
 
+Its clear in recent years that the court has had more republican nominations in recent years, and those republican nominations are replacing nominees from the Democratic party from years prior! 
